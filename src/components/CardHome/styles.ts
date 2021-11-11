@@ -34,5 +34,8 @@ export const Container = styled.div`
       font-size: 12px;
       font-weight: 500;
     }
+    img{
+      width: 78px;
+    }
   }
 `;
