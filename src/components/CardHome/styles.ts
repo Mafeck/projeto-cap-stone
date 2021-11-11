@@ -16,6 +16,9 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    img{
+      width: 78px;
+    }
   }
 
   main {
@@ -34,8 +37,6 @@ export const Container = styled.div`
       font-size: 12px;
       font-weight: 500;
     }
-    img{
-      width: 78px;
-    }
+
   }
 `;
