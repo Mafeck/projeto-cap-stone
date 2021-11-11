@@ -10,6 +10,7 @@ export const Global = createGlobalStyle`
     
     :root {
         --color-primary: #212529;
+        --color-primary-strong: #0C0D0E;
         --color-secondary: #6AB089;
         --gray-100: #111111;
         --gray-50: #878787;
@@ -35,7 +36,18 @@ export const Global = createGlobalStyle`
     }
 
     button {
+        font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 19px;
         cursor: pointer;
+    }
+
+    input {
+        font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 16px;
     }
 
     a {
