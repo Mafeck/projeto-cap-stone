@@ -2,7 +2,7 @@ import { BsHouseDoor } from 'react-icons/bs';
 import { Container } from './style';
 import { useHistory } from 'react-router';
 
-export const Footer = () => {
+const Footer = () => {
     const history = useHistory();
 
     return (
@@ -13,3 +13,5 @@ export const Footer = () => {
         </Container>
     )
 }
+
+export default Footer;
