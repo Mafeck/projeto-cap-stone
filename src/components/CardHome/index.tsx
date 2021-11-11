@@ -2,7 +2,7 @@ import { Container } from "./styles";
 
 interface CardHomeProps {
   title: string;
-  image: string;
+  image?: string;
   description: string;
   onClick: () => void;
 }
