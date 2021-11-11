@@ -5,7 +5,6 @@ export const Container = styled.div`
   height: 75px;
   display: flex;
   border-radius: 5px;
-  margin: 10px auto;
   cursor: pointer;
 
   .divImage {
@@ -16,6 +15,7 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    
     img{
       width: 78px;
     }
