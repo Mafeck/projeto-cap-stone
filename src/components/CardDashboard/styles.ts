@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 340px;
-  max-width: 100%;
+  width: 95%;
+  max-width: 650px;
   height: 140px;
   display: flex;
   position: relative;
@@ -32,6 +32,7 @@ export const Container = styled.div`
   .divImage {
     display: flex;
     align-items: flex-end;
+    justify-content: flex-end;
     width: 37%;
     border-radius: 5px;
     background-size: contain no-repeat;
