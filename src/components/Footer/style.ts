@@ -5,14 +5,14 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #000000;
+    background-color: var(--black);
 
     button {
         border: none;
         background: none;
 
         svg {
-            color: #f5f5f5;
+            color: var(--gray-0);
         }
     }
 `;
