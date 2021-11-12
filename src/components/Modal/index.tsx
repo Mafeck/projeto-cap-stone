@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactNode } from "react";
 import {
   ModalLargeContainer,
   ModalContainer,
@@ -12,7 +12,7 @@ interface ModalProps {
   className?: string;
   onClose: () => void;
   id?: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const Modal = ({
