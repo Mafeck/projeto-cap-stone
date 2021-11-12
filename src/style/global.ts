@@ -20,6 +20,8 @@ export const Global = createGlobalStyle`
         --warning: #FFCD07;
         --success: #168821;
         --information: #155BCB;
+        --black: #000000;
+        --white: #ffffff;
     }
 
     body {
