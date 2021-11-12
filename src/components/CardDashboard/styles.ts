@@ -49,5 +49,8 @@ export const Container = styled.div`
     border-radius: 5px;
     border-bottom-right-radius: 110%;
     z-index: 1;
+    img {
+      max-width: 100%;
+    }
   }
 `;
