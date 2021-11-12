@@ -37,6 +37,9 @@ export const Container = styled.div`
     background-size: contain no-repeat;
     padding-bottom: 1px;
     z-index: 2;
+    img {
+      max-width: 100%;
+    }
   }
 
   .divBall {
