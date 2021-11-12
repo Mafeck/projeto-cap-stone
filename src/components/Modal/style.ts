@@ -64,7 +64,7 @@ export const ModalButtonClose = styled.button`
   width: 40px;
   height: 20px;
   cursor: pointer;
-  color: var(--white);
+  color: var(--gray-0);
 
   &:after {
     content: "X";
@@ -79,9 +79,10 @@ export const ModalButtonClose = styled.button`
   }
 
   &:hover::after {
-    background-color: #626262;
+    color: var(--gray-50);
   }
+
   &:hover::before {
-    background-color: #626262;
+    color: var(--gray-50);
   }
 `;
