@@ -43,7 +43,7 @@ export const Container = styled.div`
   .divBall {
     position: absolute;
     width: 100%;
-    height: 140px;
+    height: 100%;
     border-radius: 5px;
     border-bottom-right-radius: 110%;
     z-index: 1;
