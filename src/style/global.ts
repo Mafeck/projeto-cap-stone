@@ -40,7 +40,18 @@ export const Global = createGlobalStyle`
     }
 
     button {
+        font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 19px;
         cursor: pointer;
+    }
+
+    input {
+        font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 16px;
     }
 
     a {
