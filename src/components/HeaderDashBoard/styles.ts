@@ -10,6 +10,7 @@ export const Container = styled.div`
   position: fixed;
   top: 0;
   z-index: 2;
+  padding: 0 10px;
 
   h1 {
     color: var(--gray-0);
@@ -23,7 +24,6 @@ export const UserPerfil = styled.div`
   justify-content: flex-end;
   align-items: center;
   z-index: 1;
-  padding-right: 15px;
   cursor: pointer;
 
   h2 {

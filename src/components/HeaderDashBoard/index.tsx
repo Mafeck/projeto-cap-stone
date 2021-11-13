@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import api from "../../services/api";
 import Modal from "../Modal";
 import Input from "../Input";
+import Button from "../Button";
 
 const HeaderDashBoard = () => {
   const { user, setUser, token } = useUser();
@@ -91,6 +92,7 @@ const HeaderDashBoard = () => {
               onChange={(event) => setNewUsername(event.target.value)}
               placeholder="New username"
             />
+            <Button onClick={editPerfil}>Editar</Button>
           </Modal>
         )}
       </UserPerfil>
