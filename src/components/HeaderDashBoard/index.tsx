@@ -6,16 +6,22 @@ import { useUser } from "../../providers/User";
 import { useHistory } from "react-router-dom";
 import api from "../../services/api";
 import Modal from "../Modal";
+import Input from "../Input";
 
 const HeaderDashBoard = () => {
   const { user, setUser, token } = useUser();
   const [renderOptions, setRenderOptions] = useState<boolean>(false);
   const [renderModal, setRenderModal] = useState<boolean>(false);
+  const [newUsername, setNewUsername] = useState<string>("");
   const history = useHistory();
 
   const editPerfil = () => {
+    const data = {
+      username: newUsername,
+    };
+
     api
-      .patch(`/users/${Object.values(user)[1]}`, {
+      .patch(`/users/${Object.values(user)[1]}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -81,7 +87,10 @@ const HeaderDashBoard = () => {
             }}
             modalTitle="Editar perfil"
           >
-            <div></div>
+            <Input
+              onChange={(event) => setNewUsername(event.target.value)}
+              placeholder="New username"
+            />
           </Modal>
         )}
       </UserPerfil>
