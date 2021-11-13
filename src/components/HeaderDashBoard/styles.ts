@@ -24,7 +24,6 @@ export const UserPerfil = styled.div`
   justify-content: flex-end;
   align-items: center;
   z-index: 1;
-  cursor: pointer;
 
   h2 {
     color: var(--gray-20);
@@ -42,6 +41,7 @@ export const UserPerfil = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
 
     .perfil--1 {
       background: var(--gray-20);
@@ -76,7 +76,7 @@ export const PerfilOptions = styled.div`
   border-radius: 5px;
 
   .editPerfil {
-    background: var(--gray-0);
+    background: #d8f3dc;
     cursor: pointer;
     width: 95%;
     height: 55px;
@@ -87,9 +87,9 @@ export const PerfilOptions = styled.div`
     padding: 0 5px;
 
     .divIcon {
-      background: #80ed99;
+      background: var(--gray-0);
       color: var(--gray-50);
-      font-size: 26px;
+      font-size: 24px;
       width: 50px;
       height: 48px;
       display: flex;
@@ -99,14 +99,28 @@ export const PerfilOptions = styled.div`
       margin-right: 10px;
     }
 
-    span {
-      text-align: start;
-      font-size: 11px;
+    main {
+      height: 100%;
+      display: flex;
+      justify-content: space-around;
+      flex-direction: column;
+      padding: 5px 0;
+
+      h6 {
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      span {
+        color: var(--gray-50);
+        text-align: start;
+        font-size: 10px;
+      }
     }
   }
 
   .logout {
-    background: var(--gray-0);
+    background: #ffdcc2;
     cursor: pointer;
     width: 95%;
     height: 55px;
@@ -116,9 +130,9 @@ export const PerfilOptions = styled.div`
     padding: 0 5px;
 
     .divIcon {
-      background: #ffaa00;
+      background: var(--gray-0);
       color: var(--gray-50);
-      font-size: 26px;
+      font-size: 24px;
       width: 50px;
       height: 48px;
       display: flex;
@@ -128,10 +142,23 @@ export const PerfilOptions = styled.div`
       margin-right: 10px;
     }
 
-    span {
-      text-align: start;
-      font-size: 11px;
-      padding-right: 15px;
+    main {
+      height: 100%;
+      display: flex;
+      justify-content: space-around;
+      flex-direction: column;
+      padding: 5px 0;
+
+      h6 {
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      span {
+        color: var(--gray-50);
+        text-align: start;
+        font-size: 10px;
+      }
     }
   }
 `;

@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Container, UserPerfil, PerfilOptions } from "./styles";
-import { AiFillEdit } from "react-icons/ai";
-import { FiLogOut } from "react-icons/fi";
+import { FiLogOut, FiEdit } from "react-icons/fi";
 import { useUser } from "../../providers/User";
 import { useHistory } from "react-router-dom";
 import api from "../../services/api";
 import Modal from "../Modal";
 import Input from "../Input";
 import Button from "../Button";
+import logo from "../../assets/Group 51.svg";
 
 const HeaderDashBoard = () => {
   const { user, setUser, token } = useUser();
@@ -27,15 +27,18 @@ const HeaderDashBoard = () => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => setUser(response.data))
+      .then((response) => {
+        setUser(response.data);
+        setNewUsername("");
+      })
       .catch((error) => console.log(error.data.response));
   };
 
   return (
     <Container>
-      <h1>HAKI</h1>
+      <img src={logo} alt="logo" />
       <UserPerfil>
-        <h2>Felipe Matheus</h2>
+        <h2>{Object.values(user)[0]}</h2>
         <div
           onClick={() => {
             if (renderOptions === false) {
@@ -59,9 +62,12 @@ const HeaderDashBoard = () => {
               className="editPerfil"
             >
               <div className="divIcon">
-                <AiFillEdit />
+                <FiEdit color="#80ed99" />
               </div>
-              <span>Clique aqui para editar.</span>
+              <main>
+                <h6>Editar Perfil</h6>
+                <span>Clique aqui para editar</span>
+              </main>
             </div>
             <div
               onClick={() => {
@@ -71,9 +77,12 @@ const HeaderDashBoard = () => {
               className="logout"
             >
               <div className="divIcon">
-                <FiLogOut />
+                <FiLogOut color="#ffaa00" />
               </div>
-              <span>Clique aqui para sair.</span>
+              <main>
+                <h6>Sair</h6>
+                <span>Clique aqui para sair</span>
+              </main>
             </div>
           </PerfilOptions>
         )}
