@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Container, UserPerfil, PerfilOptions, LargerModal } from "./styles";
+import { Container, UserPerfil, PerfilOptions } from "./styles";
 import { AiFillEdit } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import { useUser } from "../../providers/User";
 import { useHistory } from "react-router-dom";
 import api from "../../services/api";
+import Modal from "../Modal";
 
 const HeaderDashBoard = () => {
   const { user, setUser, token } = useUser();
@@ -70,7 +71,18 @@ const HeaderDashBoard = () => {
           </PerfilOptions>
         )}
         {renderModal && (
-          <LargerModal onClick={() => setRenderModal(false)}></LargerModal>
+          <Modal
+            onClose={() => {
+              if (renderModal === true) {
+                setRenderModal(false);
+              } else {
+                setRenderModal(true);
+              }
+            }}
+            modalTitle="Editar perfil"
+          >
+            <div></div>
+          </Modal>
         )}
       </UserPerfil>
     </Container>
