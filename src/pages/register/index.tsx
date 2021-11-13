@@ -2,9 +2,9 @@ import { Container, FormContainer } from "./styles";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../../components/schema";
-import { useUser } from "../../providers/User";
-import Input from "../../components/Input";
 import api from "../../services/api";
+import Input from "../../components/Input";
+import Button from "../../components/Button";
 
 interface User {
   email: string;
@@ -16,8 +16,6 @@ interface User {
 }
 
 const Register = () => {
-  const { setUser } = useUser();
-
   const {
     register,
     handleSubmit,
@@ -36,7 +34,7 @@ const Register = () => {
 
     api
       .post("/users", newData)
-      .then((response) => setUser(response.data))
+      .then((response) => console.log(response.data))
       .catch((error) => console.log(error.data.response));
   };
 
@@ -44,16 +42,14 @@ const Register = () => {
     <Container>
       <FormContainer>
         <form onSubmit={handleSubmit(createUser)}>
-          <Input placeholder="OAB" {...register("oab")} />
-          <Input placeholder="Estado" {...register("state")} />
-          <Input placeholder="Usuário" {...register("username")} />
-          <Input placeholder="E-mail" {...register("email")} />
-          <Input placeholder="Telefone" {...register("phone")} />
-          <Input placeholder="Senha" {...register("password")} />
-          <Input
-            placeholder="Confirmar Senha"
-            {...register("confirmPassword")}
-          />
+          <Input placeholder="OAB" />
+          <Input placeholder="Estado" />
+          <Input placeholder="Usuário" />
+          <Input placeholder="E-mail" />
+          <Input placeholder="Telefone" />
+          <Input placeholder="Senha" />
+          <Input placeholder="Confirmar Senha" />
+          <Button type="submit">Cadastrar</Button>
         </form>
       </FormContainer>
     </Container>
