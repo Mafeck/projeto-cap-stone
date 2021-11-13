@@ -5,7 +5,7 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--black);
+    background-color: var(--color-primary-strong);
 
     button {
         border: none;
