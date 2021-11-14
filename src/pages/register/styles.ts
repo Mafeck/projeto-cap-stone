@@ -7,17 +7,22 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  overflow-x: hidden;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const FormContainer = styled.div`
   width: 95%;
-  max-width: 380px;
-  height: 620px;
+  max-width: 500px;
+  margin-top: 250px;
 
   h1 {
     font-size: 24px;
     font-weight: 600;
-    margin: 60px 0 20px 0;
+    margin-bottom: 30px;
   }
 
   form {
@@ -28,6 +33,12 @@ export const FormContainer = styled.div`
 
     input {
       margin-bottom: 15px;
+    }
+
+    p {
+      color: var(--gray-50);
+      font-size: 14px;
+      margin: 10px auto;
     }
   }
 `;

@@ -57,8 +57,11 @@ export const HeaderStyle = styled.div`
 `;
 
 export const HeaderMenu = styled.div`
-  height: 735px;
+  width: 100vw;
+  height: 100vh;
   background-color: var(--black);
+  position: fixed;
+  top: 0;
 
   .menu {
     display: flex;

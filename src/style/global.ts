@@ -55,7 +55,7 @@ export const Global = createGlobalStyle`
     }
 
     a {
-        /* color: ; */
+        color: var(--color-secondary);
         text-decoration: none;
     }
 `;
