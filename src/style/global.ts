@@ -28,13 +28,25 @@ export const Global = createGlobalStyle`
         font-family: 'Poppins', sans-serif;
     }
     
-    border-list-style, input, button {
-        /* font-family: ; */
-        /* font-size: ; */
+    h1 {
+        font-size: 26px;
     }
-    
-    h1, h2, h3, h4, h5, h6 {
-        /* font-family: 'Lexend Deca', sans-serif; */
+
+    h2 {
+        font-size: 22px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    span {
+        font-size: 14px;
+        font-family: 'Lexend Deca', sans-serif;
+    }
+
+    p {
+        font-family: 'Lexend Deca', sans-serif;
     }
 
     button {
