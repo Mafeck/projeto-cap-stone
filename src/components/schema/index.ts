@@ -17,7 +17,7 @@ export const schema = yup.object().shape({
     .required("Senha obrigatória")
     .matches(
       /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%&*^-`?]).{8,}$/i,
-      "Senha muito fraca"
+      "Senha muito fraca, coloque pelo menos 1 caractere especial, 1 letra maiúscula, 1 letra minúscula e 1 número"
     ),
   confirmPassword: yup
     .string()

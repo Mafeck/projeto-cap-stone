@@ -41,4 +41,8 @@ export const FormContainer = styled.div`
       margin: 10px auto;
     }
   }
+
+  @media (min-width: 768px) {
+    margin: 0;
+  }
 `;
