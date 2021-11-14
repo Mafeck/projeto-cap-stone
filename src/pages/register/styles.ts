@@ -32,7 +32,7 @@ export const FormContainer = styled.div`
     justify-content: space-between;
 
     input {
-      margin-bottom: 15px;
+      margin-bottom: 2px;
     }
 
     p {

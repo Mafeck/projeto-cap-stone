@@ -41,8 +41,8 @@ const Register = () => {
       .post("/signup", newData)
       .then((response) => {
         console.log(response.data.user);
-        setTimeout(() => toast.success("Conta criada"), 2000);
-        history.push("/login");
+        toast.success("Conta criada");
+        setTimeout(() => history.push("/login"), 2000);
       })
       .catch((error) => toast.error(error.response.data));
   };
@@ -60,6 +60,7 @@ const Register = () => {
               type="number"
               width="47%"
               register={register}
+              error={errors.oab?.message}
             />
             <Input
               type="text"
@@ -67,36 +68,43 @@ const Register = () => {
               width="47%"
               placeholder="Estado"
               register={register}
+              error={errors.state?.message}
             />
             <Input
-              placeholder="Usuário"
+              placeholder="Nome de Usuário"
               name="username"
               type="text"
+              maxLength={15}
               register={register}
+              error={errors.username?.message}
             />
             <Input
               placeholder="E-mail"
               name="email"
               type="email"
               register={register}
+              error={errors.email?.message}
             />
             <Input
               placeholder="Telefone"
               name="phone"
               type="number"
               register={register}
+              error={errors.phone?.message}
             />
             <Input
               placeholder="Senha"
               name="password"
               type="password"
               register={register}
+              error={errors.password?.message}
             />
             <Input
               placeholder="Confirmar Senha"
               name="confirmPassword"
               type="password"
               register={register}
+              error={errors.confirmPassword?.message}
             />
             <Button type="submit">Cadastrar</Button>
             <p>

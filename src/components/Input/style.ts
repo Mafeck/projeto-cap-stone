@@ -2,10 +2,9 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  height: 90px;
+  height: 85px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 
   input {
     font-size: 16px;
@@ -19,9 +18,12 @@ export const Container = styled.div`
     border: 2px solid var(--gray-0);
     box-sizing: border-box;
     border-radius: 8px;
+    border: 2px solid #333333;
   }
 
-  @media (min-width: 768px) {
-    border: 2px solid #333333;
+  span {
+    color: var(--negative);
+    font-size: 10px;
+    padding-left: 5px;
   }
 `;

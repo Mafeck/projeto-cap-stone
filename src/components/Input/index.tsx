@@ -25,6 +25,7 @@ const Input = ({
         placeholder={placeholder}
         {...rest}
       />
+      <span>{error}</span>
     </Container>
   );
 };
