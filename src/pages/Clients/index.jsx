@@ -3,6 +3,7 @@ import CardClients from "../../components/CardClients";
 import api from "../../services/api";
 import { ReactComponent as PageClientIcon } from '../../assets/pageClientIcon.svg';
 import { Header } from './style';
+import Footer from "../../components/Footer";
 
 // interface User {
 //     username: string;
@@ -79,6 +80,7 @@ const Clients = () => {
             {clientsList.map((item, index) => {
                return <CardClients key={index} name={item.name} cpf={item.cpf} />
             })}
+            <Footer />
         </div>
     )
 } 
