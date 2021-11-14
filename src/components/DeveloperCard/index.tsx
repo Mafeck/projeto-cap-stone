@@ -2,24 +2,24 @@ import { Link } from "react-router-dom";
 import Icon from "../../assets/linkedin.svg";
 import { DevelopBox } from "./style";
 
-interface DeveloperProps {
+interface DeveloperCardProps {
   image?: string;
   name: string;
   link?: string;
 }
 
-const Developer = ({ image, name, link }: DeveloperProps) => {
+const DeveloperCard = ({ image, name, link }: DeveloperCardProps) => {
   return (
     <DevelopBox>
       <img src={image} alt="dev" />
       <span>{name}</span>
       {link && (
         <Link to={link}>
-          <img src={Icon} alt="linkedin" />
+          <img className="linkedin" src={Icon} alt="linkedin" />
         </Link>
       )}
     </DevelopBox>
   );
 };
 
-export default Developer;
+export default DeveloperCard;

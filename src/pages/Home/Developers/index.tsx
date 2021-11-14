@@ -1,18 +1,30 @@
-import Developer from "../../../components/Developer";
+import DeveloperCard from "../../../components/DeveloperCard";
 import { DevelopersBox } from "./style";
-import Felipe from "../../../assets/felipe.png";
-import Fernanda from "../../../assets/fernanda.png";
-import Maria from "../../../assets/maria.png";
-import Marcus from "../../../assets/marcus.png";
-import Patrick from "../../../assets/patrick.png";
+import felipe from "../../../assets/felipe.png";
+import fernanda from "../../../assets/fernanda.png";
+import maria from "../../../assets/maria.png";
+import marcus from "../../../assets/marcus.png";
+import patrick from "../../../assets/patrick.png";
+
+const links = {
+  felipe: "https://www.linkedin.com/in/felipe-matheus-33b4711aa/",
+  fernanda: "",
+  maria: "",
+  marcus: "",
+  patrick: "",
+};
 
 const Developers = () => (
   <DevelopersBox>
-    <Developer name="Felipe Matheus" image={Felipe} />
-    <Developer name="Fernanda Baia" image={Fernanda} />
-    <Developer name="Maria Ferrari" image={Maria} />
-    <Developer name="Marcus Castro" image={Marcus} />
-    <Developer name="Patrick Arruda" image={Patrick} />
+    <DeveloperCard name="Felipe Matheus" image={felipe} link={links.felipe} />
+    <DeveloperCard
+      name="Fernanda Baia"
+      image={fernanda}
+      link={links.fernanda}
+    />
+    <DeveloperCard name="Maria Ferrari" image={maria} link={links.maria} />
+    <DeveloperCard name="Marcus Castro" image={marcus} link={links.marcus} />
+    <DeveloperCard name="Patrick Arruda" image={patrick} link={links.patrick} />
   </DevelopersBox>
 );
 
