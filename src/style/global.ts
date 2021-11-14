@@ -24,7 +24,7 @@ export const Global = createGlobalStyle`
     }
 
     body {
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Lexend Deca', sans-serif;
     }
     
     border-list-style, input, button {
@@ -33,7 +33,7 @@ export const Global = createGlobalStyle`
     }
     
     h1, h2, h3, h4, h5, h6 {
-        font-family: 'Lexend Deca', sans-serif;
+        font-family: 'Poppins', sans-serif;
     }
 
     button {
