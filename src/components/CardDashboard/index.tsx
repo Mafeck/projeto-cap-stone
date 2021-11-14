@@ -6,6 +6,7 @@ interface CardDashboardProps {
   image: string;
   background: string;
   backgroundBall: string;
+  width?: string;
   height?: string;
 }
 
@@ -15,10 +16,11 @@ const CardDashboard = ({
   image,
   background,
   backgroundBall,
+  width = "95%",
   height = "140px",
 }: CardDashboardProps) => {
   return (
-    <Container style={{ backgroundColor: background, height: height }}>
+    <Container style={{ backgroundColor: background, height: height, width: width }}>
       <main>
         <h2>{title}</h2>
         <p>{description}</p>
