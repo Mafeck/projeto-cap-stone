@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import CardClients from "../../components/CardClients";
 import api from "../../services/api";
+import { ReactComponent as PageClientIcon } from '../../assets/pageClientIcon.svg';
+import { Header } from './style';
 
 // interface User {
 //     username: string;
@@ -68,6 +70,12 @@ const Clients = () => {
 
     return (
         <div>
+            <Header>
+                <div className='frontBox'>
+                    <h1>Lista de clientes</h1>
+                    <PageClientIcon />
+                </div>
+            </Header>
             {clientsList.map((item, index) => {
                return <CardClients key={index} name={item.name} cpf={item.cpf} />
             })}
