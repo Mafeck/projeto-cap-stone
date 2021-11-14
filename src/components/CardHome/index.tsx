@@ -4,14 +4,19 @@ interface CardHomeProps {
   title: string;
   image?: string;
   description: string;
-  onClick: () => void;
+  isLast?: boolean;
 }
 
-const CardHome = ({ title, image, description, onClick }: CardHomeProps) => {
+const CardHome = ({
+  title,
+  image,
+  description,
+  isLast = false,
+}: CardHomeProps) => {
   return (
-    <Container onClick={onClick}>
+    <Container isLast={isLast}>
       <div className="divImage">
-        <img src={image} alt="card image" />
+        <img src={image} alt="img" />
       </div>
       <main>
         <h3>{title}</h3>

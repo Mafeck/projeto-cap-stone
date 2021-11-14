@@ -1,11 +1,16 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+interface ContainerProps {
+  isLast: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
   width: 330px;
   height: 75px;
   display: flex;
   border-radius: 5px;
   cursor: pointer;
+  margin-bottom: ${(props) => (props.isLast ? "0px" : "20px")};
 
   .divImage {
     background: var(--color-primary);
@@ -15,8 +20,8 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    img{
+
+    img {
       width: 78px;
     }
   }
@@ -37,6 +42,5 @@ export const Container = styled.div`
       font-size: 12px;
       font-weight: 500;
     }
-
   }
 `;
