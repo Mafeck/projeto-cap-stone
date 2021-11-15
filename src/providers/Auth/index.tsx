@@ -1,4 +1,4 @@
-import { createContext, useState, ReactNode } from "react";
+import { createContext, useState, ReactNode, useContext } from "react";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import api from "../../services/api";
@@ -56,3 +56,5 @@ export const AuthProvider = ({ children }: AuthProps) => {
     </AuthContext.Provider>
   );
 };
+
+export const useAuth = () => useContext(AuthContext);

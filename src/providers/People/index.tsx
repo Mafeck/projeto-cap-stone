@@ -28,6 +28,8 @@ interface People {
   maritalStatus: string;
   address: Address[];
   comments: Comments[];
+  id: number;
+  userId: string;
 }
 
 interface PeopleContextData {

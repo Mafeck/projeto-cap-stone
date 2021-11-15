@@ -7,13 +7,19 @@ const Router = () => {
   return (
     <Switch>
       <Route exact path="/">
-        <Clients />
+      
       </Route>
       <Route exact path="/register">
         <Register />
       </Route>
       <Route exact path="/login">
         <Login />
+      </Route>
+      <Route exact path="/people">
+        <Clients />
+      </Route>
+      <Route exact path="/people/:id">
+
       </Route>
     </Switch>
   );

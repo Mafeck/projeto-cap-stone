@@ -4,11 +4,13 @@ import { Container } from "./style";
 interface CardClientsProps {
   name: string;
   cpf: string;
+  id: number;
+  onClick: () => void;
 }
 
-const CardClients = ({ name, cpf }: CardClientsProps) => {
+const CardClients = ({ name, cpf, id, onClick }: CardClientsProps) => {
   return (
-    <Container>
+    <Container onClick={onClick}>
       <div className="diceBackground">
         <Dice className="diceIcon" />
       </div>
