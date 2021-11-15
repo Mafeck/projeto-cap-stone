@@ -55,7 +55,7 @@ const Register = () => {
           <h1>Cadastro</h1>
           <form onSubmit={handleSubmit(createUser)}>
             <Input
-              placeholder="Digite sua OAB"
+              placeholder="OAB"
               name="oab"
               type="number"
               width="47%"
@@ -66,12 +66,12 @@ const Register = () => {
               type="text"
               name="state"
               width="47%"
-              placeholder="Digite o nome do seu estato"
+              placeholder="Estado"
               register={register}
               error={errors.state?.message}
             />
             <Input
-              placeholder="Nome de Usuário"
+              placeholder="Usuário"
               name="username"
               type="text"
               maxLength={15}
@@ -93,14 +93,14 @@ const Register = () => {
               error={errors.phone?.message}
             />
             <Input
-              placeholder="Digite sua senha"
+              placeholder="Senha"
               name="password"
               type="password"
               register={register}
               error={errors.password?.message}
             />
             <Input
-              placeholder="Confirme sua senha"
+              placeholder="Confirmar senha"
               name="confirmPassword"
               type="password"
               register={register}
