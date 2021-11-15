@@ -16,11 +16,8 @@ export const Global = createGlobalStyle`
         --gray-50: #878787;
         --gray-20: #E0E0E0;
         --gray-0: #F5F5F5;
-<<<<<<< HEAD
-        --white: #FFFFFF
-=======
         --white: #FFFFFF;
->>>>>>> 4a41e735a7cee55fd1856042968fd23803eb6a7f
+        --black: #000000;
         --negative: #E60000;
         --warning: #FFCD07;
         --success: #168821;
