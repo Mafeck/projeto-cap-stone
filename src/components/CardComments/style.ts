@@ -1,30 +1,51 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
-    padding: 15px;
-    width: 95%;
-    margin: 10px;
-    border: 2px solid var(--gray-0);
+  width: 95%;
+  max-width: 500px;
+  height: 192px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 12px 15px;
+  border: 2px solid var(--gray-20);
+  border-radius: 5px;
+  margin: 30px auto;
 
-    h1 {
-        font-family: 'Poppins', sans-serif;
-        font-weight: 600;
-        font-size: 18px;
-        line-height: 24px;
-        color: var(--color-primary);
-        margin-bottom: 10px;
-    }
+  .card__title {
+    color: var(--color-primary-strong);
+    font-size: 20px;
+  }
 
-    p {
-        font-weight: normal;
-        font-size: 14px;
-        line-height: 16px;
-        color: var(--gray-50);
-        margin-bottom: 10px;
-    }
+  .card__comment {
+    color: var(--gray-50);
+    font-weight: 400;
+    width: 100%;
+    height: 80px;
+    overflow-y: scroll;
+    font-size: 12px;
 
-    div {
-        display: flex;
-        justify-content: space-between;
+    ::-webkit-scrollbar {
+      display: none;
     }
+  }
+
+  .card__content {
+    font-size: 10px;
+    width: 100%;
+    height: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    span {
+      color: var(--gray-20);
+
+      :hover {
+        transition: 0.5s;
+        color: var(--gray-100);
+      }
+    }
+  }
 `;
