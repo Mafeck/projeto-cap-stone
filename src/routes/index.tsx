@@ -7,7 +7,7 @@ const Router = () => {
   return (
     <Switch>
       <Route exact path="/">
-      
+      <Clients />
       </Route>
       <Route exact path="/register">
         <Register />

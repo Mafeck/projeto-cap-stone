@@ -1,9 +1,10 @@
+import Router from "./routes";
 import { Global } from "./style/global";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import Router from "./routes";
 
 function App() {
+
   return (
     <div className="App">
       <Global />
