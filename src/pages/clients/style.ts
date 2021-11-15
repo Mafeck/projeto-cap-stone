@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
-export const Header = styled.div`
+export const TitleBox = styled.div`
     width: 100%;
     max-width: 100%;
     background: var(--gray-100);
-    height: 86px;
+    height: 75px;
+    margin-top: 64px;
 
     .frontBox {
         background: var(--color-primary);
@@ -21,6 +22,10 @@ export const Header = styled.div`
             font-weight: 600;
             font-size: 18px;
 
+        }
+
+        svg {
+            width: 75px;
         }
     }
 `;

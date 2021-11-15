@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import CardClients from "../../components/CardClients";
 import api from "../../services/api";
 import { ReactComponent as PageClientIcon } from '../../assets/pageClientIcon.svg';
-import { Header } from './style';
+import { TitleBox } from './style';
 import Footer from "../../components/Footer";
 import { useAuth } from "../../providers/Auth";
 import { useHistory } from "react-router-dom";
 import jwtDecode from "jwt-decode";
+import HeaderDashBoard from "../../components/HeaderDashBoard";
 
 interface CardClientsProps {
     name: string;
@@ -46,12 +47,13 @@ const Clients = () => {
 
     return (
         <div>
-            <Header>
+            <HeaderDashBoard />
+            <TitleBox>
                 <div className='frontBox'>
                     <h1>Lista de clientes</h1>
                     <PageClientIcon />
                 </div>
-            </Header>
+            </TitleBox>
             {clientsList.map((item, index) => {
                return <CardClients key={index} onClick={() => handleClick(item.id)} id={item.id} name={item.name} cpf={item.cpf} />
             })}

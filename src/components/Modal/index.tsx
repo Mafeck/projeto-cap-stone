@@ -11,24 +11,22 @@ interface ModalProps {
   modalTitle: string;
   className?: string;
   onClose: () => void;
-  id?: string;
   children: React.ReactNode;
 }
 
 const Modal = ({
   children,
   onClose = () => {},
-  id = "modal",
   modalTitle,
   className,
 }: ModalProps) => {
   const handleOutsideClick = (e: React.MouseEvent) => {
-    if ((e.target as Element).id === id) {
+    if ((e.target as Element).id === "Modal") {
       onClose();
     }
   };
   return (
-    <ModalLargeContainer id={id} onClick={handleOutsideClick}>
+    <ModalLargeContainer id="Modal" onClick={handleOutsideClick}>
       <ModalContainer>
         <ModalHeader className={className}>
           <h3>{modalTitle}</h3>
