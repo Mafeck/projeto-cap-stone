@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.input`
-  font-size: 16px;
-  width: 100%;
+  font-size: 14px;
+  width: 95vw;
   height: 60px;
   display: flex;
   flex-direction: row;
