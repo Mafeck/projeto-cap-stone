@@ -4,8 +4,11 @@ const Router = () => {
   return (
     <Switch>
       <Route exact path="/"></Route>
-      <Route exact path="/login"></Route>
-      <Route exact path="/register"></Route>
+      <Route path="/login"></Route>
+      <Route path="/register"></Route>
+      <Route path="/dashboard"></Route>
+      <Route path="/dashboard/people"></Route>
+      <Route path="/dashboard/people/:id"></Route>
     </Switch>
   );
 };
