@@ -1,6 +1,5 @@
 import { createContext, useState, ReactNode } from "react";
 import { useHistory } from "react-router";
-
 import { toast } from "react-toastify";
 import api from "../../services/api";
 
@@ -28,9 +27,7 @@ export const AuthContext = createContext<AuthProviderData>(
 export const AuthProvider = ({ children }: AuthProps) => {
   const history = useHistory();
 
-  const [token, setToken] = useState(
-    () => JSON.parse(localStorage.getItem("@token:haki")!) || ""
-  );
+  const [token, setToken] = useState(JSON.parse(localStorage.getItem("@token:haki")!) || "");
 
   const signIn = (data: UserData) => {
     api
