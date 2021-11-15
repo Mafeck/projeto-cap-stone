@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 95%;
-  max-width: 500px;
   height: 192px;
   display: flex;
   flex-direction: column;
@@ -11,7 +10,7 @@ export const Container = styled.div`
   padding: 12px 15px;
   border: 2px solid var(--gray-20);
   border-radius: 5px;
-  margin: 30px auto;
+  margin-bottom: 20px;
 
   .card__title {
     color: var(--color-primary-strong);
@@ -40,7 +39,7 @@ export const Container = styled.div`
     align-items: center;
 
     span {
-      color: var(--gray-20);
+      color: var(--gray-50);
 
       :hover {
         transition: 0.5s;
