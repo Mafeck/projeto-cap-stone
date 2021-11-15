@@ -25,13 +25,13 @@ const Login = () => {
     formState: { errors },
   } = useForm<UserData>({ resolver: yupResolver(schemaLogin) });
 
-  if (token) {
-    return <Redirect to="/dashboard" />;
-  }
-
   const onSubmitForm = (data: UserData) => {
     signIn(data);
   };
+  
+  if (token) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <>
