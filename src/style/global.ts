@@ -17,15 +17,22 @@ export const Global = createGlobalStyle`
         --gray-20: #E0E0E0;
         --gray-0: #F5F5F5;
 <<<<<<< HEAD
+<<<<<<< HEAD
         --white: #FFFFFF
 =======
         --white: #FFFFFF;
         --black: #000000;
 >>>>>>> 36c8579d44f19086077c7aa5b5c991c753c25e7d
+=======
+        --white: #FFFFFF;
+        --black: #000000;
+>>>>>>> 2cd2f27fcbdd4798d57bb4273027098243f74413
         --negative: #E60000;
         --warning: #FFCD07;
         --success: #168821;
         --information: #155BCB;
+        --black: #000000;
+        --white: #ffffff;
     }
 
     body {
@@ -57,7 +64,7 @@ export const Global = createGlobalStyle`
     }
 
     a {
-        /* color: ; */
+        color: var(--color-secondary);
         text-decoration: none;
     }
 `;
