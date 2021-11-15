@@ -3,14 +3,33 @@ import { useState } from "react";
 import { FaDice } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import { usePeople } from "../../providers/People";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schemaComment } from "../../components/schema";
 import CardComment from "../../components/CardComment";
 import Modal from "../../components/Modal";
 import Input from "../../components/Input";
+
+interface Comment {
+  title: string;
+  comment: string;
+  id: number;
+}
 
 const Client = () => {
   const [renderModal, setRenderModal] = useState<boolean>(false);
   const { people } = usePeople();
   const history = useHistory();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Comment>({
+    resolver: yupResolver(schemaComment),
+  });
+
+  const createComment = () => {};
 
   return (
     <Container>
@@ -69,7 +88,16 @@ const Client = () => {
       </CommentsContainer>
       {renderModal && (
         <Modal onClose={() => setRenderModal(false)} modalTitle="Comentário">
-          <h1>estou testando</h1>
+          <form onSubmit={handleSubmit(createComment)}>
+            <Input
+              maxLength={15}
+              name="title"
+              error={errors.title?.message}
+              register={register}
+              placeholder="Título do comentário"
+            />
+            <textarea placeholder="comentário..." {...register("comment")} />
+          </form>
         </Modal>
       )}
     </Container>

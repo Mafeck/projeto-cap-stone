@@ -45,6 +45,19 @@ export const Container = styled.div`
       height: 100px;
     }
   }
+
+  form {
+    width: 100%;
+
+    textarea {
+      width: 100%;
+      height: 200px;
+      border: 2px solid black;
+      border-radius: 5px;
+      resize: none;
+      padding: 10px 10px 20px 10px;
+    }
+  }
 `;
 
 export const ContentInfo = styled.div`
@@ -99,11 +112,12 @@ export const CommentsContainer = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    padding: 0 10px;
     margin-bottom: 10px;
 
     .comments__title {
-      font-size: 16px;
+      font-size: 18px;
+      font-weight: 600;
     }
 
     .comment__button {
@@ -126,9 +140,14 @@ export const CommentsContainer = styled.div`
     height: 100vh;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     overflow-y: scroll;
     overflow-x: hidden;
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   @media (min-width: 1100px) {
