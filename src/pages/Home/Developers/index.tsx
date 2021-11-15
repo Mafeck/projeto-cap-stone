@@ -8,10 +8,11 @@ import patrick from "../../../assets/patrick.png";
 
 const links = {
   felipe: "https://www.linkedin.com/in/felipe-matheus-33b4711aa/",
-  fernanda: "",
-  maria: "",
-  marcus: "",
-  patrick: "",
+  fernanda: "https://www.linkedin.com/in/maria-baia/",
+  maria:
+    "https://www.linkedin.com/in/maria-aparecida-guedes-ferrari-1b4a16163/",
+  marcus: "https://www.linkedin.com/in/patrickgsda/",
+  patrick: "https://www.linkedin.com/in/patrickgsda/",
 };
 
 const Developers = () => (

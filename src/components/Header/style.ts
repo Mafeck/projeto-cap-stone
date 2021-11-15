@@ -9,6 +9,7 @@ export const HeaderStyle = styled.div`
   justify-content: center;
   position: fixed;
   top: 0;
+  z-index: 10;
   div {
     min-width: 80%;
     height: 29px;
@@ -36,7 +37,7 @@ export const HeaderStyle = styled.div`
     .desktop {
       display: flex;
       justify-content: space-between;
-      min-width: 90%;
+      width: 90%;
       .menu {
         display: flex;
         min-width: 560px;

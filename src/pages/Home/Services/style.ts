@@ -15,11 +15,8 @@ export const ServicesBox = styled.div`
   }
 `;
 
-export const BoxWidth = styled.div`
-  width: 70vw;
-`;
-
-export const Content = styled.div`
-  display: flex;
-  justify-content: space-between;
+export const ImageBox = styled.div`
+  @media (min-width: 769px) {
+    margin-right: 15vw;
+  }
 `;
