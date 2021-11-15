@@ -20,4 +20,8 @@ export const Container = styled.div`
             color: var(--gray-0);
         }
     }
+
+    @media (min-width: 768px) {
+        display: none;
+    }
 `;
