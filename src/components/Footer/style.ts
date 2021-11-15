@@ -6,6 +6,11 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     background-color: var(--color-primary-strong);
+    position: fixed;
+    top: auto;
+    left: 0;
+    bottom: 0; 
+    width: 100%;
 
     button {
         border: none;
