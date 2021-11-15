@@ -9,8 +9,6 @@ interface User {
 interface UserContextData {
   user: User[];
   setUser: (props: User[]) => void;
-  token: string;
-  setToken: (props: string) => void;
 }
 
 interface UserProviderProps {
@@ -23,12 +21,9 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("@user:haki")!) || []
   );
-  const [token, setToken] = useState(
-    JSON.parse(localStorage.getItem("@token:haki")!) || ""
-  );
 
   return (
-    <UserContext.Provider value={{ user, setUser, token, setToken }}>
+    <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
   );

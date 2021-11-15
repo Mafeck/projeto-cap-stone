@@ -24,3 +24,11 @@ export const schema = yup.object().shape({
     .required("Confirme sua senha")
     .oneOf([yup.ref("password")], "Senhas diferentes"),
 });
+
+export const schemaLogin = yup.object().shape({
+  email: yup
+    .string()
+    .required("E-mail necessário para efetuar login")
+    .email("E-mail inválido"),
+  password: yup.string().required("Senha necessária para efetuar login"),
+});

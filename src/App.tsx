@@ -1,7 +1,7 @@
 import { Global } from "./style/global";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import Register from "./pages/register";
+import Router from "./routes";
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
         pauseOnHover
         theme="colored"
       />
-      <Register />
+      <Router />
     </div>
   );
 }

@@ -7,17 +7,11 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  overflow-x: hidden;
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
 `;
 
-export const FormContainer = styled.div`
+export const ContainerForm = styled.div`
   width: 90%;
   max-width: 500px;
-  margin-top: 250px;
 
   h1 {
     font-size: 24px;
