@@ -8,9 +8,11 @@ import Modal from "../Modal";
 import Input from "../Input";
 import Button from "../Button";
 import logo from "../../assets/Group 51.svg";
+import { useAuth } from "../../providers/Auth";
 
 const HeaderDashBoard = () => {
-  const { user, setUser, token } = useUser();
+  const { user, setUser } = useUser();
+  const {token} = useAuth();
   const [renderOptions, setRenderOptions] = useState<boolean>(false);
   const [renderModal, setRenderModal] = useState<boolean>(false);
   const [newUsername, setNewUsername] = useState<string>("");

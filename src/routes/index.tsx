@@ -1,6 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 import Login from "../pages/login";
 import Register from "../pages/register";
+import RegisterClient from "../pages/RegisterClient"
 
 const Router = () => {
   return (
@@ -13,6 +14,9 @@ const Router = () => {
       </Route>
       <Route exact path="/login">
         <Login />
+      </Route>
+      <Route exact path="/registerClient">
+        <RegisterClient/>
       </Route>
     </Switch>
   );
