@@ -14,22 +14,26 @@ export const ModalLargeContainer = styled.div`
 `;
 
 const ModalEffectContainer = keyframes`
-0%{
-  opacity: 0;
-  transform: translateY(-10%)
-}
+  0%{
+    opacity: 0;
+    transform: translateY(-10%)
+  }
 
-100%{
-  opacity: 1;
-  transform: translateY(0%)}
-`;
+  100%{
+    opacity: 1;
+    transform: translateY(0%)}
+  `;
 
 export const ModalContainer = styled.div`
   background-color: #fff;
   width: 600px;
   border-radius: 5px;
   animation: ${ModalEffectContainer} 0.6s;
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> feature/pageClient
   @media (max-width: 990px) {
     width: 95%;
   }
@@ -42,6 +46,7 @@ export const ModalHeader = styled.header`
   padding: 15px;
   border-radius: 5px 5px 0 0;
   background-color: var(--color-primary);
+
   h3 {
     color: var(--gray-0);
   }
@@ -65,7 +70,7 @@ export const ModalButtonClose = styled.button`
   width: 40px;
   height: 20px;
   cursor: pointer;
-  color: var(--white);
+  color: var(--gray-0);
 
   &:after {
     content: "X";
@@ -80,10 +85,14 @@ export const ModalButtonClose = styled.button`
   }
 
   &:hover::after {
-    background-color: #626262;
+    color: var(--gray-50);
   }
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> feature/pageClient
   &:hover::before {
-    background-color: #626262;
+    color: var(--gray-50);
   }
 `;

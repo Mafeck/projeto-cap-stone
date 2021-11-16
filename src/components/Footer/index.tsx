@@ -8,7 +8,7 @@ const Footer = () => {
     return (
         <Container>
             <button>
-                <BsHouseDoor onClick={() => history.push('/home')} />
+                <BsHouseDoor onClick={() => history.push('/')} />
             </button>
         </Container>
     )
