@@ -61,7 +61,9 @@ interface TokenDecodeParams {
 const PeopleContext = createContext<PeopleContextData>({} as PeopleContextData);
 
 export const PeopleProvider = ({ children }: PeopleProviderProps) => {
-  const token = JSON.parse(localStorage.getItem("@token:haki")!);
+  const [token] = useState(
+    JSON.parse(localStorage.getItem("@token:haki")!) || ""
+  );
   const [tokenDecode] = useState<TokenDecodeParams>(jwtDecode(token!));
   const [people, setPeople] = useState<People[]>([]);
   const [client, setClient] = useState<People>(
