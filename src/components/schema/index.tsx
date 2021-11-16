@@ -26,7 +26,10 @@ export const schema = yup.object().shape({
 });
 
 export const schemaComment = yup.object().shape({
-  title: yup.string().required("Digite o título do comentário"),
+  title: yup
+    .string()
+    .required("Digite o título do comentário")
+    .min(15, "Digite um título maior"),
   comment: yup
     .string()
     .required("Faça um comentário")

@@ -10,7 +10,7 @@ interface CardCommentProps {
 
 const CardComment = ({ comment, commentTitle, onClick }: CardCommentProps) => {
   const newDate = new Date();
-  const newDataFormatted = newDate.toLocaleString("pt-BR")
+  const newDataFormatted = newDate.toLocaleString("pt-BR").split(" ")[0];
 
   return (
     <Container>

@@ -57,6 +57,11 @@ export const Container = styled.div`
       resize: none;
       padding: 10px 10px 20px 10px;
     }
+
+    span {
+      color: var(--negative);
+      font-size: 10px;
+    }
   }
 `;
 
