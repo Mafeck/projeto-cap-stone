@@ -6,16 +6,14 @@ import RegisterClient from "../pages/RegisterClient"
 const Router = () => {
   return (
     <Switch>
-      <Route exact path="/">
-        <Login />
-      </Route>
+      <Route exact path="/"></Route>
       <Route exact path="/register">
         <Register />
       </Route>
       <Route exact path="/login">
         <Login />
       </Route>
-      <Route exact path="/registerClient">
+      <Route exact path="/dashboard/register">
         <RegisterClient/>
       </Route>
     </Switch>
