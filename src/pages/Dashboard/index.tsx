@@ -6,15 +6,16 @@ import imageListOfClient from "../../assets/Group 153.svg";
 import Footer from "../../components/Footer";
 
 const Dashboard = () => {
+
     return (
         <DashboardStyled>
             <HeaderDashBoard/>
             <div className="cards">
-                <CardDashboard title="Cadastrar Cliente" description="Cadastre 
+                <CardDashboard route="/dashboard/register" title="Cadastrar Cliente" description="Cadastre 
                 dados de seus clientes, de forma rápida e de qualquer 
                 lugar." image={imageRegisterClient} background="var(--color-secondary-strong)" 
                 backgroundBall="var(--color-secondary)" />
-                <CardDashboard title="Listar Clientes" description="Pode 
+                <CardDashboard route="/dashboard/people" title="Listar Clientes" description="Pode 
                 ser editada com a remoção ou adição de outros usuários específicos." 
                 image={imageListOfClient} background="var(--black)" 
                 backgroundBall="var(--color-primary)" />
