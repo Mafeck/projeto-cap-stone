@@ -5,13 +5,13 @@ import Appointment from "../../../assets/agenda.svg";
 import DesktopImage from "./DesktopImage";
 // import Process from "../../../assets/processos.svg";
 
-const isDesktop = window.innerWidth > 769;
-
 const Services = () => (
   <ServicesBox>
     <ImageBox>
       <h2>Serviços</h2>
-      {isDesktop && <DesktopImage />}
+      <div className='desktopImage'>
+        <DesktopImage />
+      </div>
     </ImageBox>
     <div>
       <CardHome
