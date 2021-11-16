@@ -10,7 +10,7 @@ const isDesktop = window.innerWidth > 769;
 const Services = () => (
   <ServicesBox>
     <ImageBox>
-      <h2>Serviços</h2>
+      <h2 id="nossosServiços">Serviços</h2>
       {isDesktop && <DesktopImage />}
     </ImageBox>
     <div>

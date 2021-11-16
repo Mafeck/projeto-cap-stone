@@ -1,10 +1,11 @@
-import Home from "./pages/Home";
 import { Global } from "./style/global";
+import Router from "./routes/";
+
 function App() {
   return (
     <div className="App">
       <Global />
-      <Home />
+      <Router />
     </div>
   );
 }

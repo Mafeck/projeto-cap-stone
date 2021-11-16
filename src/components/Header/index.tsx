@@ -5,7 +5,7 @@ import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 
 const Header = () => {
-    const [openMenu, setOpenMenu] = useState<boolean>(false) 
+    const [openMenu, setOpenMenu] = useState<boolean>(false);
 
     return (
         <>
@@ -20,8 +20,8 @@ const Header = () => {
                     <div className="menu">
                         <a href="#quemSomos">Quem somos</a>
                         <a href="#nossosServiços">Nossos Serviços</a>
-                        <a href="#login">Login</a>
-                        <a href="#cadastrar">Cadastrar</a>
+                        <a href="/login">Login</a>
+                        <a href="/register">Cadastrar</a>
                     </div>
                 </HeaderMenu>
                 :
@@ -35,8 +35,8 @@ const Header = () => {
                         <div className="menu">
                             <a href="#quemSomos">Quem somos</a>
                             <a href="#nossosServiços">Nossos Serviços</a>
-                            <a href="#login">Login</a>
-                            <a href="#cadastrar">Cadastrar</a>
+                            <a href="/login">Login</a>
+                            <a href="/register">Cadastrar</a>
                         </div>
                     </div>
                 </HeaderStyle>

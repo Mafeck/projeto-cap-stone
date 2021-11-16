@@ -20,7 +20,7 @@ const Home = () => {
       <Services />
       <AboutUsBox>
         <div className="content">
-          <h1>Quem somos?</h1>
+          <h1 id="quemSomos">Quem somos?</h1>
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard dummy text
