@@ -3,15 +3,15 @@ import { useState, useContext, ReactNode, createContext } from "react";
 interface User {
   email: string;
   id: number;
-  username: string;
-  phone: string;
   oab: string;
+  phone: string;
   state: string;
+  username: string;
 }
 
 interface UserContextData {
   user: User[];
-  setUser: (props: User[]) => void;
+  setUser: (props: User) => void;
 }
 
 interface UserProviderProps {

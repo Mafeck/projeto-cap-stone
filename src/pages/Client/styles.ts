@@ -46,22 +46,17 @@ export const Container = styled.div`
     }
   }
 
-  form {
+  input {
+    margin-top: 20px;
+  }
+
+  textarea {
     width: 100%;
-
-    textarea {
-      width: 100%;
-      height: 200px;
-      border: 2px solid black;
-      border-radius: 5px;
-      resize: none;
-      padding: 10px 10px 20px 10px;
-    }
-
-    span {
-      color: var(--negative);
-      font-size: 10px;
-    }
+    height: 200px;
+    border: 2px solid black;
+    border-radius: 5px;
+    resize: none;
+    padding: 10px 10px 20px 10px;
   }
 `;
 

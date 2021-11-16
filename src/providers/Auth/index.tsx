@@ -1,9 +1,7 @@
-import { setupMaster } from "cluster";
 import { createContext, useState, ReactNode, useContext } from "react";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import api from "../../services/api";
-import { useUser } from "../User";
 
 interface AuthProps {
   children: ReactNode;
@@ -26,7 +24,6 @@ export const AuthContext = createContext<AuthProviderData>(
 
 export const AuthProvider = ({ children }: AuthProps) => {
   const history = useHistory();
-  const { setUser } = useUser();
   const [token, setToken] = useState(
     JSON.parse(localStorage.getItem("@token:haki")!) || ""
   );
@@ -35,12 +32,12 @@ export const AuthProvider = ({ children }: AuthProps) => {
     api
       .post("/signin", data)
       .then((response) => {
+        localStorage.clear();
         localStorage.setItem(
           "@token:haki",
           JSON.stringify(response.data.accessToken)
         );
-        setUser(response.data.user);
-        setToken(response.data.accessToken);
+        localStorage.setItem("@user:haki", JSON.stringify(response.data.user));
         toast.success("Login efetuado com sucesso!");
         setTimeout(() => history.push("/dashboard"), 700);
       })

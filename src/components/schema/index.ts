@@ -33,13 +33,3 @@ export const schemaLogin = yup.object().shape({
   password: yup.string().required("Senha necessária para efetuar login"),
 });
 
-export const schemaComment = yup.object().shape({
-  title: yup
-    .string()
-    .required("Digite o título do comentário")
-    .min(15, "Digite um título maior"),
-  comment: yup
-    .string()
-    .required("Faça um comentário")
-    .min(15, "Digite algum comentário"),
-});

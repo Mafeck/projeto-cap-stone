@@ -2,21 +2,28 @@ import { useState } from "react";
 import { Container, UserPerfil, PerfilOptions } from "./styles";
 import { FiLogOut, FiEdit } from "react-icons/fi";
 import { useUser } from "../../providers/User";
-import { useHistory } from "react-router-dom";
 import api from "../../services/api";
 import Modal from "../Modal";
 import Input from "../Input";
 import Button from "../Button";
 import logo from "../../assets/Group 51.svg";
 import { useAuth } from "../../providers/Auth";
+import jwtDecode from "jwt-decode";
+
+interface DecodeProps {
+  email: string;
+  exp: number;
+  iat: number;
+  sub: string;
+}
 
 const HeaderDashBoard = () => {
   const { user, setUser } = useUser();
-  const { token } = useAuth();
+  const { token, Logout } = useAuth();
+  const [tokenDecode] = useState<DecodeProps>(jwtDecode(token));
   const [renderOptions, setRenderOptions] = useState<boolean>(false);
   const [renderModal, setRenderModal] = useState<boolean>(false);
   const [newUsername, setNewUsername] = useState<string>("");
-  const history = useHistory();
 
   const editPerfil = () => {
     const data = {
@@ -24,14 +31,24 @@ const HeaderDashBoard = () => {
     };
 
     api
-      .patch(`/users/${Object.values(user)[1]}`, data, {
+      .patch(`/users/${tokenDecode.sub}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
-        setUser(response.data);
+        const newUser = {
+          email: response.data.email,
+          username: response.data.username,
+          id: response.data.id,
+          oab: response.data.oab,
+          phone: response.data.phone,
+          state: response.data.state,
+        };
+
         setNewUsername("");
+        setUser(newUser);
+        setRenderModal(false);
       })
       .catch((error) => console.log(error.data.response));
   };
@@ -40,7 +57,7 @@ const HeaderDashBoard = () => {
     <Container>
       <img src={logo} alt="logo" />
       <UserPerfil>
-        <h2>{Object.values(user)[0]}</h2>
+        <h2>{Object.values(user)[1]}</h2>
         <div
           onClick={() => {
             if (renderOptions === false) {
@@ -71,13 +88,7 @@ const HeaderDashBoard = () => {
                 <span>Clique aqui para editar</span>
               </main>
             </div>
-            <div
-              onClick={() => {
-                localStorage.clear();
-                history.push("/login");
-              }}
-              className="logout"
-            >
+            <div onClick={Logout} className="logout">
               <div className="divIcon">
                 <FiLogOut color="#ffaa00" />
               </div>
@@ -100,7 +111,7 @@ const HeaderDashBoard = () => {
             modalTitle="Editar perfil"
           >
             <Input
-              // register={() => {}}
+              register={() => {}}
               onChange={(event) => setNewUsername(event.target.value)}
               placeholder="New username"
             />

@@ -1,61 +1,148 @@
 import { Container, ContentInfo, CommentsContainer } from "./styles";
 import { useState, useEffect } from "react";
 import { FaDice } from "react-icons/fa";
-import { useHistory, useParams } from "react-router-dom";
-import { usePeople } from "../../providers/People";
-import { useUser } from "../../providers/User";
+import { useHistory } from "react-router-dom";
 import { useAuth } from "../../providers/Auth";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { schemaComment } from "../../components/schema";
 import CardComment from "../../components/CardComment";
 import Modal from "../../components/Modal";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import api from "../../services/api";
+import jwtDecode from "jwt-decode";
+import { usePeople } from "../../providers/People";
+import { toast } from "react-toastify";
 
 interface Comment {
+  title?: string;
+  comment?: string;
+  data?: string;
+  id?: number;
+}
+
+interface DecodeProps {
+  email: string;
+  exp: number;
+  iat: number;
+  sub: string;
+}
+
+interface Address {
+  road: string;
+  zipCode: string;
+  district: string;
+  houseNumber: string;
+}
+
+interface Comments {
   title: string;
   comment: string;
   id: number;
 }
+interface People {
+  name: string;
+  cpf: string;
+  genre: string;
+  naturalness: string;
+  nationality: string;
+  fatherName: string;
+  motherName: string;
+  qualification: string;
+  company: string;
+  phone: string;
+  type: string;
+  maritalStatus: string;
+  address: Address[];
+  comments: Comments[];
+  id: number;
+  userId: string;
+}
 
 const Client = () => {
-  const [renderModal, setRenderModal] = useState<boolean>(false);
-  const { user } = useUser();
   const { token } = useAuth();
-  const { people } = usePeople();
+  const { client, setClient } = usePeople();
+  const [tokenDecode] = useState<DecodeProps>(jwtDecode(token));
+  const [renderModal, setRenderModal] = useState<boolean>(false);
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [comment, setComment] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
   const history = useHistory();
-  
+
   useEffect(() => {
-    api.get(`users/${Object.values(user)}/people`);
+    api
+      .get(`users/${tokenDecode.sub}/people`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const people = response.data;
+        const findClient = people.find(
+          (value: People) => value.id === client.id
+        );
+        setComments(findClient.comments);
+      });
   }, []);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Comment>({
-    resolver: yupResolver(schemaComment),
-  });
+  const createComment = () => {
+    const newDataFormatted = new Date().toLocaleString("pt-BR");
 
-  const createComment = (data: Comment) => {
     const newData = {
-      title: data.title,
-      comment: data.comment,
+      title: title,
+      comment: comment,
+      data: newDataFormatted,
+      id: comments.length + 1,
     };
 
-    api.patch(`/people/${Object.values(people)[5].id}`, newData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const newComments = { comments: [...comments, newData] };
+
+    api
+      .patch(`/people/${client.id}`, newComments, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setComments(response.data.comments);
+        setRenderModal(false);
+        setComment("");
+        setTitle("");
+        toast.success("comentário criado com sucesso");
+      });
   };
 
-  /** Criar uma função para remover o comentário:
-   *  pegar o comentário pelo id do card, e fazer um
-   *  novo array de comentários.
-   */
+  const deleteComment = (id: number) => {
+    const newComments = comments.filter((values) => values.id !== id);
+
+    const newPeople = {
+      name: client.name,
+      cpf: client.cpf,
+      genre: client.genre,
+      naturalness: client.naturalness,
+      nationality: client.nationality,
+      fatherName: client.fatherName,
+      motherName: client.motherName,
+      qualification: client.qualification,
+      company: client.company,
+      phone: client.phone,
+      type: client.type,
+      maritalStatus: client.maritalStatus,
+      address: client.address,
+      comments: newComments,
+      id: client.id,
+      userId: client.userId,
+    };
+
+    api
+      .patch(`/people/${client.id}`, newPeople, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setComments(response.data.comments);
+        toast.success("comentário excluído com sucesso");
+      });
+  };
 
   return (
     <Container>
@@ -66,14 +153,14 @@ const Client = () => {
         <div className="divIcon">
           <FaDice />
         </div>
-        <h1 className="client__name">Client Fake</h1>
+        <h1 className="client__name">{client.name}</h1>
       </nav>
       <ContentInfo>
         <div className="itemInfo">
-          <span>Idade</span> <span>21</span>
+          <span>Tipo</span> <span>{client.type}</span>
         </div>
         <div className="itemInfo">
-          <span>CPF</span> <span>000.000.000-10</span>
+          <span>CPF</span> <span>{client.cpf}</span>
         </div>
         <div className="itemInfo">
           <span>Processo</span> <span>443.2132-2</span>
@@ -90,42 +177,35 @@ const Client = () => {
           </button>
         </div>
         <div className="comments">
-          <CardComment
-            comment="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-            commentTitle="teste"
-            onClick={(event) => console.log(event.currentTarget)}
-          />
-          <CardComment
-            comment="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-            commentTitle="teste"
-            onClick={(event) => console.log(event.currentTarget)}
-          />
-          <CardComment
-            comment="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-            commentTitle="teste"
-            onClick={(event) => console.log(event.currentTarget)}
-          />
-          <CardComment
-            comment="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-            commentTitle="teste"
-            onClick={(event) => console.log(event.currentTarget)}
-          />
+          {comments &&
+            comments.map((value, index) => {
+              return (
+                <CardComment
+                  data={value.data!}
+                  onClick={() => deleteComment(value.id!)}
+                  key={index}
+                  commentTitle={value.title!}
+                  comment={value.comment!}
+                />
+              );
+            })}
         </div>
       </CommentsContainer>
       {renderModal && (
         <Modal onClose={() => setRenderModal(false)} modalTitle="Comentário">
-          <form onSubmit={handleSubmit(createComment)}>
-            <Input
-              maxLength={15}
-              name="title"
-              error={errors.title?.message}
-              register={register}
-              placeholder="Título do comentário"
-            />
-            <textarea placeholder="comentário..." {...register("comment")} />
-            <span>{errors.comment?.message}</span>
-            <Button>cadastrar comentário</Button>
-          </form>
+          <Input
+            onChange={(event) => setTitle(event.target.value)}
+            maxLength={20}
+            name="title"
+            error={""}
+            register={() => {}}
+            placeholder="Título do comentário"
+          />
+          <textarea
+            onChange={(event) => setComment(event.target.value)}
+            placeholder="comentário..."
+          />
+          <Button onClick={createComment}>cadastrar comentário</Button>
         </Modal>
       )}
     </Container>

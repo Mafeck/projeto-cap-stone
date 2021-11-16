@@ -5,19 +5,19 @@ import { MouseEventHandler } from "react";
 interface CardCommentProps {
   commentTitle: string;
   comment: string;
+  data: string;
   onClick: MouseEventHandler;
 }
 
-const CardComment = ({ comment, commentTitle, onClick }: CardCommentProps) => {
+const CardComment = ({ comment, commentTitle, data, onClick }: CardCommentProps) => {
   const newDate = new Date();
-  const newDataFormatted = newDate.toLocaleString("pt-BR").split(" ")[0];
 
   return (
     <Container>
       <h1 className="card__title">{commentTitle}</h1>
       <p className="card__comment">{comment}</p>
       <div className="card__content">
-        <span>{newDataFormatted}</span>
+        <span>{data}</span>
         <FaTrash
           onClick={onClick}
           style={{ cursor: "pointer" }}

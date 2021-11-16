@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import CardClients from "../../components/CardClients";
 import api from "../../services/api";
 import { ReactComponent as PageClientIcon } from "../../assets/pageClientIcon.svg";
-import { TitleBox } from "./style";
+import { Container, TitleBox } from "./style";
 import Footer from "../../components/Footer";
 import { useAuth } from "../../providers/Auth";
 import { useHistory } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import HeaderDashBoard from "../../components/HeaderDashBoard";
+import { usePeople } from "../../providers/People";
 
 interface CardClientsProps {
   name: string;
@@ -25,6 +26,7 @@ interface Decode {
 
 const Clients = () => {
   const history = useHistory();
+  const { people, setClient } = usePeople();
   const { token } = useAuth();
   const [tokenDecode] = useState<Decode>(jwtDecode(token));
   const [clientsList, setClientsList] = useState<CardClientsProps[]>([]);
@@ -36,18 +38,20 @@ const Clients = () => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => {
-        return setClientsList(response.data);
-      });
+      .then((response) => setClientsList(response.data));
   });
 
   const handleClick = (id: number) => {
+    const filteredCLient = people.find((value) => value.id === id);
+    localStorage.setItem("@client:haki", JSON.stringify(filteredCLient));
+    setClient(filteredCLient!);
     history.push(`/people/${id}`);
   };
 
   return (
-    <div>
+    <Container>
       <HeaderDashBoard />
+
       <TitleBox>
         <div className="frontBox">
           <h1>Lista de clientes</h1>
@@ -66,7 +70,7 @@ const Clients = () => {
         );
       })}
       <Footer />
-    </div>
+    </Container>
   );
 };
 
