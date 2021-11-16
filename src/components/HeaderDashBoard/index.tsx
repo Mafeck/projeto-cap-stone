@@ -12,7 +12,7 @@ import { useAuth } from "../../providers/Auth";
 
 const HeaderDashBoard = () => {
   const { user, setUser } = useUser();
-  const {token} = useAuth()
+  const { token } = useAuth();
   const [renderOptions, setRenderOptions] = useState<boolean>(false);
   const [renderModal, setRenderModal] = useState<boolean>(false);
   const [newUsername, setNewUsername] = useState<string>("");
@@ -73,8 +73,8 @@ const HeaderDashBoard = () => {
             </div>
             <div
               onClick={() => {
-                history.push("/login");
                 localStorage.clear();
+                history.push("/login");
               }}
               className="logout"
             >
@@ -100,6 +100,7 @@ const HeaderDashBoard = () => {
             modalTitle="Editar perfil"
           >
             <Input
+              // register={() => {}}
               onChange={(event) => setNewUsername(event.target.value)}
               placeholder="New username"
             />

@@ -4,16 +4,14 @@ interface User {
   email: string;
   id: number;
   username: string;
+  phone: string;
+  oab: string;
+  state: string;
 }
 
 interface UserContextData {
   user: User[];
   setUser: (props: User[]) => void;
-<<<<<<< HEAD
-  token: string;
-  setToken: (props: string) => void;
-=======
->>>>>>> feature/pageClient
 }
 
 interface UserProviderProps {
@@ -25,20 +23,10 @@ const UserContext = createContext<UserContextData>({} as UserContextData);
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("@user:haki")!) || []
-<<<<<<< HEAD
-  );
-  const [token, setToken] = useState(
-    JSON.parse(localStorage.getItem("@token:haki")!) || ""
-  );
-
-  return (
-    <UserContext.Provider value={{ user, setUser, token, setToken }}>
-=======
   );
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
->>>>>>> feature/pageClient
       {children}
     </UserContext.Provider>
   );

@@ -29,11 +29,7 @@ export const ModalContainer = styled.div`
   width: 600px;
   border-radius: 5px;
   animation: ${ModalEffectContainer} 0.6s;
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> feature/pageClient
   @media (max-width: 990px) {
     width: 95%;
   }
@@ -85,14 +81,6 @@ export const ModalButtonClose = styled.button`
   }
 
   &:hover::after {
-    color: var(--gray-50);
-  }
-<<<<<<< HEAD
-  
-=======
-
->>>>>>> feature/pageClient
-  &:hover::before {
     color: var(--gray-50);
   }
 `;

@@ -1,5 +1,5 @@
 import { Global } from "./style/global";
-import Client from "./pages/Client";
+import Routes from "./routes";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
@@ -7,8 +7,7 @@ function App() {
   return (
     <div className="App">
       <Global />
-      <Client />
-      <Global />
+      <Routes />
       <ToastContainer
         position="top-right"
         autoClose={5000}

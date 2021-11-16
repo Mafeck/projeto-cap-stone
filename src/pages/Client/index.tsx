@@ -1,8 +1,10 @@
 import { Container, ContentInfo, CommentsContainer } from "./styles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaDice } from "react-icons/fa";
 import { useHistory, useParams } from "react-router-dom";
 import { usePeople } from "../../providers/People";
+import { useUser } from "../../providers/User";
+import { useAuth } from "../../providers/Auth";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaComment } from "../../components/schema";
@@ -11,7 +13,6 @@ import Modal from "../../components/Modal";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import api from "../../services/api";
-import { useUser } from "../../providers/User";
 
 interface Comment {
   title: string;
@@ -21,10 +22,14 @@ interface Comment {
 
 const Client = () => {
   const [renderModal, setRenderModal] = useState<boolean>(false);
-  const { user, token } = useUser();
+  const { user } = useUser();
+  const { token } = useAuth();
   const { people } = usePeople();
   const history = useHistory();
-  // const {} = useParams();
+  
+  useEffect(() => {
+    api.get(`users/${Object.values(user)}/people`);
+  }, []);
 
   const {
     register,
@@ -40,11 +45,11 @@ const Client = () => {
       comment: data.comment,
     };
 
-    // api.patch(`/people/${Object.values(people)[5].id}`, newData, {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // }).then((response) => );
+    api.patch(`/people/${Object.values(people)[5].id}`, newData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   };
 
   /** Criar uma função para remover o comentário:

@@ -29,10 +29,7 @@ interface People {
   address: Address[];
   comments: Comments[];
   id: number;
-<<<<<<< HEAD
-=======
   userId: string;
->>>>>>> feature/pageClient
 }
 
 interface PeopleContextData {
