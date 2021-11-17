@@ -5,7 +5,7 @@ import { ReactComponent as PageClientIcon } from "../../assets/pageClientIcon.sv
 import { Container, TitleBox, ContainerClients } from "./style";
 import Footer from "../../components/Footer";
 import { useAuth } from "../../providers/Auth";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import HeaderDashBoard from "../../components/HeaderDashBoard";
 import { usePeople } from "../../providers/People";
@@ -41,11 +41,11 @@ const Clients = () => {
 
   const handleClick = (id: number) => {
     const filteredCLient = people.find((value) => value.id === id);
-    localStorage.setItem("@client:haki", JSON.stringify(filteredCLient));
+    localStorage.setItem("@id:haki", JSON.stringify(id));
     setClient(filteredCLient!);
     history.push(`/dashboard/people/${id}`);
   };
-  
+
   return (
     <Container>
       <HeaderDashBoard />
