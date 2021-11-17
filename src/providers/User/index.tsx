@@ -22,7 +22,7 @@ const UserContext = createContext<UserContextData>({} as UserContextData);
 
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("@user:haki")!) || []
+    JSON.parse(localStorage.getItem("@user:haki")!) || {}
   );
 
   return (

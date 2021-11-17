@@ -57,7 +57,7 @@ const HeaderDashBoard = () => {
     <Container>
       <img src={logo} alt="logo" />
       <UserPerfil>
-        <h2>{Object.values(user)[1]}</h2>
+        <h2>{Object.values(user)[4]}</h2>
         <div
           onClick={() => {
             if (renderOptions === false) {

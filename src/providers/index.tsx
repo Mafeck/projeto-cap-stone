@@ -9,11 +9,11 @@ interface ContextProps {
 
 const Providers = ({ children }: ContextProps) => {
   return (
-    <AuthProvider>
-      <UserProvider>
+    <UserProvider>
+      <AuthProvider>
         <PeopleProvider>{children}</PeopleProvider>
-      </UserProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </UserProvider>
   );
 };
 
