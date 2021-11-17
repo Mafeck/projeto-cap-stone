@@ -1,4 +1,3 @@
-import Home from "./pages/Home";
 import { Global } from "./style/global";
 import Routes from "./routes";
 import "react-toastify/dist/ReactToastify.css";

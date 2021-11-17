@@ -71,7 +71,8 @@ const HeaderDashBoard = () => {
           <div className="perfil--1"></div>
           <div className="perfil--2"></div>
         </div>
-        {renderOptions && (
+      </UserPerfil>
+      {renderOptions && (
           <PerfilOptions>
             <div
               onClick={() => {
@@ -118,7 +119,6 @@ const HeaderDashBoard = () => {
             <Button onClick={editPerfil}>Editar</Button>
           </Modal>
         )}
-      </UserPerfil>
     </Container>
   );
 };

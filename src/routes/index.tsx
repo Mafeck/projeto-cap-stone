@@ -4,6 +4,7 @@ import Client from "../pages/Client";
 import Login from "../pages/login";
 import Register from "../pages/register";
 import Home from "../pages/Home";
+import Dashboard from "../pages/Dashboard";
 
 const Router = () => {
   return (
@@ -22,6 +23,9 @@ const Router = () => {
       </Route>
       <Route exact path="/people/:id">
         <Client />
+      </Route>
+      <Route exact path="/dashboard">
+        <Dashboard />
       </Route>
     </Switch>
   );
