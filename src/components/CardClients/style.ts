@@ -2,15 +2,20 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 95%;
   max-width: 450px;
   height: 80px;
   padding: 15px 10px;
-  cursor: pointer;
-
   margin: 10px 0;
   border-radius: 5px;
   border: 1px solid var(--gray-0);
+
+  .infosBox {
+    display: flex;
+    cursor: pointer;
+  }
 
   .diceBackground {
     background-color: var(--color-secondary-light);
@@ -38,5 +43,10 @@ export const Container = styled.div`
     font-size: 10px;
     line-height: 16px;
     color: var(--gray-50);
+  }
+
+  button {
+    border: none;
+    background: none;
   }
 `;
