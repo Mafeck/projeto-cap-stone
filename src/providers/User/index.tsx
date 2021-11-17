@@ -3,14 +3,15 @@ import { useState, useContext, ReactNode, createContext } from "react";
 interface User {
   email: string;
   id: number;
+  oab: string;
+  phone: string;
+  state: string;
   username: string;
 }
 
 interface UserContextData {
   user: User[];
-  setUser: (props: User[]) => void;
-  token: string;
-  setToken: (props: string) => void;
+  setUser: (props: User) => void;
 }
 
 interface UserProviderProps {
@@ -21,14 +22,11 @@ const UserContext = createContext<UserContextData>({} as UserContextData);
 
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("@user:haki")!) || []
-  );
-  const [token, setToken] = useState(
-    JSON.parse(localStorage.getItem("@token:haki")!) || ""
+    JSON.parse(localStorage.getItem("@user:haki")!) || {}
   );
 
   return (
-    <UserContext.Provider value={{ user, setUser, token, setToken }}>
+    <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
   );
