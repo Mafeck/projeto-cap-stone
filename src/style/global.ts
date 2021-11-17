@@ -13,30 +13,41 @@ export const Global = createGlobalStyle`
         --color-primary-strong: #0C0D0E;
         --color-secondary: #6AB089;
         --color-secondary-light: #e1efe7;
+        --color-secondary-strong: #53886a;
         --gray-100: #111111;
         --gray-50: #878787;
         --gray-20: #E0E0E0;
         --gray-0: #F5F5F5;
         --white: #FFFFFF;
+        --black: #000000;
         --negative: #E60000;
         --warning: #FFCD07;
         --success: #168821;
         --information: #155BCB;
-        --black: #000000;
-        --white: #ffffff;
     }
 
     body {
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Lexend Deca', sans-serif;
     }
     
-    border-list-style, input, button {
-        /* font-family: ; */
-        /* font-size: ; */
+    h1 {
+        font-size: 26px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    span {
+        font-size: 14px;
     }
     
     h1, h2, h3, h4, h5, h6 {
-        font-family: 'Lexend Deca', sans-serif;
+        font-family: 'Poppins', sans-serif;
     }
 
     button {

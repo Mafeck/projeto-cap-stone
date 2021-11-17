@@ -3,6 +3,7 @@ import Logo from "../../assets/Logo.png";
 import { FaBars } from "react-icons/fa";
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
@@ -18,10 +19,10 @@ const Header = () => {
             </div>
           </HeaderStyle>
           <div className="menu">
-            <a href="#quemSomos">Quem somos</a>
-            <a href="#nossosServiços">Nossos Serviços</a>
-            <a href="#login">Login</a>
-            <a href="#cadastrar">Cadastrar</a>
+            <Link to="/">Quem somos</Link>
+            <Link to="/">Nossos Serviços</Link>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Cadastrar</Link>
           </div>
         </HeaderMenu>
       ) : (
@@ -33,10 +34,10 @@ const Header = () => {
           <div className="desktop">
             <img src={Logo} alt="logo" />
             <div className="menu">
-              <a href="#quemSomos">Quem somos</a>
-              <a href="#nossosServiços">Nossos Serviços</a>
-              <a href="#login">Login</a>
-              <a href="#cadastrar">Cadastrar</a>
+              <Link to="/">Quem somos</Link>
+              <Link to="/">Nossos Serviços</Link>
+              <Link to="/login">Login</Link>
+              <Link to="/register">Cadastrar</Link>
             </div>
           </div>
         </HeaderStyle>

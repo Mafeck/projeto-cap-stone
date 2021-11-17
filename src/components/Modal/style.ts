@@ -83,8 +83,4 @@ export const ModalButtonClose = styled.button`
   &:hover::after {
     color: var(--gray-50);
   }
-
-  &:hover::before {
-    color: var(--gray-50);
-  }
 `;

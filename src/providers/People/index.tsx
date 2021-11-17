@@ -11,23 +11,24 @@ interface Comments {
   title: string;
   comment: string;
   id: number;
+  data: string;
 }
 
 interface People {
   name: string;
-  cpf: string;
-  genre: string;
-  naturalness: string;
-  nationality: string;
-  fatherName: string;
-  motherName: string;
-  qualification: string;
-  company: string;
-  phone: string;
+  cpf?: string;
+  genre?: string;
+  naturalness?: string;
+  nationality?: string;
+  fatherName?: string;
+  motherName?: string;
+  qualification?: string;
+  company?: string;
+  phone?: string;
   type: string;
-  maritalStatus: string;
-  address: Address[];
-  comments: Comments[];
+  maritalStatus?: string;
+  address?: Address;
+  comments?: Comments[];
   id: number;
   userId: string;
 }

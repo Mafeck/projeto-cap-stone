@@ -40,7 +40,6 @@ const Register = () => {
     api
       .post("/signup", newData)
       .then((response) => {
-        console.log(response.data.user);
         toast.success("Conta criada");
         setTimeout(() => history.push("/login"), 2000);
       })

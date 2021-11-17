@@ -32,3 +32,4 @@ export const schemaLogin = yup.object().shape({
     .email("E-mail inválido"),
   password: yup.string().required("Senha necessária para efetuar login"),
 });
+
