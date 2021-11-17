@@ -25,7 +25,7 @@ const Router = () => {
       <Route exact path="/dashboard/register">
         <RegisterClient />
       </Route>
-      <Route exact path="/dashboard/people">
+      <Route exact path="/dashboard/people/">
         <Clients />
       </Route>
       <Route exact path="/dashboard/people/:id">

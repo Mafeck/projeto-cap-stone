@@ -8,7 +8,6 @@ import Modal from "../../components/Modal";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import api from "../../services/api";
-import jwtDecode from "jwt-decode";
 import { usePeople } from "../../providers/People";
 import { toast } from "react-toastify";
 
@@ -19,69 +18,20 @@ interface Comment {
   id?: number;
 }
 
-interface DecodeProps {
-  email: string;
-  exp: number;
-  iat: number;
-  sub: string;
-}
-
-interface Address {
-  road: string;
-  zipCode: string;
-  district: string;
-  houseNumber: string;
-}
-
 interface Comments {
   title: string;
   comment: string;
   id: number;
 }
-interface People {
-  name: string;
-  cpf: string;
-  genre: string;
-  naturalness: string;
-  nationality: string;
-  fatherName: string;
-  motherName: string;
-  qualification: string;
-  company: string;
-  phone: string;
-  type: string;
-  maritalStatus: string;
-  address: Address[];
-  comments: Comments[];
-  id: number;
-  userId: string;
-}
 
 const Client = () => {
   const { token } = useAuth();
-  const { client, setClient } = usePeople();
-  const [tokenDecode] = useState<DecodeProps>(jwtDecode(token));
+  const { client } = usePeople();
   const [renderModal, setRenderModal] = useState<boolean>(false);
   const [comments, setComments] = useState<Comment[]>([]);
   const [comment, setComment] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const history = useHistory();
-
-  useEffect(() => {
-    api
-      .get(`users/${tokenDecode.sub}/people`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        const people = response.data;
-        const findClient = people.find(
-          (value: People) => value.id === client.id
-        );
-        setComments(findClient.comments);
-      });
-  }, []);
 
   const createComment = () => {
     const newDataFormatted = new Date().toLocaleString("pt-BR");
@@ -147,7 +97,10 @@ const Client = () => {
   return (
     <Container>
       <nav>
-        <div onClick={() => history.push("/people")} className="divAction">
+        <div
+          onClick={() => history.push("/dashboard/people")}
+          className="divAction"
+        >
           {"<"}
         </div>
         <div className="divIcon">

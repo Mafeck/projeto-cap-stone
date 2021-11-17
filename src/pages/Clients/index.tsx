@@ -9,13 +9,8 @@ import { useHistory } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import HeaderDashBoard from "../../components/HeaderDashBoard";
 import { usePeople } from "../../providers/People";
-
-interface CardClientsProps {
-  name: string;
-  cpf: string;
-  id: number;
-  onClick: () => void;
-}
+import { setTimeout } from "timers";
+import { useUser } from "../../providers/User";
 
 interface Decode {
   email: string;
@@ -26,26 +21,27 @@ interface Decode {
 
 const Clients = () => {
   const history = useHistory();
-  const { people, setClient } = usePeople();
+  const { user } = useUser();
+  const { people, setPeople, setClient } = usePeople();
   const { token } = useAuth();
   const [tokenDecode] = useState<Decode>(jwtDecode(token));
-  const [clientsList, setClientsList] = useState<CardClientsProps[]>([]);
 
   useEffect(() => {
     api
-      .get(`users/${tokenDecode.sub}/people`, {
+      .get(`/users/${tokenDecode.sub}/people`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => setClientsList(response.data));
-  });
+      .then((response) => setPeople(response.data))
+      .catch((error) => console.log(error));
+  }, []);
 
   const handleClick = (id: number) => {
     const filteredCLient = people.find((value) => value.id === id);
     localStorage.setItem("@client:haki", JSON.stringify(filteredCLient));
-    setClient(filteredCLient!);
-    history.push(`/people/${id}`);
+    setTimeout(() => setClient(filteredCLient!), 1500);
+    history.push(`/dashboard/people/${id}`);
   };
 
   return (
@@ -58,7 +54,7 @@ const Clients = () => {
           <PageClientIcon />
         </div>
       </TitleBox>
-      {clientsList.map((item, index) => {
+      {people.map((item, index) => {
         return (
           <CardClients
             key={index}

@@ -9,6 +9,7 @@ import Button from "../Button";
 import logo from "../../assets/Group 51.svg";
 import { useAuth } from "../../providers/Auth";
 import jwtDecode from "jwt-decode";
+import { toast } from "react-toastify";
 
 interface DecodeProps {
   email: string;
@@ -49,15 +50,16 @@ const HeaderDashBoard = () => {
         setNewUsername("");
         setUser(newUser);
         setRenderModal(false);
+        toast.success("Perfil Editado");
       })
-      .catch((error) => console.log(error.data.response));
+      .catch((error) => console.log(error));
   };
 
   return (
     <Container>
       <img src={logo} alt="logo" />
       <UserPerfil>
-        <h2>{Object.values(user)[4]}</h2>
+        <h2>{user.username}</h2>
         <div
           onClick={() => {
             if (renderOptions === false) {

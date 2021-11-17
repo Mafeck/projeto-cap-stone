@@ -1,4 +1,14 @@
-import { ReactNode, useState, useContext, createContext } from "react";
+import jwtDecode from "jwt-decode";
+import {
+  ReactNode,
+  useState,
+  useContext,
+  createContext,
+  useEffect,
+} from "react";
+import { useAuth } from "../Auth";
+import api from "../../services/api";
+import { useUser } from "../User";
 
 interface Address {
   road: string;
@@ -43,13 +53,31 @@ interface PeopleProviderProps {
   children: ReactNode;
 }
 
+interface DecodeProps {
+  email: string;
+  exp: number;
+  iat: number;
+  sub: string;
+}
+
 const PeopleContext = createContext<PeopleContextData>({} as PeopleContextData);
 
 export const PeopleProvider = ({ children }: PeopleProviderProps) => {
   const [people, setPeople] = useState<People[]>([]);
-  const [client, setClient] = useState<People>(
-    JSON.parse(localStorage.getItem("@client:haki")!)
-  );
+  const [client, setClient] = useState<People>({} as People);
+  const [token] = useState(localStorage.getItem("@token:haki") || "");
+  const { user } = useUser();
+
+  useEffect(() => {
+    api
+      .get(`/users/${Object.values(user)[5]}/people`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => setPeople(response.data))
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
     <PeopleContext.Provider value={{ people, setPeople, client, setClient }}>
