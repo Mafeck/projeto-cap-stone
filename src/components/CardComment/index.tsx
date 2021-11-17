@@ -9,9 +9,12 @@ interface CardCommentProps {
   onClick: MouseEventHandler;
 }
 
-const CardComment = ({ comment, commentTitle, data, onClick }: CardCommentProps) => {
-  const newDate = new Date();
-
+const CardComment = ({
+  comment,
+  commentTitle,
+  data,
+  onClick,
+}: CardCommentProps) => {
   return (
     <Container>
       <h1 className="card__title">{commentTitle}</h1>

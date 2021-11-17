@@ -5,12 +5,10 @@ import { ReactComponent as PageClientIcon } from "../../assets/pageClientIcon.sv
 import { Container, TitleBox, ContainerClients } from "./style";
 import Footer from "../../components/Footer";
 import { useAuth } from "../../providers/Auth";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import HeaderDashBoard from "../../components/HeaderDashBoard";
 import { usePeople } from "../../providers/People";
-import { setTimeout } from "timers";
-import { useUser } from "../../providers/User";
 import { useClient } from "../../providers/Client";
 
 interface Decode {
@@ -22,9 +20,8 @@ interface Decode {
 
 const Clients = () => {
   const history = useHistory();
-  const { user } = useUser();
   const { people, setPeople } = usePeople();
-  const { client, setClient } = useClient();
+  const { setClient } = useClient();
   const { token } = useAuth();
   const [tokenDecode] = useState<Decode>(jwtDecode(token));
 
@@ -49,7 +46,6 @@ const Clients = () => {
   return (
     <Container>
       <HeaderDashBoard />
-
       <TitleBox>
         <div className="frontBox">
           <h1>Lista de clientes</h1>

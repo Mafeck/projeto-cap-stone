@@ -9,6 +9,7 @@ interface CardDashboardProps {
   backgroundBall: string;
   width?: string;
   height?: string;
+  radius?: string;
   route?: string;
 }
 
@@ -20,6 +21,7 @@ const CardDashboard = ({
   backgroundBall,
   width = "95%",
   height = "140px",
+  radius = "5px",
   route,
 }: CardDashboardProps) => {
   const history = useHistory();
@@ -27,7 +29,12 @@ const CardDashboard = ({
   return (
     <Container
       onClick={() => history.push(`${route}`)}
-      style={{ backgroundColor: background, height: height, width: width }}
+      style={{
+        backgroundColor: background,
+        height: height,
+        width: width,
+        borderRadius: radius,
+      }}
     >
       <main>
         <h2>{title}</h2>

@@ -56,6 +56,17 @@ export const ModalContent = styled.div`
   padding: 10px;
   justify-content: space-around;
   flex-direction: column;
+  margin: 10px 0;
+
+  .divButton {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      width: 45%;
+    }
+  }
 `;
 
 export const ModalButtonClose = styled.button`

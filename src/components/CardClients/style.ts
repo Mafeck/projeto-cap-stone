@@ -7,8 +7,7 @@ export const Container = styled.div`
   height: 80px;
   padding: 15px 10px;
   cursor: pointer;
-
-  margin: 10px 0;
+  margin: 10px auto;
   border-radius: 5px;
   border: 1px solid var(--gray-0);
 
@@ -38,5 +37,9 @@ export const Container = styled.div`
     font-size: 10px;
     line-height: 16px;
     color: var(--gray-50);
+  }
+
+  @media (min-width: 768px) {
+    margin: 10px;
   }
 `;
