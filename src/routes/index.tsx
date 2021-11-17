@@ -6,9 +6,7 @@ import Register from "../pages/register";
 const Router = () => {
   return (
     <Switch>
-      <Route exact path="/">
-      <Clients />
-      </Route>
+      <Route exact path="/"></Route>
       <Route exact path="/register">
         <Register />
       </Route>
