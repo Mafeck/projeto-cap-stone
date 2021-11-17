@@ -8,8 +8,8 @@ import DesktopImage from "./DesktopImage";
 const Services = () => (
   <ServicesBox>
     <ImageBox>
-      <h2>Serviços</h2>
-      <div className='desktopImage'>
+      <h2 id="nossosServiços">Serviços</h2>
+      <div className="desktopImage">
         <DesktopImage />
       </div>
     </ImageBox>

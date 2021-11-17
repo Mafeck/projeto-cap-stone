@@ -18,7 +18,7 @@ const Router = () => {
       <Route exact path="/login">
         <Login />
       </Route>
-      <Route exact path="/people">
+      <Route exact path="/dashboard/people">
         <Clients />
       </Route>
       <Route exact path="/people/:id">

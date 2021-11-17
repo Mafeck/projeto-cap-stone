@@ -23,10 +23,12 @@ const CardDashboard = ({
   route,
 }: CardDashboardProps) => {
   const history = useHistory();
-  console.log(route);
 
   return (
-    <Container onClick={() => history.push(`${route}`)}  style={{ backgroundColor: background, height: height, width: width }}>
+    <Container
+      onClick={() => history.push(`${route}`)}
+      style={{ backgroundColor: background, height: height, width: width }}
+    >
       <main>
         <h2>{title}</h2>
         <p>{description}</p>

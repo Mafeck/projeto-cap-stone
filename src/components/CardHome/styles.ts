@@ -5,7 +5,8 @@ interface ContainerProps {
 }
 
 export const Container = styled.div<ContainerProps>`
-  width: 330px;
+  width: 90%;
+  max-width: 390px;
   height: 75px;
   display: flex;
   border-radius: 5px;
@@ -38,7 +39,6 @@ export const Container = styled.div<ContainerProps>`
 
     p {
       color: var(--gray-50);
-      width: 240px;
       font-size: 12px;
       font-weight: 500;
     }
