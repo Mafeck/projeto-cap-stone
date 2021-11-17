@@ -44,6 +44,7 @@ export const Container = styled.div`
     @media (min-width: 768px) {
       height: 100px;
     }
+
   }
 
   input {

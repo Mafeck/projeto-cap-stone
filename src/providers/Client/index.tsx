@@ -1,5 +1,4 @@
 import { useState, useContext, createContext, ReactNode } from "react";
-import Client from "../../pages/Client";
 
 interface Address {
   road: string;
