@@ -11,6 +11,7 @@ interface Comments {
   title: string;
   comment: string;
   id: number;
+  data: string;
 }
 
 interface People {

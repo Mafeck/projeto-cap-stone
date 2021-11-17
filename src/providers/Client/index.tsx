@@ -12,6 +12,7 @@ interface Comments {
   title: string;
   comment: string;
   id: number;
+  data: string;
 }
 
 interface ClientData {
@@ -40,6 +41,8 @@ interface ClientProvidersData {
 interface ClientContextProps {
   client: ClientData;
   setClient: (props: ClientData) => void;
+  comments: Comments[];
+  setComments: (props: Comments[]) => void;
 }
 
 const ClientContext = createContext<ClientContextProps>(
@@ -51,7 +54,9 @@ export const ClientProvider = ({ children }: ClientProvidersData) => {
   const [comments, setComments] = useState<Comments[]>([]);
 
   return (
-    <ClientContext.Provider value={{ client, setClient }}>
+    <ClientContext.Provider
+      value={{ client, setClient, comments, setComments }}
+    >
       {children}
     </ClientContext.Provider>
   );

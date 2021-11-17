@@ -1,5 +1,5 @@
 import { Container, ContentInfo, CommentsContainer } from "./styles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaDice } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../providers/Auth";
@@ -10,13 +10,7 @@ import Button from "../../components/Button";
 import api from "../../services/api";
 import { toast } from "react-toastify";
 import { useClient } from "../../providers/Client";
-
-interface Comment {
-  title?: string;
-  comment?: string;
-  data?: string;
-  id?: number;
-}
+import jwtDecode from "jwt-decode";
 
 interface Comments {
   title: string;
@@ -24,14 +18,72 @@ interface Comments {
   id: number;
 }
 
+interface Address {
+  road: string;
+  zipCode: string;
+  district: string;
+  houseNumber: string;
+}
+interface Comment {
+  title?: string;
+  comment?: string;
+  data?: string;
+  id?: number;
+}
+
+interface ClientData {
+  name: string;
+  cpf?: string;
+  genre?: string;
+  naturalness?: string;
+  nationality?: string;
+  fatherName?: string;
+  motherName?: string;
+  qualification?: string;
+  company?: string;
+  phone?: string;
+  type: string;
+  maritalStatus?: string;
+  address?: Address;
+  comments?: Comments[];
+  id: number;
+  userId: string;
+}
+
+interface TokenDecodeData {
+  email: string;
+  sub: number;
+  iat: string;
+  exp: string;
+}
+
 const Client = () => {
   const { token } = useAuth();
-  const { client } = useClient();
+  const { client, setClient, comments, setComments } = useClient();
   const [renderModal, setRenderModal] = useState<boolean>(false);
-  const [comments, setComments] = useState<Comment[]>([]);
   const [comment, setComment] = useState<string>("");
   const [title, setTitle] = useState<string>("");
+  const [tokenDecode] = useState<TokenDecodeData>(jwtDecode(token));
   const history = useHistory();
+
+  useEffect(() => {
+    api
+      .get(`/users/${tokenDecode.sub}/people`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const people = response.data;
+        const clientId = localStorage.getItem("@id:haki");
+        const newClient = people.find(
+          (value: ClientData) => value.id === Number(clientId)
+        );
+        setClient(newClient);
+        setComments(newClient.comments);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   const createComment = () => {
     const newDataFormatted = new Date().toLocaleString("pt-BR");

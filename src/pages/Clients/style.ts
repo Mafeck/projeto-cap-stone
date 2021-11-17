@@ -42,7 +42,7 @@ export const ContainerClients = styled.div`
   overflow-y: scroll;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: flex-start;
   margin-bottom: 70px;
 

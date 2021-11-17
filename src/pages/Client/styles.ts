@@ -101,10 +101,10 @@ export const ContentInfo = styled.div`
 export const CommentsContainer = styled.div`
   width: 100vw;
   max-width: 780px;
-  height: 55%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   margin-top: 20px;
   overflow-x: hidden;
 
@@ -137,10 +137,8 @@ export const CommentsContainer = styled.div`
 
   .comments {
     width: 100%;
-    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
     overflow-y: scroll;
     overflow-x: hidden;
