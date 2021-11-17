@@ -1,6 +1,8 @@
 import { ReactNode } from "react";
 import { UserProvider } from "./User";
 import { PeopleProvider } from "./People";
+import { AuthProvider } from "./Auth";
+import { ClientProvider } from "./Client";
 
 interface ContextProps {
   children: ReactNode;
@@ -9,7 +11,11 @@ interface ContextProps {
 const Providers = ({ children }: ContextProps) => {
   return (
     <UserProvider>
-      <PeopleProvider>{children}</PeopleProvider>
+      <AuthProvider>
+        <PeopleProvider>
+          <ClientProvider>{children}</ClientProvider>
+        </PeopleProvider>
+      </AuthProvider>
     </UserProvider>
   );
 };

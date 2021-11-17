@@ -17,6 +17,7 @@ export const HeaderStyle = styled.div`
     align-items: center;
     justify-content: space-between;
   }
+
   img {
     width: 69px;
     height: 29px;
@@ -34,6 +35,7 @@ export const HeaderStyle = styled.div`
     .mobile {
       display: none;
     }
+
     .desktop {
       display: flex;
       justify-content: space-between;
@@ -51,8 +53,12 @@ export const HeaderStyle = styled.div`
 `;
 
 export const HeaderMenu = styled.div`
-  height: 735px;
+  width: 100vw;
+  height: 100vh;
   background-color: var(--black);
+  position: fixed;
+  top: 0;
+
   .menu {
     display: flex;
     flex-direction: column;
@@ -60,6 +66,7 @@ export const HeaderMenu = styled.div`
     justify-content: space-evenly;
     margin: 30px 0 0 30px;
   }
+
   a {
     color: var(--white);
     opacity: 0.5;
