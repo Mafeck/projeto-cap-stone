@@ -3,7 +3,7 @@ import { ServicesBox, ImageBox } from "./style";
 import Clients from "../../../assets/clientes.svg";
 import Appointment from "../../../assets/agenda.svg";
 import DesktopImage from "./DesktopImage";
-// import Process from "../../../assets/processos.svg";
+import Judge from "../../../assets/judge.svg";
 
 const Services = () => (
   <ServicesBox>
@@ -22,8 +22,7 @@ const Services = () => (
       />
       <CardHome
         title="Processos"
-        // to do: mudar imagem
-        image={Clients}
+        image={Judge}
         description="Acompanhe seus processos, nunca mais perca nenhum prazo!
 
 "
