@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaClient } from "../../components/schemaClient";
 import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 import api from "../../services/api";
 import { useAuth } from "../../providers/Auth";
 import { useState } from "react";
@@ -41,6 +42,7 @@ interface Decode {
 const RegisterClient = () => {
   const { token } = useAuth();
   const [tokenDecode] = useState<Decode>(jwtDecode(token));
+  const history = useHistory();
 
   const {
     register,
@@ -77,7 +79,10 @@ const RegisterClient = () => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => toast.success("Novo cliente adicionado"))
+      .then(() => {
+        toast.success("Novo cliente adicionado");
+        history.push("/dashboard");
+      })
       .catch(() => toast.error("Erro ao adicionar cliente"));
   };
 

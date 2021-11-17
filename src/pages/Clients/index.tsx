@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import CardClients from "../../components/CardClients";
 import api from "../../services/api";
 import { ReactComponent as PageClientIcon } from "../../assets/pageClientIcon.svg";
-import { Container, TitleBox } from "./style";
+import { Container, TitleBox, ContainerClients } from "./style";
 import Footer from "../../components/Footer";
 import { useAuth } from "../../providers/Auth";
 import { useHistory } from "react-router-dom";
@@ -11,6 +11,7 @@ import HeaderDashBoard from "../../components/HeaderDashBoard";
 import { usePeople } from "../../providers/People";
 import { setTimeout } from "timers";
 import { useUser } from "../../providers/User";
+import { useClient } from "../../providers/Client";
 
 interface Decode {
   email: string;
@@ -22,7 +23,8 @@ interface Decode {
 const Clients = () => {
   const history = useHistory();
   const { user } = useUser();
-  const { people, setPeople, setClient } = usePeople();
+  const { people, setPeople } = usePeople();
+  const { client, setClient } = useClient();
   const { token } = useAuth();
   const [tokenDecode] = useState<Decode>(jwtDecode(token));
 
@@ -40,10 +42,10 @@ const Clients = () => {
   const handleClick = (id: number) => {
     const filteredCLient = people.find((value) => value.id === id);
     localStorage.setItem("@client:haki", JSON.stringify(filteredCLient));
-    setTimeout(() => setClient(filteredCLient!), 1500);
+    setClient(filteredCLient!);
     history.push(`/dashboard/people/${id}`);
   };
-
+  
   return (
     <Container>
       <HeaderDashBoard />
@@ -54,17 +56,19 @@ const Clients = () => {
           <PageClientIcon />
         </div>
       </TitleBox>
-      {people.map((item, index) => {
-        return (
-          <CardClients
-            key={index}
-            onClick={() => handleClick(item.id)}
-            id={item.id}
-            name={item.name}
-            cpf={item.cpf}
-          />
-        );
-      })}
+      <ContainerClients>
+        {people.map((item, index) => {
+          return (
+            <CardClients
+              key={index}
+              onClick={() => handleClick(item.id)}
+              id={item.id}
+              name={item.name}
+              cpf={item.cpf!}
+            />
+          );
+        })}
+      </ContainerClients>
       <Footer />
     </Container>
   );

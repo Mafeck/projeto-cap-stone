@@ -1,5 +1,5 @@
 import { Container, ContentInfo, CommentsContainer } from "./styles";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FaDice } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../providers/Auth";
@@ -8,8 +8,8 @@ import Modal from "../../components/Modal";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import api from "../../services/api";
-import { usePeople } from "../../providers/People";
 import { toast } from "react-toastify";
+import { useClient } from "../../providers/Client";
 
 interface Comment {
   title?: string;
@@ -26,7 +26,7 @@ interface Comments {
 
 const Client = () => {
   const { token } = useAuth();
-  const { client } = usePeople();
+  const { client } = useClient();
   const [renderModal, setRenderModal] = useState<boolean>(false);
   const [comments, setComments] = useState<Comment[]>([]);
   const [comment, setComment] = useState<string>("");

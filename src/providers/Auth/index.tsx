@@ -41,7 +41,6 @@ export const AuthProvider = ({ children }: AuthProps) => {
           "@token:haki",
           JSON.stringify(response.data.accessToken)
         );
-        localStorage.setItem("@user:haki", JSON.stringify(response.data.user));
         toast.success("Login efetuado com sucesso!");
         setTimeout(() => history.push("/dashboard"), 700);
       })

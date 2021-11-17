@@ -5,7 +5,7 @@ export const Container = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 export const TitleBox = styled.div`
@@ -34,5 +34,19 @@ export const TitleBox = styled.div`
     svg {
       width: 75px;
     }
+  }
+`;
+
+export const ContainerClients = styled.div`
+  width: 100%;
+  overflow-y: scroll;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin-bottom: 70px;
+
+  ::-webkit-scrollbar {
+    display: none;
   }
 `;

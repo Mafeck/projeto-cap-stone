@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, UserPerfil, PerfilOptions } from "./styles";
 import { FiLogOut, FiEdit } from "react-icons/fi";
 import { useUser } from "../../providers/User";
@@ -25,6 +25,27 @@ const HeaderDashBoard = () => {
   const [renderOptions, setRenderOptions] = useState<boolean>(false);
   const [renderModal, setRenderModal] = useState<boolean>(false);
   const [newUsername, setNewUsername] = useState<string>("");
+
+  useEffect(() => {
+    api
+      .get(`/users/${tokenDecode.sub}/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const patchUser = {
+          email: response.data.email,
+          id: response.data.id,
+          oab: response.data.oab,
+          phone: response.data.phone,
+          state: response.data.state,
+          username: response.data.username,
+        };
+
+        setUser(patchUser);
+      });
+  }, []);
 
   const editPerfil = () => {
     const data = {
