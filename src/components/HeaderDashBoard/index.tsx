@@ -73,52 +73,52 @@ const HeaderDashBoard = () => {
         </div>
       </UserPerfil>
       {renderOptions && (
-          <PerfilOptions>
-            <div
-              onClick={() => {
-                setRenderModal(true);
-                setRenderOptions(false);
-              }}
-              className="editPerfil"
-            >
-              <div className="divIcon">
-                <FiEdit color="#80ed99" />
-              </div>
-              <main>
-                <h6>Editar Perfil</h6>
-                <span>Clique aqui para editar</span>
-              </main>
-            </div>
-            <div onClick={Logout} className="logout">
-              <div className="divIcon">
-                <FiLogOut color="#ffaa00" />
-              </div>
-              <main>
-                <h6>Sair</h6>
-                <span>Clique aqui para sair</span>
-              </main>
-            </div>
-          </PerfilOptions>
-        )}
-        {renderModal && (
-          <Modal
-            onClose={() => {
-              if (renderModal === true) {
-                setRenderModal(false);
-              } else {
-                setRenderModal(true);
-              }
+        <PerfilOptions>
+          <div
+            onClick={() => {
+              setRenderModal(true);
+              setRenderOptions(false);
             }}
-            modalTitle="Editar perfil"
+            className="editPerfil"
           >
-            <Input
-              register={() => {}}
-              onChange={(event) => setNewUsername(event.target.value)}
-              placeholder="New username"
-            />
-            <Button onClick={editPerfil}>Editar</Button>
-          </Modal>
-        )}
+            <div className="divIcon">
+              <FiEdit color="#80ed99" />
+            </div>
+            <main>
+              <h6>Editar Perfil</h6>
+              <span>Clique aqui para editar</span>
+            </main>
+          </div>
+          <div onClick={Logout} className="logout">
+            <div className="divIcon">
+              <FiLogOut color="#ffaa00" />
+            </div>
+            <main>
+              <h6>Sair</h6>
+              <span>Clique aqui para sair</span>
+            </main>
+          </div>
+        </PerfilOptions>
+      )}
+      {renderModal && (
+        <Modal
+          onClose={() => {
+            if (renderModal === true) {
+              setRenderModal(false);
+            } else {
+              setRenderModal(true);
+            }
+          }}
+          modalTitle="Editar perfil"
+        >
+          <Input
+            register={() => {}}
+            onChange={(event) => setNewUsername(event.target.value)}
+            placeholder="New username"
+          />
+          <Button onClick={editPerfil}>Editar</Button>
+        </Modal>
+      )}
     </Container>
   );
 };

@@ -5,6 +5,7 @@ import Login from "../pages/login";
 import Register from "../pages/register";
 import Home from "../pages/Home";
 import Dashboard from "../pages/Dashboard";
+import RegisterClient from "../pages/RegisterClient";
 
 const Router = () => {
   return (
@@ -12,20 +13,23 @@ const Router = () => {
       <Route exact path="/">
         <Home />
       </Route>
-      <Route path="/register">
+      <Route exact path="/register">
         <Register />
       </Route>
       <Route exact path="/login">
         <Login />
       </Route>
+      <Route exact path="/dashboard">
+        <Dashboard />
+      </Route>
+      <Route exact path="/dashboard/register">
+        <RegisterClient />
+      </Route>
       <Route exact path="/dashboard/people">
         <Clients />
       </Route>
-      <Route exact path="/people/:id">
+      <Route exact path="/dashboard/people/:id">
         <Client />
-      </Route>
-      <Route exact path="/dashboard">
-        <Dashboard />
       </Route>
     </Switch>
   );
