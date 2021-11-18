@@ -21,9 +21,8 @@ interface Decode {
 
 const Clients = () => {
   const history = useHistory();
-  const { user } = useUser();
   const { people, setPeople } = usePeople();
-  const { client, setClient } = useClient();
+  const { setClient } = useClient();
   const { token } = useAuth();
   const [tokenDecode] = useState<Decode>(jwtDecode(token));
 
@@ -48,10 +47,17 @@ const Clients = () => {
   return (
     <Container>
       <HeaderDashBoard />
-
       <TitleBox>
         <div className="frontBox">
-          <h1>Lista de clientes</h1>
+          <div className="titleIconBox">
+            <div
+              onClick={() => history.push("/dashboard")}
+              className="divAction"
+            >
+              {"<"}
+            </div>
+            <h1>Lista de clientes</h1>
+          </div>
           <PageClientIcon />
         </div>
       </TitleBox>

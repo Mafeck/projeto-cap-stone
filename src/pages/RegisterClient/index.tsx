@@ -1,5 +1,5 @@
 import HeaderDashBoard from "../../components/HeaderDashBoard";
-import { RegisterClientStyled } from "./style";
+import { RegisterClientStyled, TitleBox } from "./style";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Footer from "../../components/Footer";
@@ -12,10 +12,26 @@ import api from "../../services/api";
 import { useAuth } from "../../providers/Auth";
 import { useState } from "react";
 import jwtDecode from "jwt-decode";
+import { ReactComponent as PageClientIcon } from "../../assets/undraw_tweetstorm_re_n0rs 1.svg";
 
 interface Process {
-  numberProcess: string;
+  processNumber: string;
   area: string;
+}
+
+
+interface Address {
+  road?: string;
+  zipCode?: string;
+  district?: string;
+  houseNumber?: string;
+}
+
+interface Comments {
+  title: string;
+  comment: string;
+  id: number;
+  data: string;
 }
 
 export interface ClientData {
@@ -31,11 +47,12 @@ export interface ClientData {
   phone: string;
   type: string;
   maritalStatus: string;
-  road: string;
-  zipCode: string;
-  district: string;
-  houseNumber: string;
-  process: Process;
+  road?: string;
+  zipCode?: string;
+  district?: string;
+  houseNumber?: string;
+  processNumber?: string;
+  area?: string;
 }
 
 export interface Decode {
@@ -76,9 +93,13 @@ const RegisterClient = () => {
         district: data.district,
         houseNumber: data.houseNumber,
       },
+      process: {
+        processNumber: data.processNumber,
+        area: data.area,
+      },
       comments: [],
     };
-
+    console.log(newData);
     api
       .post(`/users/${tokenDecode.sub}/people`, newData, {
         headers: {
@@ -95,10 +116,16 @@ const RegisterClient = () => {
   return (
     <div>
       <HeaderDashBoard />
+      <TitleBox>
+        <div className="frontBox">
+          <h1>Cadastrar cliente</h1>
+          <PageClientIcon />
+        </div>
+      </TitleBox>
       <RegisterClientStyled>
-        <form className="formClient" onSubmit={handleSubmit(createClient)}>
-          <div className="formDesktop">
-            <div>
+        <form onSubmit={handleSubmit(createClient)}>
+          <div className="inputs">
+            <div className="column">
               <Input
                 width={"280px"}
                 placeholder="Nome completo"
@@ -110,7 +137,7 @@ const RegisterClient = () => {
               <Input
                 placeholder="000.000.000-00"
                 name="cpf"
-                type="number"
+                type="text"
                 register={register}
               />
               <Input
@@ -137,8 +164,6 @@ const RegisterClient = () => {
                 type="text"
                 register={register}
               />
-            </div>
-            <div>
               <Input
                 placeholder="Nome da mãe"
                 name="motherName"
@@ -164,6 +189,8 @@ const RegisterClient = () => {
                 type="number"
                 register={register}
               />
+            </div>
+            <div className="column">
               <Input
                 placeholder="Tipo de pessoa"
                 name="type"
@@ -177,8 +204,6 @@ const RegisterClient = () => {
                 type="text"
                 register={register}
               />
-            </div>
-            <div>
               <p>Endereço completo:</p>
               <Input
                 placeholder="Rua"
@@ -202,6 +227,19 @@ const RegisterClient = () => {
                 placeholder="Número da casa"
                 name="houseNumber"
                 type="number"
+                register={register}
+              />
+              <p>Processo:</p>
+              <Input
+                placeholder="N° do Processo"
+                name="processNumber"
+                type="number"
+                register={register}
+              />
+              <Input
+                placeholder="Área"
+                name="area"
+                type="text"
                 register={register}
               />
             </div>

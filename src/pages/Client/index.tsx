@@ -34,7 +34,7 @@ interface Comment {
 }
 
 interface Process {
-  numberProcess: string;
+  processNumber?: string;
   area: string;
 }
 
@@ -53,9 +53,9 @@ interface ClientData {
   maritalStatus?: string;
   address?: Address;
   comments?: Comments[];
-  process: Process;
   id: number;
   userId: string;
+  processNumber: Process;
 }
 
 interface TokenDecodeData {
@@ -154,6 +154,7 @@ const Client = () => {
         toast.success("comentário excluído com sucesso");
       });
   };
+  console.log(client.process);
 
   return (
     <Container>
@@ -180,7 +181,10 @@ const Client = () => {
           <span>CPF</span> <span>{client.cpf}</span>
         </div>
         <div className="itemInfo">
-          <span>Processo</span> <span>443.2132-2</span>
+          <span>Processo</span> <span>{client.process?.processNumber}</span>
+        </div>
+        <div className="itemInfo">
+          <span>Área</span> <span>{client.process?.area}</span>
         </div>
       </ContentInfo>
       <CommentsContainer>

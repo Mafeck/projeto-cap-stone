@@ -17,4 +17,6 @@ export const schemaClient = yup.object().shape({
   zipCode: yup.string(),
   district: yup.string(),
   houseNumber: yup.string(),
+  area: yup.string(),
+  process: yup.string(),
 });

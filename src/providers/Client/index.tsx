@@ -2,10 +2,10 @@ import { useState, useContext, createContext, ReactNode } from "react";
 import Client from "../../pages/Client";
 
 interface Address {
-  road: string;
-  zipCode: string;
-  district: string;
-  houseNumber: string;
+  road?: string;
+  zipCode?: string;
+  district?: string;
+  houseNumber?: string;
 }
 
 interface Comments {
@@ -16,8 +16,8 @@ interface Comments {
 }
 
 interface Process {
-  numberProcess: string;
-  area: string;
+  processNumber?: string;
+  area?: string;
 }
 
 interface ClientData {
@@ -34,10 +34,10 @@ interface ClientData {
   type: string;
   maritalStatus?: string;
   address?: Address;
-  process: Process;
   comments?: Comments[];
   id: number;
   userId: string;
+  process?: Process;
 }
 
 interface ClientProvidersData {

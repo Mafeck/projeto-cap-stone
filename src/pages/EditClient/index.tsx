@@ -23,17 +23,17 @@ interface Comments {
   id: number;
 }
 
-interface Address {
-  road: string;
-  zipCode: string;
-  district: string;
-  houseNumber: string;
-}
+// interface Address {
+//   road?: string;
+//   zipCode?: string;
+//   district?: string;
+//   houseNumber?: string;
+// }
 
-interface Process {
-  numberProcess: string;
-  area: string;
-}
+// interface Process {
+//   processNumber?: string;
+//   area?: string;
+// }
 
 interface ClientData {
   name: string;
@@ -48,49 +48,21 @@ interface ClientData {
   phone?: string;
   type: string;
   maritalStatus?: string;
-  address?: Address;
   comments?: Comments[];
-  process: Process;
   id: number;
   userId: string;
-  road: string;
-  zipCode: string;
-  district: string;
-  houseNumber: string;
-  numberProcess: string;
+  road?: string;
+  zipCode?: string;
+  district?: string;
+  houseNumber?: string;
+  processNumber?: string;
+  area?: string;
 }
 
 const EditClient = () => {
   const { token } = useAuth();
   const { client, setClient } = useClient();
   const [tokenDecode] = useState<Decode>(jwtDecode(token));
-  // const [inputName, setInputName] = useState(client.name);
-  // const [inputCPF, setInputCPF] = useState(client.cpf);
-  // const [inputNationality, setInputNationality] = useState(client.nationality);
-  // const [inputGenre, setInputGenre] = useState(client.genre);
-  // const [inputNaturalness, setInputNaturalness] = useState(client.naturalness);
-  // const [inputFatherName, setInputFatherName] = useState(client.fatherName);
-  // const [inputMotherName, setInputMotherName] = useState(client.motherName);
-  // const [inputQualification, setInputQualification] = useState(
-  //   client.qualification
-  // );
-  // const [inputCompany, setInputCompany] = useState(client.company);
-  // const [inputPhone, setInputPhone] = useState(client.phone);
-  // const [inputType, setInputType] = useState(client.type);
-  // const [inputMaritalStatus, setInputMaritalStatus] = useState(
-  //   client.maritalStatus
-  // );
-  // const [inputRoad, setInputRoad] = useState(client.address?.road);
-  // const [inputZipCode, setInputZipCode] = useState(client.address?.zipCode);
-  // const [inputDistrict, setInputDistrict] = useState(client.address?.district);
-  // const [inputHouseNumber, setInputHouseNumber] = useState(
-  //   client.address?.houseNumber
-  // );
-  // const [inputProcessNumber, setInputProcessNumber] = useState(
-  //   client.process?.numberProcess
-  // );
-  // const [inputArea, setInputArea] = useState();
-
   const history = useHistory();
   const {
     register,
@@ -142,8 +114,8 @@ const EditClient = () => {
           zipCode: response.data[0].address.zipCode,
           district: response.data[0].address.district,
           houseNumber: response.data[0].address.houseNumber,
-          // processNumber: response.data[0].process.processNumber,
-          // area: response.data[0].process.area,
+          processNumber: response.data[0].process.processNumber,
+          area: response.data[0].process.area,
           comments: response.data[0].comments,
         });
       });

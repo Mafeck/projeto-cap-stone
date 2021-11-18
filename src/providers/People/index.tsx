@@ -1,10 +1,10 @@
 import { ReactNode, useState, useContext, createContext } from "react";
 
 interface Address {
-  road: string;
-  zipCode: string;
-  district: string;
-  houseNumber: string;
+  road?: string;
+  zipCode?: string;
+  district?: string;
+  houseNumber?: string;
 }
 
 interface Comments {
@@ -15,7 +15,7 @@ interface Comments {
 }
 
 interface Process {
-  numberProcess: string;
+  processNumber: string;
   area: string;
 }
 
@@ -33,7 +33,7 @@ interface People {
   type: string;
   maritalStatus?: string;
   address?: Address;
-  process: Process;
+  process?: Process;
   comments?: Comments[];
   id: number;
   userId: string;
