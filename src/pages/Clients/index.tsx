@@ -10,6 +10,8 @@ import jwtDecode from "jwt-decode";
 import HeaderDashBoard from "../../components/HeaderDashBoard";
 import { usePeople } from "../../providers/People";
 import { useClient } from "../../providers/Client";
+import Input from "../../components/Input";
+
 
 interface Decode {
   email: string;
@@ -18,12 +20,14 @@ interface Decode {
   sub: string;
 }
 
+
 const Clients = () => {
   const history = useHistory();
   const { people, setPeople } = usePeople();
   const { setClient } = useClient();
   const { token } = useAuth();
   const [tokenDecode] = useState<Decode>(jwtDecode(token));
+  const [input, setInput] = useState<string>("");
 
   useEffect(() => {
     api
@@ -60,19 +64,40 @@ const Clients = () => {
           <PageClientIcon />
         </div>
       </TitleBox>
+        <Input 
+          className='search'
+          placeholder='Pesquisar por nome ou área do processo' 
+          value={input}
+          onChange={e => setInput(e.target.value)} 
+          register={() => {}} />
       <ContainerClients>
-        {people.map((item, index) => {
-          return (
-            <CardClients
-              key={index}
-              onClick={() => handleClick(item.id)}
-              id={item.id}
-              name={item.name}
-              cpf={item.cpf!}
-            />
-          );
-        })}
-      </ContainerClients>
+        {input.length > 0 ? (
+          people.filter((item) => item.name.toLowerCase().includes(input.toLowerCase()) || item.process?.area.toLowerCase().includes(input.toLowerCase()))
+          .map((item, index) => {
+            return (
+              <CardClients
+                key={index}
+                onClick={() => handleClick(item.id)}
+                id={item.id}
+                name={item.name}
+                cpf={item.cpf!}
+                area={item.process?.area}
+              />
+            )})
+        ) : (
+            people.map((item, index) => {
+              return (
+                <CardClients
+                  key={index}
+                  onClick={() => handleClick(item.id)}
+                  id={item.id}
+                  name={item.name}
+                  cpf={item.cpf!}
+                  area={item.process?.area}
+                  />
+              )})   
+        )}
+        </ContainerClients>
       <Footer />
     </Container>
   );

@@ -6,6 +6,19 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  .search {
+    width: 90%;
+    height: 50px;
+    margin: 15px auto;
+  }
+
+  @media (min-width: 769px) {
+    .search {
+      width: 50%;
+    }
+  }
+
 `;
 
 export const TitleBox = styled.div`

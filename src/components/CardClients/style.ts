@@ -21,6 +21,8 @@ export const Container = styled.div`
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
   }
 
   .diceIcon {
@@ -29,6 +31,8 @@ export const Container = styled.div`
   }
 
   .clientInfo {
+    display: flex;
+    flex-direction: column;
     margin-left: 10px;
   }
 
@@ -45,12 +49,26 @@ export const Container = styled.div`
     color: var(--gray-50);
   }
 
-  @media (min-width: 768px) {
-    margin: 10px;
-  }
-
-  button {
+  .trashButton {
     border: none;
     background: none;
   }
+
+  .deleteClientModal {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+
+    button {
+      width: 30%;
+      height: 50px;
+    }
+    
+    
+  }
+
+  @media (min-width: 769px) {
+    margin: 10px;
+  }
+
 `;
