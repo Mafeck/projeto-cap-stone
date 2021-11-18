@@ -13,6 +13,8 @@ import { useClient } from "../../providers/Client";
 import jwtDecode from "jwt-decode";
 import { Link } from "react-router-dom";
 import EditIcon from "../../assets/editGroup.svg";
+import HeaderDashBoard from "../../components/HeaderDashBoard";
+import Footer from "../../components/Footer";
 
 interface Comments {
   title: string;
@@ -151,9 +153,10 @@ const Client = () => {
         toast.success("comentário excluído com sucesso");
       });
   };
-  console.log(client.process);
 
   return (
+    <>
+    <HeaderDashBoard/>
     <Container>
       <nav>
         <div
@@ -250,6 +253,8 @@ const Client = () => {
         </Modal>
       )}
     </Container>
+    <Footer />
+    </>
   );
 };
 
