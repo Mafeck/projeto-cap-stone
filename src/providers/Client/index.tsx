@@ -32,6 +32,10 @@ interface ClientData {
   comments?: Comments[];
   id: number;
   userId: string;
+  process?: {
+    processNumber?: number;
+    area?: string;
+  }
 }
 
 interface ClientProvidersData {

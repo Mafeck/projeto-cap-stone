@@ -79,7 +79,7 @@ const RegisterClient = () => {
       },
       comments: [],
     };
-
+    console.log(newData);
     api
       .post(`/users/${tokenDecode.sub}/people`, newData, {
         headers: {
