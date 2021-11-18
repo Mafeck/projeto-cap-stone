@@ -1,4 +1,3 @@
-import React from "react";
 import { Redirect } from "react-router";
 import { schemaLogin } from "../../components/schema";
 import { useContext } from "react";

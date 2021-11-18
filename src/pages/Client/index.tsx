@@ -26,12 +26,6 @@ interface Address {
   district: string;
   houseNumber: string;
 }
-interface Comment {
-  title?: string;
-  comment?: string;
-  data?: string;
-  id?: number;
-}
 
 interface Process {
   processNumber?: string;
@@ -69,6 +63,8 @@ const Client = () => {
   const { token } = useAuth();
   const { client, setClient, comments, setComments } = useClient();
   const [renderModal, setRenderModal] = useState<boolean>(false);
+  const [renderModalDelete, setRenderModalDelete] = useState<boolean>(false);
+  const [deletedId, setDeletedId] = useState<number>();
   const [comment, setComment] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [tokenDecode] = useState<TokenDecodeData>(jwtDecode(token));
@@ -151,6 +147,7 @@ const Client = () => {
       })
       .then((response) => {
         setComments(response.data.comments);
+        setRenderModalDelete(false);
         toast.success("comentário excluído com sucesso");
       });
   };
@@ -203,13 +200,36 @@ const Client = () => {
               return (
                 <CardComment
                   data={value.data!}
-                  onClick={() => deleteComment(value.id!)}
+                  onClick={() => {
+                    setRenderModalDelete(true);
+                    setDeletedId(value.id);
+                  }}
                   key={index}
                   commentTitle={value.title!}
                   comment={value.comment!}
                 />
               );
             })}
+          {renderModalDelete && (
+            <Modal
+              onClose={() => setRenderModalDelete(false)}
+              modalTitle="Deletar cliente"
+            >
+              <div className="divButton">
+                <Button onClick={() => deleteComment(deletedId!)}>
+                  Deletar
+                </Button>
+                <Button
+                  onClick={() => {
+                    setRenderModalDelete(false);
+                    setDeletedId(0);
+                  }}
+                >
+                  Cancelar
+                </Button>
+              </div>
+            </Modal>
+          )}
         </div>
       </CommentsContainer>
       {renderModal && (

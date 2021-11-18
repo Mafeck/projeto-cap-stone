@@ -9,7 +9,6 @@ import { useHistory } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import HeaderDashBoard from "../../components/HeaderDashBoard";
 import { usePeople } from "../../providers/People";
-import { useUser } from "../../providers/User";
 import { useClient } from "../../providers/Client";
 
 interface Decode {

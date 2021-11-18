@@ -8,19 +8,19 @@ export const Container = styled.div`
   max-width: 450px;
   height: 80px;
   padding: 15px 10px;
-  margin: 10px 0;
+  margin: 10px auto;
   border-radius: 5px;
   border: 1px solid var(--gray-0);
 
   .infosBox {
     display: flex;
-    cursor: pointer;
   }
 
   .diceBackground {
     background-color: var(--color-secondary-light);
     padding: 10px;
     border-radius: 5px;
+    cursor: pointer;
   }
 
   .diceIcon {
@@ -43,6 +43,10 @@ export const Container = styled.div`
     font-size: 10px;
     line-height: 16px;
     color: var(--gray-50);
+  }
+
+  @media (min-width: 768px) {
+    margin: 10px;
   }
 
   button {

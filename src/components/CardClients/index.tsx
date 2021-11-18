@@ -1,9 +1,9 @@
 import { ReactComponent as Dice } from "../../assets/dice.svg";
 import { Container } from "./style";
-import api from '../../services/api';
+import api from "../../services/api";
 import { useAuth } from "../../providers/Auth";
 import { usePeople } from "../../providers/People";
-import {ReactComponent as Delete} from '../../assets/trash.svg';
+import { ReactComponent as Delete } from "../../assets/trash.svg";
 import { toast } from "react-toastify";
 
 interface CardClientsProps {
@@ -15,27 +15,28 @@ interface CardClientsProps {
 
 const CardClients = ({ name, cpf, id, onClick }: CardClientsProps) => {
   const { token } = useAuth();
-  const { people, setPeople } = usePeople()
+  const { people, setPeople } = usePeople();
 
   const deleteClient = (id: number) => {
-    const newList = people.filter((item) => item.id !== id)
+    const newList = people.filter((item) => item.id !== id);
+
     api
       .delete(`/people/${id}`, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       })
       .then((_) => {
-        toast.success('Cliente deletado com sucesso')
-        setPeople(newList)
+        toast.success("Cliente deletado com sucesso");
+        setPeople(newList);
       })
-      .catch((_) => toast.error('Houve um erro'))
-  }
+      .catch((_) => toast.error("Houve um erro"));
+  };
 
   return (
     <Container>
-      <div className='infosBox' onClick={onClick}>
-        <div className="diceBackground">
+      <div className="infosBox">
+        <div onClick={onClick} className="diceBackground">
           <Dice className="diceIcon" />
         </div>
         <div className="clientInfo">
