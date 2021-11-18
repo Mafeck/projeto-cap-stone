@@ -11,6 +11,8 @@ import api from "../../services/api";
 import { toast } from "react-toastify";
 import { useClient } from "../../providers/Client";
 import jwtDecode from "jwt-decode";
+import HeaderDashBoard from "../../components/HeaderDashBoard";
+import Footer from "../../components/Footer";
 
 interface Comments {
   title: string;
@@ -149,9 +151,10 @@ const Client = () => {
         toast.success("comentário excluído com sucesso");
       });
   };
-  console.log(client.process)
 
   return (
+    <>
+    <HeaderDashBoard/>
     <Container>
       <nav>
         <div
@@ -222,6 +225,8 @@ const Client = () => {
         </Modal>
       )}
     </Container>
+    <Footer />
+    </>
   );
 };
 
