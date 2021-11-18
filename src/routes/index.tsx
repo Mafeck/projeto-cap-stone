@@ -6,6 +6,7 @@ import Register from "../pages/register";
 import Home from "../pages/Home";
 import Dashboard from "../pages/Dashboard";
 import RegisterClient from "../pages/RegisterClient";
+import EditClient from "../pages/EditClient";
 
 const Router = () => {
   return (
@@ -30,6 +31,9 @@ const Router = () => {
       </Route>
       <Route exact path="/dashboard/people/:id">
         <Client />
+      </Route>
+      <Route exact path="/dashboard/people/:id/update">
+        <EditClient />
       </Route>
     </Switch>
   );

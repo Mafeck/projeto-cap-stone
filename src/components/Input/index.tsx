@@ -2,7 +2,7 @@ import { InputHTMLAttributes } from "react";
 import { Container } from "./style";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  placeholder: string;
+  placeholder?: string;
   register?: any;
   name?: string;
   error?: string;

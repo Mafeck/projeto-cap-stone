@@ -14,6 +14,11 @@ interface Comments {
   data: string;
 }
 
+interface Process {
+  numberProcess: string;
+  area: string;
+}
+
 interface People {
   name: string;
   cpf?: string;
@@ -28,6 +33,7 @@ interface People {
   type: string;
   maritalStatus?: string;
   address?: Address;
+  process: Process;
   comments?: Comments[];
   id: number;
   userId: string;

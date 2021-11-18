@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const RegisterClientStyled = styled.div`
-  margin: 80px 5px 0 5px;
+  margin: 40px 5px 0 5px;
 
   .formClient {
     max-width: 600px;
@@ -20,7 +20,7 @@ export const RegisterClientStyled = styled.div`
 
     button {
       margin-top: 9px;
-      margin-bottom: 100px;
+      margin-bottom: 50px;
       width: 90%;
       max-width: 350px;
     }

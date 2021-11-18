@@ -11,6 +11,8 @@ import api from "../../services/api";
 import { toast } from "react-toastify";
 import { useClient } from "../../providers/Client";
 import jwtDecode from "jwt-decode";
+import { Link } from "react-router-dom";
+import EditIcon from "../../assets/editGroup.svg";
 
 interface Comments {
   title: string;
@@ -31,6 +33,11 @@ interface Comment {
   id?: number;
 }
 
+interface Process {
+  numberProcess: string;
+  area: string;
+}
+
 interface ClientData {
   name: string;
   cpf?: string;
@@ -46,6 +53,7 @@ interface ClientData {
   maritalStatus?: string;
   address?: Address;
   comments?: Comments[];
+  process: Process;
   id: number;
   userId: string;
 }
@@ -65,6 +73,7 @@ const Client = () => {
   const [title, setTitle] = useState<string>("");
   const [tokenDecode] = useState<TokenDecodeData>(jwtDecode(token));
   const history = useHistory();
+  console.log(client);
 
   useEffect(() => {
     api
@@ -159,6 +168,9 @@ const Client = () => {
           <FaDice />
         </div>
         <h1 className="client__name">{client.name}</h1>
+        <Link to={`/dashboard/people/${client.id}/update`}>
+          <img src={EditIcon} alt="icon" />
+        </Link>
       </nav>
       <ContentInfo>
         <div className="itemInfo">

@@ -5,11 +5,10 @@ import { ReactComponent as PageClientIcon } from "../../assets/pageClientIcon.sv
 import { Container, TitleBox, ContainerClients } from "./style";
 import Footer from "../../components/Footer";
 import { useAuth } from "../../providers/Auth";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import HeaderDashBoard from "../../components/HeaderDashBoard";
 import { usePeople } from "../../providers/People";
-import { setTimeout } from "timers";
 import { useUser } from "../../providers/User";
 import { useClient } from "../../providers/Client";
 

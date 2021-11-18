@@ -3,13 +3,13 @@ import { useHistory } from "react-router-dom";
 
 interface CardDashboardProps {
   title: string;
-  description: string;
+  description?: string;
   image: string;
-  background: string;
-  backgroundBall: string;
+  background?: string;
+  backgroundBall?: string;
   width?: string;
   height?: string;
-  route: string;
+  route?: string;
 }
 
 const CardDashboard = ({

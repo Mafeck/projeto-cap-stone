@@ -13,7 +13,12 @@ import { useAuth } from "../../providers/Auth";
 import { useState } from "react";
 import jwtDecode from "jwt-decode";
 
-interface ClientData {
+interface Process {
+  numberProcess: string;
+  area: string;
+}
+
+export interface ClientData {
   name: string;
   cpf: string;
   genre: string;
@@ -30,9 +35,10 @@ interface ClientData {
   zipCode: string;
   district: string;
   houseNumber: string;
+  process: Process;
 }
 
-interface Decode {
+export interface Decode {
   email: string;
   exp: number;
   iat: number;
@@ -131,6 +137,8 @@ const RegisterClient = () => {
                 type="text"
                 register={register}
               />
+            </div>
+            <div>
               <Input
                 placeholder="Nome da mãe"
                 name="motherName"
@@ -149,8 +157,6 @@ const RegisterClient = () => {
                 type="text"
                 register={register}
               />
-            </div>
-            <div>
               <Input
                 width={"280px"}
                 placeholder="(00) 9.9999-9999"
@@ -171,6 +177,8 @@ const RegisterClient = () => {
                 type="text"
                 register={register}
               />
+            </div>
+            <div>
               <p>Endereço completo:</p>
               <Input
                 placeholder="Rua"
