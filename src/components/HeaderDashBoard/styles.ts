@@ -10,7 +10,7 @@ export const Container = styled.div`
   position: fixed;
   top: 0;
   z-index: 3;
-  padding: 0 10px;
+  padding: 0 2%;
 
   h1 {
     color: var(--gray-0);

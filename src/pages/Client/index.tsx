@@ -1,6 +1,7 @@
 import { Container, ContentInfo, CommentsContainer } from "./styles";
 import { useState, useEffect } from "react";
-import { FaDice } from "react-icons/fa";
+import { FaDice, FaRegEdit } from "react-icons/fa";
+import * as yup from "yup";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../providers/Auth";
 import CardComment from "../../components/CardComment";
@@ -12,9 +13,9 @@ import { toast } from "react-toastify";
 import { useClient } from "../../providers/Client";
 import jwtDecode from "jwt-decode";
 import { Link } from "react-router-dom";
-import EditIcon from "../../assets/editGroup.svg";
-import HeaderDashBoard from "../../components/HeaderDashBoard";
 import Footer from "../../components/Footer";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 interface Comments {
   title: string;
@@ -66,12 +67,22 @@ const Client = () => {
   const { client, setClient, comments, setComments } = useClient();
   const [renderModal, setRenderModal] = useState<boolean>(false);
   const [renderModalDelete, setRenderModalDelete] = useState<boolean>(false);
-  const [deletedId, setDeletedId] = useState<number>();
-  const [comment, setComment] = useState<string>("");
-  const [title, setTitle] = useState<string>("");
+  const [renderModalEdit, setRenderModalEdit] = useState<boolean>(false);
+  const [commentId, setCommentId] = useState<number>();
   const [tokenDecode] = useState<TokenDecodeData>(jwtDecode(token));
   const history = useHistory();
-  console.log(client);
+
+  const schemaComment = yup.object().shape({
+    title: yup.string().required("Título Obrigatório"),
+    comment: yup.string().required("Comentário Obrigatório"),
+  });
+
+  const {
+    register,
+    reset,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<Comments>({ resolver: yupResolver(schemaComment) });
 
   useEffect(() => {
     api
@@ -92,12 +103,12 @@ const Client = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  const createComment = () => {
+  const createComment = (data: Comments) => {
     const newDataFormatted = new Date().toLocaleString("pt-BR");
 
     const newData = {
-      title: title,
-      comment: comment,
+      title: data.title,
+      comment: data.comment,
       data: newDataFormatted,
       id: comments.length + 1,
     };
@@ -113,8 +124,6 @@ const Client = () => {
       .then((response) => {
         setComments(response.data.comments);
         setRenderModal(false);
-        setComment("");
-        setTitle("");
         toast.success("comentário criado com sucesso");
       });
   };
@@ -154,106 +163,182 @@ const Client = () => {
       });
   };
 
+  const editComment = (data: Comments) => {
+    const commentsFiltered = comments.filter((value) => value.id !== commentId);
+    const dataEdit = new Date().toLocaleString("pt-BR");
+    const commentEdit = {
+      title: data.title,
+      comment: data.comment,
+      id: commentId!,
+      data: dataEdit,
+    };
+    commentsFiltered.splice(commentId! - 1, 0, commentEdit);
+    const newComments = { comments: [...commentsFiltered] };
+
+    api
+      .patch(`/people/${client.id}`, newComments, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setRenderModalEdit(false);
+        setComments(response.data.comments);
+        toast.success("Comentário editado");
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <>
-    <HeaderDashBoard/>
-    <Container>
-      <nav>
-        <div
-          onClick={() => history.push("/dashboard/people")}
-          className="divAction"
-        >
-          {"<"}
-        </div>
-        <div className="divIcon">
-          <FaDice />
-        </div>
-        <h1 className="client__name">{client.name}</h1>
-        <Link to={`/dashboard/people/${client.id}/update`}>
-          <img src={EditIcon} alt="icon" />
-        </Link>
-      </nav>
-      <ContentInfo>
-        <div className="itemInfo">
-          <span>Tipo</span> <span>{client.type}</span>
-        </div>
-        <div className="itemInfo">
-          <span>CPF</span> <span>{client.cpf}</span>
-        </div>
-        <div className="itemInfo">
-          <span>Processo</span> <span>{client.process?.processNumber}</span>
-        </div>
-        <div className="itemInfo">
-          <span>Área</span> <span>{client.process?.area}</span>
-        </div>
-      </ContentInfo>
-      <CommentsContainer>
-        <div className="comments__info">
-          <h1 className="comments__title">Comentários</h1>
-          <button
-            onClick={() => setRenderModal(true)}
-            className="comment__button"
-          >
-            Cadastrar comentário
-          </button>
-        </div>
-        <div className="comments">
-          {comments &&
-            comments.map((value, index) => {
-              return (
-                <CardComment
-                  data={value.data!}
-                  onClick={() => {
-                    setRenderModalDelete(true);
-                    setDeletedId(value.id);
-                  }}
-                  key={index}
-                  commentTitle={value.title!}
-                  comment={value.comment!}
-                />
-              );
-            })}
-          {renderModalDelete && (
-            <Modal
-              onClose={() => setRenderModalDelete(false)}
-              modalTitle="Deletar cliente"
+      <Container>
+        <nav>
+          <div className="containerNav">
+            <div
+              onClick={() => history.push("/dashboard/people")}
+              className="divAction"
             >
-              <div className="divButton">
-                <Button onClick={() => deleteComment(deletedId!)}>
-                  Deletar
-                </Button>
-                <Button
-                  onClick={() => {
-                    setRenderModalDelete(false);
-                    setDeletedId(0);
+              {"<"}
+            </div>
+            <div className="divIcon">
+              <FaDice />
+            </div>
+            <h1 className="client__name">{client.name}</h1>
+          </div>
+          <Link to={`/dashboard/people/${client.id}/update`}>
+            <FaRegEdit />
+          </Link>
+        </nav>
+        <ContentInfo>
+          <div className="itemInfo">
+            <span>Tipo</span> <span>{client.type}</span>
+          </div>
+          <div className="itemInfo">
+            <span>CPF</span> <span>{client.cpf}</span>
+          </div>
+          <div className="itemInfo">
+            <span>Processo</span> <span>{client.process?.processNumber}</span>
+          </div>
+          <div className="itemInfo">
+            <span>Área</span> <span>{client.process?.area}</span>
+          </div>
+        </ContentInfo>
+        <CommentsContainer>
+          <div className="comments__info">
+            <h1 className="comments__title">Comentários</h1>
+            <button
+              onClick={() => setRenderModal(true)}
+              className="comment__button"
+            >
+              Cadastrar comentário
+            </button>
+          </div>
+          <div className="comments">
+            {comments &&
+              comments.map((value, index) => {
+                return (
+                  <CardComment
+                    data={value.data!}
+                    onEdit={() => {
+                      setRenderModalEdit(true);
+                      setCommentId(value.id);
+                    }}
+                    onClick={() => {
+                      setRenderModalDelete(true);
+                      setCommentId(value.id);
+                    }}
+                    key={index}
+                    commentTitle={value.title!}
+                    comment={value.comment!}
+                  />
+                );
+              })}
+            {renderModalDelete && (
+              <Modal
+                onClose={() => setRenderModalDelete(false)}
+                modalTitle="Tem certeza disso?"
+              >
+                <p
+                  style={{
+                    color: "var(--gray-50)",
+                    fontSize: "12px",
+                    margin: "0 auto",
                   }}
                 >
-                  Cancelar
-                </Button>
-              </div>
-            </Modal>
-          )}
-        </div>
-      </CommentsContainer>
-      {renderModal && (
-        <Modal onClose={() => setRenderModal(false)} modalTitle="Comentário">
-          <Input
-            onChange={(event) => setTitle(event.target.value)}
-            maxLength={20}
-            name="title"
-            error={""}
-            register={() => {}}
-            placeholder="Título do comentário"
-          />
-          <textarea
-            onChange={(event) => setComment(event.target.value)}
-            placeholder="comentário..."
-          />
-          <Button onClick={createComment}>cadastrar comentário</Button>
-        </Modal>
-      )}
-    </Container>
-    <Footer />
+                  Essa ação é permanente, você não poderá mais editar o
+                  comentário
+                </p>
+                <div className="divButton">
+                  <Button onClick={() => deleteComment(commentId!)}>Sim</Button>
+                  <Button
+                    onClick={() => {
+                      setRenderModalDelete(false);
+                      setCommentId(0);
+                    }}
+                  >
+                    não
+                  </Button>
+                </div>
+              </Modal>
+            )}
+            {renderModalEdit && (
+              <Modal
+                onClose={() => {
+                  setRenderModalEdit(false);
+                }}
+                modalTitle="Editar Comentário"
+              >
+                <form
+                  onSubmit={handleSubmit(editComment)}
+                  style={{ width: "100%" }}
+                >
+                  <Input
+                    maxLength={20}
+                    name="title"
+                    error={""}
+                    register={register}
+                    placeholder="Título do comentário"
+                  />
+                  <textarea
+                    maxLength={5000}
+                    {...register("comment")}
+                    placeholder="comentário..."
+                  />
+                  <Button type="submit">Editar</Button>
+                </form>
+              </Modal>
+            )}
+          </div>
+        </CommentsContainer>
+        {renderModal && (
+          <Modal
+            onClose={() => {
+              setRenderModal(false);
+            }}
+            modalTitle="Comentário"
+          >
+            <form
+              onSubmit={handleSubmit(createComment)}
+              style={{ width: "100%" }}
+            >
+              <Input
+                maxLength={20}
+                name="title"
+                error={""}
+                register={register}
+                placeholder="Título do comentário"
+              />
+              <textarea
+                maxLength={5000}
+                {...register("comment")}
+                placeholder="comentário..."
+              />
+              <Button type="submit">cadastrar comentário</Button>
+            </form>
+          </Modal>
+        )}
+      </Container>
+      <Footer />
     </>
   );
 };

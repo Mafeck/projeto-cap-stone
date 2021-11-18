@@ -13,14 +13,15 @@ export const Container = styled.div`
   border: 1px solid var(--gray-0);
 
   .infosBox {
+    width: 80%;
     display: flex;
+    cursor: pointer;
   }
 
   .diceBackground {
     background-color: var(--color-secondary-light);
     padding: 10px;
     border-radius: 5px;
-    cursor: pointer;
   }
 
   .diceIcon {

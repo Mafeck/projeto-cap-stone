@@ -23,18 +23,6 @@ interface Comments {
   id: number;
 }
 
-// interface Address {
-//   road?: string;
-//   zipCode?: string;
-//   district?: string;
-//   houseNumber?: string;
-// }
-
-// interface Process {
-//   processNumber?: string;
-//   area?: string;
-// }
-
 interface ClientData {
   name: string;
   cpf?: string;
@@ -96,7 +84,6 @@ const EditClient = () => {
         },
       })
       .then((response) => {
-        console.log(response);
         reset({
           name: response.data[0].name,
           cpf: response.data[0].cpf,
@@ -147,9 +134,9 @@ const EditClient = () => {
         </div>
       </TitleBox>
       <RegisterClientStyled>
-        <form className="formClient" onSubmit={handleSubmit(updateClient)}>
-          <div className="formDesktop">
-            <div>
+        <form onSubmit={handleSubmit(updateClient)}>
+          <div className="inputs">
+            <div className="column">
               <Input
                 width={"280px"}
                 placeholder={client.name}
@@ -206,8 +193,6 @@ const EditClient = () => {
                 type="text"
                 register={register}
               />
-            </div>
-            <div>
               <Input
                 width={"280px"}
                 placeholder="(00) 9.9999-9999"
@@ -215,6 +200,8 @@ const EditClient = () => {
                 type="number"
                 register={register}
               />
+            </div>
+            <div className="column">
               <Input
                 placeholder="Tipo de pessoa"
                 name="type"

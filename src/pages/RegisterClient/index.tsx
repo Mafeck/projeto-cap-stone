@@ -19,7 +19,6 @@ interface Process {
   area: string;
 }
 
-
 interface Address {
   road?: string;
   zipCode?: string;
@@ -99,7 +98,7 @@ const RegisterClient = () => {
       },
       comments: [],
     };
-    console.log(newData);
+
     api
       .post(`/users/${tokenDecode.sub}/people`, newData, {
         headers: {

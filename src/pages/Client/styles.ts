@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  padding-top: 60px;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -10,46 +9,54 @@ export const Container = styled.div`
   nav {
     background: var(--color-primary);
     width: 100%;
-    height: 82px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
-    .divAction {
-      font-family: "Poppins", sans-serif;
-      color: var(--white);
-      cursor: pointer;
-      width: 30px;
-      font-size: 35px;
+    .containerNav {
+      height: 82px;
       display: flex;
-      justify-content: center;
-    }
-
-    .divIcon {
-      background: rgba(63, 191, 127, 0.15);
-      color: var(--color-secondary);
-      font-size: 24px;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      justify-content: center;
       align-items: center;
-      border-radius: 5px;
-      margin-right: 10px;
+
+      .divAction {
+        font-family: "Poppins", sans-serif;
+        color: var(--white);
+        cursor: pointer;
+        width: 30px;
+        font-size: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .divIcon {
+        background: rgba(63, 191, 127, 0.15);
+        color: var(--color-secondary);
+        font-size: 24px;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        margin-right: 10px;
+      }
+
+      .client__name {
+        color: var(--white);
+        font-size: 20px;
+      }
     }
 
-    .client__name {
-      color: var(--white);
-      font-size: 20px;
+    a {
+      font-size: 24px;
+      margin-left: 20px;
+      padding-right: 10px;
     }
 
     @media (min-width: 768px) {
       height: 100px;
     }
-
-  }
-
-  input {
-    margin-top: 20px;
   }
 
   textarea {
@@ -144,6 +151,7 @@ export const CommentsContainer = styled.div`
     align-items: center;
     overflow-y: scroll;
     overflow-x: hidden;
+    padding-bottom: 50px;
 
     ::-webkit-scrollbar {
       display: none;

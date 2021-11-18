@@ -35,8 +35,8 @@ const CardClients = ({ name, cpf, id, onClick }: CardClientsProps) => {
 
   return (
     <Container>
-      <div className="infosBox">
-        <div onClick={onClick} className="diceBackground">
+      <div onClick={onClick} className="infosBox">
+        <div className="diceBackground">
           <Dice className="diceIcon" />
         </div>
         <div className="clientInfo">

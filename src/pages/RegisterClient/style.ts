@@ -9,12 +9,12 @@ export const RegisterClientStyled = styled.div`
 
   .inputs {
     max-height: 100%;
-    margin: 26px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    margin: 26px 26px 0 26px;
 
     div,
     p {
@@ -29,10 +29,9 @@ export const RegisterClientStyled = styled.div`
   }
 
   button {
-    margin-top: 9px;
-    margin-bottom: 50px;
     width: 90%;
-    max-width: 350px;
+    max-width: 280px;
+    margin-bottom: 80px;
     font-weight: 400;
     font-size: 14px;
   }
@@ -48,6 +47,7 @@ export const RegisterClientStyled = styled.div`
       flex-direction: row;
       align-items: flex-start;
       column-gap: 10vw;
+
       .column {
         display: flex;
         flex-direction: column;
