@@ -53,6 +53,11 @@ interface ClientData {
   process: Process;
   id: number;
   userId: string;
+  road: string;
+  zipCode: string;
+  district: string;
+  houseNumber: string;
+  numberProcess: string;
 }
 
 const EditClient = () => {
@@ -87,7 +92,6 @@ const EditClient = () => {
   // const [inputArea, setInputArea] = useState();
 
   const history = useHistory();
-  console.log(client);
   const {
     register,
     reset,
@@ -112,45 +116,53 @@ const EditClient = () => {
       });
   }, []);
 
+  useEffect(() => {
+    api
+      .get(`/user/${tokenDecode.sub}/people`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        reset({
+          name: response.data[0].name,
+          cpf: response.data[0].cpf,
+          genre: response.data[0].genre,
+          naturalness: response.data[0].naturalness,
+          nationality: response.data[0].nationality,
+          fatherName: response.data[0].fatherName,
+          motherName: response.data[0].motherName,
+          qualification: response.data[0].qualification,
+          company: response.data[0].company,
+          phone: response.data[0].phone,
+          type: response.data[0].type,
+          maritalStatus: response.data[0].maritalStatus,
+          road: response.data[0].address.road,
+          zipCode: response.data[0].address.zipCode,
+          district: response.data[0].address.district,
+          houseNumber: response.data[0].address.houseNumber,
+          // processNumber: response.data[0].process.processNumber,
+          // area: response.data[0].process.area,
+          comments: response.data[0].comments,
+        });
+      });
+  }, []);
+
   const updateClient = (data: ClientData) => {
-    console.log(data);
-    // const newData = {
-    //   name: data.name,
-    //   cpf: data.cpf,
-    //   genre: data.genre,
-    //   naturalness: data.naturalness,
-    //   nationality: data.nationality,
-    //   fatherName: data.fatherName,
-    //   motherName: data.motherName,
-    //   qualification: data.qualification,
-    //   company: data.company,
-    //   phone: data.phone,
-    //   type: data.type,
-    //   maritalStatus: data.maritalStatus,
-    //   address: {
-    //     road: data.road,
-    //     zipCode: data.zipCode,
-    //     district: data.district,
-    //     houseNumber: data.houseNumber,
-    //   },
-    //   process: {
-    //     processNumber: data.processNumber,
-    //     area: data.area,
-    //   },
-    //   comments: [],
-    // };
-    // api
-    //   .patch(`/users/${tokenDecode.sub}/people`, newData, {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   })
-    //   .then(() => {
-    //     toast.success("Cliente atualizado!");
-    //     history.push(`/users/${tokenDecode.sub}/people`);
-    //     console.log(newData);
-    //   })
-    //   .catch(() => toast.error("Erro ao atualizar o cliente"));
+    const clientId = localStorage.getItem("@id:haki");
+
+    api
+      .patch(`/people/${clientId}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => {
+        toast.success("Cliente atualizado!");
+        history.push(`/dashboard/people/${clientId}`);
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -169,7 +181,6 @@ const EditClient = () => {
               <Input
                 width={"280px"}
                 placeholder={client.name}
-                value="123"
                 name="name"
                 type="text"
                 register={register}
