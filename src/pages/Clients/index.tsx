@@ -48,8 +48,16 @@ const Clients = () => {
       <HeaderDashBoard />
       <TitleBox>
         <div className="frontBox">
-          <h1>Lista de clientes</h1>
-          <PageClientIcon />
+          <div className='titleIconBox'>
+            <div
+              onClick={() => history.push("/dashboard")}
+              className="divAction"
+            >
+              {"<"}
+            </div>
+            <h1>Lista de clientes</h1>
+          </div>
+            <PageClientIcon />
         </div>
       </TitleBox>
       <ContainerClients>

@@ -29,10 +29,26 @@ export const TitleBox = styled.div`
       line-height: 24px;
       font-weight: 600;
       font-size: 18px;
+      margin-left: 5px;
     }
 
     svg {
       width: 75px;
+    }
+
+    .titleIconBox {
+      display: flex;
+      align-items: center;
+    }
+
+    .divAction {
+      font-family: "Poppins", sans-serif;
+      color: var(--white);
+      cursor: pointer;
+      width: 30px;
+      font-size: 35px;
+      display: flex;
+      justify-content: center;
     }
   }
 `;

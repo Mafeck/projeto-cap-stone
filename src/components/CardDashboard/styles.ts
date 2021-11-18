@@ -5,6 +5,8 @@ export const Container = styled.div`
   height: 140px;
   display: flex;
   position: relative;
+  border-radius: 5px;
+  cursor: pointer;
 
   main {
     display: flex;

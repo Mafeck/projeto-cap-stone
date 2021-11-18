@@ -2,19 +2,25 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 95%;
   max-width: 450px;
   height: 80px;
   padding: 15px 10px;
-  cursor: pointer;
   margin: 10px auto;
   border-radius: 5px;
   border: 1px solid var(--gray-0);
+
+  .infosBox {
+    display: flex;
+  }
 
   .diceBackground {
     background-color: var(--color-secondary-light);
     padding: 10px;
     border-radius: 5px;
+    cursor: pointer;
   }
 
   .diceIcon {
@@ -41,5 +47,10 @@ export const Container = styled.div`
 
   @media (min-width: 768px) {
     margin: 10px;
+  }
+
+  button {
+    border: none;
+    background: none;
   }
 `;
