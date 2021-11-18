@@ -1,5 +1,6 @@
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, useState } from "react";
 import { Container } from "./style";
+import { RiEyeCloseLine, RiEyeFill } from "react-icons/ri";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   placeholder: string;
@@ -7,9 +8,11 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name?: string;
   error?: string;
   width?: string;
+  type?: string;
 }
 
 const Input = ({
+  type,
   placeholder,
   name,
   register,
@@ -17,14 +20,20 @@ const Input = ({
   width,
   ...rest
 }: InputProps) => {
+  const [open, setOpen] = useState<boolean>(false);
   return (
     <Container style={{ width: width }}>
-      <input
-        error={error}
-        {...register(name)}
-        placeholder={placeholder}
-        {...rest}
-      />
+      <div className="input">
+        <input
+          type={type==="password" ? open ? "text" : "password" : type}
+          error={error}
+          {...register(name)}
+          placeholder={placeholder}
+          {...rest}
+        />
+        {type==="password" && (open ? <RiEyeCloseLine onClick={() => setOpen(false)}/> :
+         <RiEyeFill onClick={() => setOpen(true)}/>)}
+        </div>
       <span>{error}</span>
     </Container>
   );
