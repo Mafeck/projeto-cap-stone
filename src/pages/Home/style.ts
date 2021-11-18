@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import backgroundImage from "../../assets/backgroundHome.png";
+import backgroundImage from "../../assets/backgroundHome.jpg";
 
 export const TitleBox = styled.div`
   margin-top: 60px;
   background-image: url(${backgroundImage});
   background-size: cover;
   background-position: center;
-  padding: 20px 15px;
+  padding: 50px 15px;
   color: var(--white);
 
   .content {
