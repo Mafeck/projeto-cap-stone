@@ -6,14 +6,15 @@ export const TitleBox = styled.div`
   background-image: url(${backgroundImage});
   background-size: cover;
   background-position: center;
-  padding: 50px 15px;
   color: var(--white);
+  padding: 80px 15px;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 
   .content {
     @media (min-width: 769px) {
-      height: 300px;
-      width: 400px;
-      margin: 20px 0 0 60px;
+      margin: 0 0 0 60px;
+      width: 500px;
     }
   }
 
@@ -24,15 +25,30 @@ export const TitleBox = styled.div`
 `;
 
 export const AboutUsBox = styled.div`
-  background-color: var(--gray-100);
+  position: relative;
+  background-image: url(${backgroundImage});
+  background-size: cover;
+  background-position: center;
   color: var(--white);
-  padding: 30px 15px;
+  padding: 80px 15px;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  z-index: 0;
 
+  ::before {
+    background-color: rgba(0, 0, 0, 0.5);
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
   .content {
     @media (min-width: 769px) {
-      height: 200px;
-      width: 690px;
-      margin: 20px 0 0 60px;
+      width: 500px;
+      margin: 0 0 0 60px;
     }
   }
 
