@@ -10,6 +10,7 @@ import logo from "../../assets/Group 51.svg";
 import { useAuth } from "../../providers/Auth";
 import jwtDecode from "jwt-decode";
 import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
 interface DecodeProps {
   email: string;
@@ -19,6 +20,7 @@ interface DecodeProps {
 }
 
 const HeaderDashBoard = () => {
+  const history = useHistory();
   const { user, setUser } = useUser();
   const { token, Logout } = useAuth();
   const [tokenDecode] = useState<DecodeProps>(jwtDecode(token));
@@ -78,7 +80,7 @@ const HeaderDashBoard = () => {
 
   return (
     <Container>
-      <img src={logo} alt="logo" />
+      <img src={logo} alt="logo" onClick={() => history.push("/dashboard")}/>
       <UserPerfil>
         <h2>{user.username}</h2>
         <div
