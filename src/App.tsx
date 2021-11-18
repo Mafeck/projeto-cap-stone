@@ -20,6 +20,7 @@ function App() {
         pauseOnHover
         theme="colored"
       />
+      
     </div>
   );
 }
