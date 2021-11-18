@@ -38,6 +38,12 @@ export const Container = styled.div`
     justify-content: space-between;
     align-items: center;
 
+    .divIcons {
+      width: 50px;
+      display: flex;
+      justify-content: space-between;
+    }
+
     span {
       color: var(--gray-50);
 

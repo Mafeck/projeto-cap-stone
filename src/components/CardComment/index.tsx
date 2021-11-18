@@ -24,16 +24,18 @@ const CardComment = ({
       <p className="card__comment">{comment}</p>
       <div className="card__content">
         <span>{data}</span>
-        <BiCommentEdit
-          onClick={onEdit}
-          style={{ cursor: "pointer" }}
-          color="#878787"
-        />
-        <FaTrash
-          onClick={onClick}
-          style={{ cursor: "pointer" }}
-          color="#878787"
-        />
+        <div className="divIcons">
+          <BiCommentEdit
+            onClick={onEdit}
+            style={{ cursor: "pointer" }}
+            color="#878787"
+          />
+          <FaTrash
+            onClick={onClick}
+            style={{ cursor: "pointer" }}
+            color="#878787"
+          />
+        </div>
       </div>
     </Container>
   );

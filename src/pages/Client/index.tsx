@@ -1,7 +1,6 @@
 import { Container, ContentInfo, CommentsContainer } from "./styles";
 import { useState, useEffect } from "react";
 import { FaDice, FaRegEdit } from "react-icons/fa";
-import * as yup from "yup";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../providers/Auth";
 import CardComment from "../../components/CardComment";
@@ -16,6 +15,7 @@ import { Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import schemaComment from "../../components/schemaComments";
 
 interface Comments {
   title: string;
@@ -68,21 +68,13 @@ const Client = () => {
   const [renderModal, setRenderModal] = useState<boolean>(false);
   const [renderModalDelete, setRenderModalDelete] = useState<boolean>(false);
   const [renderModalEdit, setRenderModalEdit] = useState<boolean>(false);
-  const [commentId, setCommentId] = useState<number>();
+  const [commentId, setCommentId] = useState<number>(0);
   const [tokenDecode] = useState<TokenDecodeData>(jwtDecode(token));
   const history = useHistory();
 
-  const schemaComment = yup.object().shape({
-    title: yup.string().required("Título Obrigatório"),
-    comment: yup.string().required("Comentário Obrigatório"),
+  const { register, reset, handleSubmit } = useForm<Comments>({
+    resolver: yupResolver(schemaComment),
   });
-
-  const {
-    register,
-    reset,
-    formState: { errors },
-    handleSubmit,
-  } = useForm<Comments>({ resolver: yupResolver(schemaComment) });
 
   useEffect(() => {
     api
@@ -105,14 +97,12 @@ const Client = () => {
 
   const createComment = (data: Comments) => {
     const newDataFormatted = new Date().toLocaleString("pt-BR");
-
     const newData = {
       title: data.title,
       comment: data.comment,
       data: newDataFormatted,
       id: comments.length + 1,
     };
-
     const newComments = { comments: [...comments, newData] };
 
     api
@@ -130,7 +120,6 @@ const Client = () => {
 
   const deleteComment = (id: number) => {
     const newComments = comments.filter((values) => values.id !== id);
-
     const newPeople = {
       name: client.name,
       cpf: client.cpf,
@@ -189,6 +178,17 @@ const Client = () => {
       .catch((error) => console.log(error));
   };
 
+  const fillInputsEditComment = (id: Number) => {
+    const findComment = client.comments!.find(
+      (value: Comments) => value.id === id
+    );
+
+    reset({
+      title: findComment!.title,
+      comment: findComment!.comment,
+    });
+  };
+
   return (
     <>
       <Container>
@@ -240,12 +240,13 @@ const Client = () => {
                   <CardComment
                     data={value.data!}
                     onEdit={() => {
-                      setRenderModalEdit(true);
                       setCommentId(value.id);
+                      fillInputsEditComment(value.id);
+                      setRenderModalEdit(true);
                     }}
                     onClick={() => {
-                      setRenderModalDelete(true);
                       setCommentId(value.id);
+                      setRenderModalDelete(true);
                     }}
                     key={index}
                     commentTitle={value.title!}
@@ -293,7 +294,7 @@ const Client = () => {
                   style={{ width: "100%" }}
                 >
                   <Input
-                    maxLength={20}
+                    maxLength={25}
                     name="title"
                     error={""}
                     register={register}
@@ -322,7 +323,7 @@ const Client = () => {
               style={{ width: "100%" }}
             >
               <Input
-                maxLength={20}
+                maxLength={25}
                 name="title"
                 error={""}
                 register={register}
