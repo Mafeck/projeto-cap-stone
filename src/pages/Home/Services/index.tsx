@@ -8,7 +8,7 @@ import Judge from "../../../assets/judge.svg";
 const Services = () => (
   <ServicesBox>
     <ImageBox>
-      <h2 id="nossosServiços">Serviços</h2>
+      <h2>Serviços</h2>
       <div className="desktopImage">
         <DesktopImage />
       </div>
@@ -31,9 +31,8 @@ const Services = () => (
         title="Agenda"
         image={Appointment}
         isLast
-        description="Mantenha-se organizado, centralize seus compromissos e demais informações.
-
-"
+        description="Mantenha-se organizado, centralize seus compromissos e demais informações."
+        id="quemSomos"
       />
     </div>
   </ServicesBox>
