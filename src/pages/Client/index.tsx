@@ -118,6 +118,12 @@ const Client = () => {
       });
   };
 
+<<<<<<< HEAD
+=======
+  if (token) {
+    return <Redirect to="/dashboard" />;
+  }
+>>>>>>> feature/cypress
   if (!token) {
     return <Redirect to="/login" />;
   }

@@ -3,11 +3,12 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../../components/schema";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, Redirect } from "react-router-dom";
 import api from "../../services/api";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Header from "../../components/Header";
+import { useAuth } from "../../providers/Auth";
 
 interface UserData {
   email: string;
@@ -21,6 +22,8 @@ interface UserData {
 
 const Register = () => {
   const history = useHistory();
+  const { token } = useAuth();
+
   const {
     register,
     handleSubmit,
@@ -40,12 +43,16 @@ const Register = () => {
     api
       .post("/signup", newData)
       .then((response) => {
-        localStorage.clear()
+        localStorage.clear();
         toast.success("Conta criada");
         setTimeout(() => history.push("/login"), 2000);
       })
       .catch((error) => toast.error(error.response.data));
   };
+
+  if (token) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <>
@@ -55,6 +62,7 @@ const Register = () => {
           <h1>Cadastro</h1>
           <form onSubmit={handleSubmit(createUser)}>
             <Input
+              data-cy="oab/register"
               placeholder="OAB"
               name="oab"
               type="number"
@@ -63,6 +71,7 @@ const Register = () => {
               error={errors.oab?.message}
             />
             <Input
+              data-cy="state/register"
               type="text"
               name="state"
               width="47%"
@@ -71,6 +80,7 @@ const Register = () => {
               error={errors.state?.message}
             />
             <Input
+              data-cy="username/register"
               placeholder="Nome de Usuário"
               name="username"
               type="text"
@@ -79,6 +89,7 @@ const Register = () => {
               error={errors.username?.message}
             />
             <Input
+              data-cy="email/register"
               placeholder="E-mail"
               name="email"
               type="email"
@@ -86,6 +97,7 @@ const Register = () => {
               error={errors.email?.message}
             />
             <Input
+              data-cy="phone/register"
               placeholder="Telefone"
               name="phone"
               type="number"
@@ -93,6 +105,7 @@ const Register = () => {
               error={errors.phone?.message}
             />
             <Input
+              data-cy="password/register"
               placeholder="Senha"
               name="password"
               type="password"
@@ -100,13 +113,16 @@ const Register = () => {
               error={errors.password?.message}
             />
             <Input
+              data-cy="confirmpassword/register"
               placeholder="Confirmar Senha"
               name="confirmPassword"
               type="password"
               register={register}
               error={errors.confirmPassword?.message}
             />
-            <Button type="submit">Cadastrar</Button>
+            <Button data-cy="button/register" type="submit">
+              Cadastrar
+            </Button>
             <p>
               Já possui um cadastro? <Link to="/login">faça seu login</Link>
             </p>
