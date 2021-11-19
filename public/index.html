@@ -51,19 +51,27 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
 
-    <script src="https://unpkg.com/blip-chat-widget" type="text/javascript">
-    </script>
+    <script
+      src="https://unpkg.com/blip-chat-widget"
+      type="text/javascript"
+    ></script>
     <script>
-        (function () {
-            window.onload = function () {
-                new BlipChat()
-                .withAppKey('aGFraTE6NzU5NmU4MWMtZjkwOS00ZTNiLWJmODMtMzcyMjUwNWUzZTM0')
-                .withButton({"color":"#050505","icon":"https://blipmediastore.blob.core.windows.net/public-medias/Media_2131cf3e-1eec-491c-9bfe-fc27c220b3f8"})
-                .withCustomCommonUrl('https://patrick-gabriel-silva-de-arruda-sx241.chat.blip.ai/')
-                .build();
-            }
-        })();
+      (function () {
+        window.onload = function () {
+          new BlipChat()
+            .withAppKey(
+              "aGFraTE6NzU5NmU4MWMtZjkwOS00ZTNiLWJmODMtMzcyMjUwNWUzZTM0"
+            )
+            .withButton({
+              color: "#050505",
+              icon: "https://blipmediastore.blob.core.windows.net/public-medias/Media_2131cf3e-1eec-491c-9bfe-fc27c220b3f8",
+            })
+            .withCustomCommonUrl(
+              "https://patrick-gabriel-silva-de-arruda-sx241.chat.blip.ai/"
+            )
+            .build();
+        };
+      })();
     </script>
-                                    
   </body>
 </html>
