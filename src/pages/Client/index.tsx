@@ -98,26 +98,29 @@ const Client = () => {
   }, []);
 
   const createComment = () => {
-    const newDataFormatted = new Date().toLocaleString("pt-BR");
-    const newData = {
-      title: title,
-      comment: comment,
-      data: newDataFormatted,
-      id: comments.length + 1,
-    };
-    const newComments = { comments: [...comments, newData] };
-
-    api
-      .patch(`/people/${client.id}`, newComments, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        setComments(response.data.comments);
-        setRenderModal(false);
-        toast.success("comentário criado com sucesso");
-      });
+    if(title || comment !== ""){
+      const newDataFormatted = new Date().toLocaleString("pt-BR");
+      const newData = {
+        title: title,
+        comment: comment,
+        data: newDataFormatted,
+        id: comments.length + 1,
+      };
+      const newComments = { comments: [...comments, newData] };
+      api
+        .patch(`/people/${client.id}`, newComments, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          setComments(response.data.comments);
+          setRenderModal(false);
+          toast.success("comentário criado com sucesso");
+        });
+      setTitle("");
+      setComment("");
+    }
   };
 
   const deleteComment = (id: number) => {
