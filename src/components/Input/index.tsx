@@ -22,18 +22,22 @@ const Input = ({
 }: InputProps) => {
   const [open, setOpen] = useState<boolean>(false);
   return (
-    <Container style={{ width: width }}>
+    <Container {...rest} style={{ width: width }}>
       <div className="input">
         <input
-          type={type==="password" ? open ? "text" : "password" : type}
+          type={type === "password" ? (open ? "text" : "password") : type}
           error={error}
           {...register(name)}
           placeholder={placeholder}
           {...rest}
         />
-        {type==="password" && (open ? <RiEyeCloseLine onClick={() => setOpen(false)}/> :
-         <RiEyeFill onClick={() => setOpen(true)}/>)}
-        </div>
+        {type === "password" &&
+          (open ? (
+            <RiEyeCloseLine onClick={() => setOpen(false)} />
+          ) : (
+            <RiEyeFill onClick={() => setOpen(true)} />
+          ))}
+      </div>
       <span>{error}</span>
     </Container>
   );

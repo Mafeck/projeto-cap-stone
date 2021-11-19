@@ -10,12 +10,12 @@ export const Container = styled.div`
   position: fixed;
   top: 0;
   z-index: 3;
-  padding: 0 10px;
+  padding: 0 20px;
 
   img {
     cursor: pointer;
   }
-  
+
   h1 {
     color: var(--gray-0);
   }

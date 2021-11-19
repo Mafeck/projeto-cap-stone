@@ -23,18 +23,6 @@ interface Comments {
   id: number;
 }
 
-// interface Address {
-//   road?: string;
-//   zipCode?: string;
-//   district?: string;
-//   houseNumber?: string;
-// }
-
-// interface Process {
-//   processNumber?: string;
-//   area?: string;
-// }
-
 interface ClientData {
   name: string;
   cpf?: string;

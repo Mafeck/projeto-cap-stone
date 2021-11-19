@@ -1,5 +1,5 @@
 import HeaderDashBoard from "../../components/HeaderDashBoard";
-import { RegisterClientStyled, TitleBox } from "./style";
+import { RegisterClientStyled, TitleBox, Container } from "./style";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Footer from "../../components/Footer";
@@ -13,26 +13,6 @@ import { useAuth } from "../../providers/Auth";
 import { useState } from "react";
 import jwtDecode from "jwt-decode";
 import { ReactComponent as PageClientIcon } from "../../assets/undraw_tweetstorm_re_n0rs 1.svg";
-
-interface Process {
-  processNumber: string;
-  area: string;
-}
-
-
-interface Address {
-  road?: string;
-  zipCode?: string;
-  district?: string;
-  houseNumber?: string;
-}
-
-interface Comments {
-  title: string;
-  comment: string;
-  id: number;
-  data: string;
-}
 
 export interface ClientData {
   name: string;
@@ -114,7 +94,7 @@ const RegisterClient = () => {
   };
 
   return (
-    <div>
+    <Container>
       <HeaderDashBoard />
       <TitleBox>
         <div className="frontBox">
@@ -139,6 +119,7 @@ const RegisterClient = () => {
                 name="cpf"
                 type="text"
                 register={register}
+                error={errors.cpf?.message}
               />
               <Input
                 placeholder="Gênero"
@@ -169,6 +150,7 @@ const RegisterClient = () => {
                 name="motherName"
                 type="text"
                 register={register}
+                error={errors.motherName?.message}
               />
               <Input
                 placeholder="Digite algo"
@@ -188,6 +170,7 @@ const RegisterClient = () => {
                 name="phone"
                 type="number"
                 register={register}
+                error={errors.phone?.message}
               />
             </div>
             <div className="column">
@@ -203,6 +186,7 @@ const RegisterClient = () => {
                 name="maritalStatus"
                 type="text"
                 register={register}
+                error={errors.maritalStatus?.message}
               />
               <p>Endereço completo:</p>
               <Input
@@ -241,6 +225,7 @@ const RegisterClient = () => {
                 name="area"
                 type="text"
                 register={register}
+                error={errors.area?.message}
               />
             </div>
           </div>
@@ -248,7 +233,7 @@ const RegisterClient = () => {
         </form>
       </RegisterClientStyled>
       <Footer />
-    </div>
+    </Container>
   );
 };
 
