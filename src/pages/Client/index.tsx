@@ -69,6 +69,8 @@ const Client = () => {
   const [renderModalDelete, setRenderModalDelete] = useState<boolean>(false);
   const [renderModalEdit, setRenderModalEdit] = useState<boolean>(false);
   const [commentId, setCommentId] = useState<number>(0);
+  const [title, setTitle] = useState<string>("");
+  const [comment, setComment] = useState<string>("");
   const [tokenDecode] = useState<TokenDecodeData>(jwtDecode(token));
   const history = useHistory();
 
@@ -95,11 +97,11 @@ const Client = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  const createComment = (data: Comments) => {
+  const createComment = () => {
     const newDataFormatted = new Date().toLocaleString("pt-BR");
     const newData = {
-      title: data.title,
-      comment: data.comment,
+      title: title,
+      comment: comment,
       data: newDataFormatted,
       id: comments.length + 1,
     };
@@ -179,14 +181,27 @@ const Client = () => {
   };
 
   const fillInputsEditComment = (id: Number) => {
-    const findComment = client.comments!.find(
-      (value: Comments) => value.id === id
-    );
+    api
+      .get(`users/${tokenDecode.sub}/people`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const people = response.data;
+        const idClient = localStorage.getItem("@id:haki");
+        const client = people.find(
+          (value: ClientData) => value.id === Number(idClient)
+        );
+        const commentFind = client.comments.find(
+          (value: Comments) => value.id === id
+        );
 
-    reset({
-      title: findComment!.title,
-      comment: findComment!.comment,
-    });
+        reset({
+          title: commentFind!.title,
+          comment: commentFind!.comment,
+        });
+      });
   };
 
   return (
@@ -323,15 +338,16 @@ const Client = () => {
               style={{ width: "100%" }}
             >
               <Input
+                onChange={(event) => setTitle(event.target.value)}
                 maxLength={25}
                 name="title"
                 error={""}
-                register={register}
+                register={() => {}}
                 placeholder="Título do comentário"
               />
               <textarea
+                onChange={(event) => setComment(event.target.value)}
                 maxLength={5000}
-                {...register("comment")}
                 placeholder="comentário..."
               />
               <Button type="submit">cadastrar comentário</Button>
