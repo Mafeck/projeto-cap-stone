@@ -6,6 +6,16 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
 
+  button {
+    margin-top: 10px;
+  }
+
+  .erro {
+    color: var(--negative);
+    font-size: 10px;
+    padding-left: 5px;
+  }
+
   nav {
     background: var(--color-primary);
     width: 100%;

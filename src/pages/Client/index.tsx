@@ -1,7 +1,7 @@
 import { Container, ContentInfo, CommentsContainer } from "./styles";
 import { useState, useEffect } from "react";
 import { FaDice, FaRegEdit } from "react-icons/fa";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { useAuth } from "../../providers/Auth";
 import CardComment from "../../components/CardComment";
 import Modal from "../../components/Modal";
@@ -69,8 +69,6 @@ const Client = () => {
   const [renderModalDelete, setRenderModalDelete] = useState<boolean>(false);
   const [renderModalEdit, setRenderModalEdit] = useState<boolean>(false);
   const [commentId, setCommentId] = useState<number>(0);
-  const [title, setTitle] = useState<string>("");
-  const [comment, setComment] = useState<string>("");
   const [tokenDecode] = useState<TokenDecodeData>(jwtDecode(token));
   const history = useHistory();
 
@@ -97,31 +95,32 @@ const Client = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  const createComment = () => {
-    if(title || comment !== ""){
-      const newDataFormatted = new Date().toLocaleString("pt-BR");
-      const newData = {
-        title: title,
-        comment: comment,
-        data: newDataFormatted,
-        id: comments.length + 1,
-      };
-      const newComments = { comments: [...comments, newData] };
-      api
-        .patch(`/people/${client.id}`, newComments, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          setComments(response.data.comments);
-          setRenderModal(false);
-          toast.success("comentário criado com sucesso");
-        });
-      setTitle("");
-      setComment("");
-    }
+  const createComment = (data: Comments) => {
+    const newDataFormatted = new Date().toLocaleString("pt-BR");
+    const newData = {
+      title: data.title,
+      comment: data.comment,
+      data: newDataFormatted,
+      id: comments.length + 1,
+    };
+    const newComments = { comments: [...comments, newData] };
+
+    api
+      .patch(`/people/${client.id}`, newComments, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setComments(response.data.comments);
+        setRenderModal(false);
+        toast.success("comentário criado com sucesso");
+      });
   };
+
+  if (!token) {
+    return <Redirect to="/login" />;
+  }
 
   const deleteComment = (id: number) => {
     const newComments = comments.filter((values) => values.id !== id);
@@ -184,27 +183,14 @@ const Client = () => {
   };
 
   const fillInputsEditComment = (id: Number) => {
-    api
-      .get(`users/${tokenDecode.sub}/people`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        const people = response.data;
-        const idClient = localStorage.getItem("@id:haki");
-        const client = people.find(
-          (value: ClientData) => value.id === Number(idClient)
-        );
-        const commentFind = client.comments.find(
-          (value: Comments) => value.id === id
-        );
+    const findComment = client.comments!.find(
+      (value: Comments) => value.id === id
+    );
 
-        reset({
-          title: commentFind!.title,
-          comment: commentFind!.comment,
-        });
-      });
+    reset({
+      title: findComment!.title,
+      comment: findComment!.comment,
+    });
   };
 
   return (
@@ -336,20 +322,24 @@ const Client = () => {
             }}
             modalTitle="Comentário"
           >
-            <Input
-              onChange={(event) => setTitle(event.target.value)}
-              maxLength={25}
-              name="title"
-              error={""}
-              register={() => {}}
-              placeholder="Título do comentário"
-            />
-            <textarea
-              onChange={(event) => setComment(event.target.value)}
-              maxLength={5000}
-              placeholder="comentário..."
-            />
-            <Button onClick={createComment}>Cadastrar comentário</Button>
+            <form
+              onSubmit={handleSubmit(createComment)}
+              style={{ width: "100%" }}
+            >
+              <Input
+                maxLength={25}
+                name="title"
+                error={""}
+                register={register}
+                placeholder="Título do comentário"
+              />
+              <textarea
+                maxLength={5000}
+                {...register("comment")}
+                placeholder="comentário..."
+              />
+              <Button type="submit">cadastrar comentário</Button>
+            </form>
           </Modal>
         )}
       </Container>
