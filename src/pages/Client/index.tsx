@@ -98,26 +98,30 @@ const Client = () => {
   }, []);
 
   const createComment = () => {
-    const newDataFormatted = new Date().toLocaleString("pt-BR");
-    const newData = {
-      title: title,
-      comment: comment,
-      data: newDataFormatted,
-      id: comments.length + 1,
-    };
-    const newComments = { comments: [...comments, newData] };
+    if(title || comment !== ""){
+      const newDataFormatted = new Date().toLocaleString("pt-BR");
+      const newData = {
+        title: title,
+        comment: comment,
+        data: newDataFormatted,
+        id: comments.length + 1,
+      };
+      const newComments = { comments: [...comments, newData] };
 
-    api
-      .patch(`/people/${client.id}`, newComments, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        setComments(response.data.comments);
-        setRenderModal(false);
-        toast.success("comentário criado com sucesso");
-      });
+      api
+        .patch(`/people/${client.id}`, newComments, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          setComments(response.data.comments);
+          setRenderModal(false);
+          toast.success("comentário criado com sucesso");
+        });
+      setTitle("");
+      setComment("");
+    }
   };
 
   const deleteComment = (id: number) => {
@@ -333,10 +337,6 @@ const Client = () => {
             }}
             modalTitle="Comentário"
           >
-            <form
-              onSubmit={handleSubmit(createComment)}
-              style={{ width: "100%" }}
-            >
               <Input
                 onChange={(event) => setTitle(event.target.value)}
                 maxLength={25}
@@ -350,8 +350,7 @@ const Client = () => {
                 maxLength={5000}
                 placeholder="comentário..."
               />
-              <Button type="submit">cadastrar comentário</Button>
-            </form>
+              <Button onClick={createComment}>cadastrar comentário</Button>
           </Modal>
         )}
       </Container>
