@@ -1,6 +1,6 @@
 context("SearchAdress", () => {
   it.only("Cadastrar Usuário", () => {
-    cy.visit("http://localhost:3000/");
+    cy.visit("https://projeto-cap-stone-patrickgsda-mafeck.vercel.app");
     cy.viewport(1440, 900);
 
     cy.contains("Cadastrar").click();
@@ -25,9 +25,9 @@ context("SearchAdress", () => {
 
     // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.get('input[data-cy="email/register"]')
-      .type("apresentacaoteste222222@haki.com.br")
+      .type("apresentacao@haki.com.br")
       .wait(1000)
-      .should("have.value", "apresentacaoteste222222@haki.com.br");
+      .should("have.value", "apresentacao@haki.com.br");
 
     // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.get('input[data-cy="phone/register"]')
@@ -52,8 +52,8 @@ context("SearchAdress", () => {
 
     // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.get('input[data-cy="email/login"]')
-      .type("apresentacaoteste222222@haki.com.br")
-      .should("have.value", "apresentacaoteste222222@haki.com.br")
+      .type("apresentacao@haki.com.br")
+      .should("have.value", "apresentacao@haki.com.br")
       .wait(1000);
 
     // eslint-disable-next-line cypress/no-unnecessary-waiting
