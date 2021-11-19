@@ -33,7 +33,7 @@ export const AboutUsBox = styled.div`
   padding: 80px 15px;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  z-index: 0;
+  z-index: -1;
 
   ::before {
     background-color: rgba(0, 0, 0, 0.5);
