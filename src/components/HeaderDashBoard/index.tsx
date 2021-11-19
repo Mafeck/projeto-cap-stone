@@ -11,12 +11,19 @@ import { useAuth } from "../../providers/Auth";
 import jwtDecode from "jwt-decode";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
 
 interface DecodeProps {
   email: string;
   exp: number;
   iat: number;
   sub: string;
+}
+
+interface UserName {
+  username: string;
 }
 
 const HeaderDashBoard = () => {
@@ -27,6 +34,16 @@ const HeaderDashBoard = () => {
   const [renderOptions, setRenderOptions] = useState<boolean>(false);
   const [renderModal, setRenderModal] = useState<boolean>(false);
   const [newUsername, setNewUsername] = useState<string>("");
+
+  const schemaPerfil = yup.object().shape({
+    username: yup.string().required("Digite seu novo nome"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schemaPerfil) });
 
   useEffect(() => {
     api
@@ -49,11 +66,7 @@ const HeaderDashBoard = () => {
       });
   }, []);
 
-  const editPerfil = () => {
-    const data = {
-      username: newUsername,
-    };
-
+  const editPerfil = (data: UserName) => {
     api
       .patch(`/users/${tokenDecode.sub}`, data, {
         headers: {
@@ -80,7 +93,7 @@ const HeaderDashBoard = () => {
 
   return (
     <Container>
-      <img src={logo} alt="logo" onClick={() => history.push("/dashboard")}/>
+      <img src={logo} alt="logo" onClick={() => history.push("/dashboard")} />
       <UserPerfil>
         <h2>{user.username}</h2>
         <div
@@ -136,12 +149,17 @@ const HeaderDashBoard = () => {
           }}
           modalTitle="Editar perfil"
         >
-          <Input
-            register={() => {}}
-            onChange={(event) => setNewUsername(event.target.value)}
-            placeholder="New username"
-          />
-          <Button onClick={editPerfil}>Editar</Button>
+          <form style={{ width: "100%" }} onSubmit={handleSubmit(editPerfil)}>
+            <Input
+              minLength={2}
+              error={errors.username?.message}
+              name="username"
+              register={register}
+              onChange={(event) => setNewUsername(event.target.value)}
+              placeholder="New username"
+            />
+            <Button type="submit">Editar</Button>
+          </form>
         </Modal>
       )}
     </Container>
