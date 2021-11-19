@@ -16,6 +16,7 @@ import Footer from "../../components/Footer";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import schemaComment from "../../components/schemaComments";
+import ModalCreateComment from "../../components/ModalCreateComment";
 
 interface Comments {
   title: string;
@@ -74,7 +75,7 @@ const Client = () => {
   const [tokenDecode] = useState<TokenDecodeData>(jwtDecode(token));
   const history = useHistory();
 
-  const { register, reset, handleSubmit } = useForm<Comments>({
+  const { register, reset, handleSubmit, formState: { errors }, } = useForm<Comments>({
     resolver: yupResolver(schemaComment),
   });
 
@@ -96,34 +97,7 @@ const Client = () => {
       })
       .catch((error) => console.log(error));
   }, []);
-
-  const createComment = () => {
-    if(title || comment !== ""){
-      const newDataFormatted = new Date().toLocaleString("pt-BR");
-      const newData = {
-        title: title,
-        comment: comment,
-        data: newDataFormatted,
-        id: comments.length + 1,
-      };
-      const newComments = { comments: [...comments, newData] };
-
-      api
-        .patch(`/people/${client.id}`, newComments, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          setComments(response.data.comments);
-          setRenderModal(false);
-          toast.success("comentário criado com sucesso");
-        });
-      setTitle("");
-      setComment("");
-    }
-  };
-
+  
   const deleteComment = (id: number) => {
     const newComments = comments.filter((values) => values.id !== id);
     const newPeople = {
@@ -331,27 +305,7 @@ const Client = () => {
           </div>
         </CommentsContainer>
         {renderModal && (
-          <Modal
-            onClose={() => {
-              setRenderModal(false);
-            }}
-            modalTitle="Comentário"
-          >
-              <Input
-                onChange={(event) => setTitle(event.target.value)}
-                maxLength={25}
-                name="title"
-                error={""}
-                register={() => {}}
-                placeholder="Título do comentário"
-              />
-              <textarea
-                onChange={(event) => setComment(event.target.value)}
-                maxLength={5000}
-                placeholder="comentário..."
-              />
-              <Button onClick={createComment}>cadastrar comentário</Button>
-          </Modal>
+          <ModalCreateComment setRenderModal={setRenderModal}/>
         )}
       </Container>
       <Footer />

@@ -14,25 +14,6 @@ import { useState } from "react";
 import jwtDecode from "jwt-decode";
 import { ReactComponent as PageClientIcon } from "../../assets/undraw_tweetstorm_re_n0rs 1.svg";
 
-interface Process {
-  processNumber: string;
-  area: string;
-}
-
-interface Address {
-  road?: string;
-  zipCode?: string;
-  district?: string;
-  houseNumber?: string;
-}
-
-interface Comments {
-  title: string;
-  comment: string;
-  id: number;
-  data: string;
-}
-
 export interface ClientData {
   name: string;
   cpf: string;
