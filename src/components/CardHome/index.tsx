@@ -5,9 +5,11 @@ interface CardHomeProps {
   image?: string;
   description: string;
   isLast?: boolean;
+  id?: string;
 }
 
 const CardHome = ({
+  id,
   title,
   image,
   description,
@@ -15,7 +17,7 @@ const CardHome = ({
 }: CardHomeProps) => {
   return (
     <Container isLast={isLast}>
-      <div className="divImage">
+      <div id={id} className="divImage">
         <img src={image} alt="img" />
       </div>
       <main>

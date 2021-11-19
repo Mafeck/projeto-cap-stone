@@ -40,6 +40,7 @@ const Register = () => {
     api
       .post("/signup", newData)
       .then((response) => {
+        localStorage.clear()
         toast.success("Conta criada");
         setTimeout(() => history.push("/login"), 2000);
       })

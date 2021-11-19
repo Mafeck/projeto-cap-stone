@@ -66,3 +66,14 @@ export const ContainerClients = styled.div`
     display: none;
   }
 `;
+
+export const InputDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 15px auto;
+  height: 50px;
+  width: 91%;
+  @media (min-width: 669px) {
+    width: 50%;
+  }
+`;

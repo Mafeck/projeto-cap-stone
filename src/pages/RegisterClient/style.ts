@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
 export const RegisterClientStyled = styled.div`
   form {
     display: flex;
@@ -41,8 +47,6 @@ export const RegisterClientStyled = styled.div`
   }
 
   @media (min-width: 768px) {
-    text-align: center;
-
     .inputs {
       flex-direction: row;
       align-items: flex-start;

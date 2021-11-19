@@ -19,6 +19,7 @@ export const HeaderStyle = styled.div`
   }
 
   img {
+    cursor: pointer;
     width: 69px;
     height: 29px;
   }

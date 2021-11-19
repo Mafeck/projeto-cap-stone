@@ -5,17 +5,22 @@ import { useAuth } from "../../providers/Auth";
 import { usePeople } from "../../providers/People";
 import { ReactComponent as Delete } from "../../assets/trash.svg";
 import { toast } from "react-toastify";
+import Modal from "../Modal";
+import { useState } from "react";
+import Button from "../Button";
 
 interface CardClientsProps {
   name: string;
   cpf: string;
   id: number;
+  area?: string;
   onClick: () => void;
 }
 
-const CardClients = ({ name, cpf, id, onClick }: CardClientsProps) => {
+const CardClients = ({ name, cpf, id, area, onClick }: CardClientsProps) => {
   const { token } = useAuth();
   const { people, setPeople } = usePeople();
+  const [renderModal, setRenderModal] = useState<boolean>(false);
 
   const deleteClient = (id: number) => {
     const newList = people.filter((item) => item.id !== id);
@@ -31,6 +36,8 @@ const CardClients = ({ name, cpf, id, onClick }: CardClientsProps) => {
         setPeople(newList);
       })
       .catch((_) => toast.error("Houve um erro"));
+
+    setRenderModal(false);
   };
 
   return (
@@ -42,11 +49,23 @@ const CardClients = ({ name, cpf, id, onClick }: CardClientsProps) => {
         <div className="clientInfo">
           <h4>{name}</h4>
           <span>{cpf}</span>
+          <span>Área do Processo: {area}</span>
         </div>
       </div>
-      <button onClick={() => deleteClient(id)}>
+      <button className="trashButton" onClick={() => setRenderModal(true)}>
         <Delete />
       </button>
+      {renderModal && (
+        <Modal
+          onClose={() => setRenderModal(false)}
+          modalTitle="Confirma a exclusão do cliente?"
+        >
+          <div className="deleteClientModal">
+            <Button onClick={() => deleteClient(id)}>Sim</Button>
+            <Button onClick={() => setRenderModal(false)}>Não</Button>
+          </div>
+        </Modal>
+      )}
     </Container>
   );
 };
