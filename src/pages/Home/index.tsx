@@ -17,7 +17,7 @@ const Home = () => {
           </span>
         </div>
       </TitleBox>
-      <Services/>
+      <Services />
       <AboutUsBox>
         <div className="content">
           <h1>Quem somos?</h1>

@@ -1,7 +1,7 @@
 import { Container, ContentInfo, CommentsContainer } from "./styles";
 import { useState, useEffect } from "react";
 import { FaDice, FaRegEdit } from "react-icons/fa";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { useAuth } from "../../providers/Auth";
 import CardComment from "../../components/CardComment";
 import Modal from "../../components/Modal";
@@ -117,6 +117,13 @@ const Client = () => {
         toast.success("comentário criado com sucesso");
       });
   };
+
+  if (token) {
+    return <Redirect to="/dashboard" />;
+  }
+  if (!token) {
+    return <Redirect to="/login" />;
+  }
 
   const deleteComment = (id: number) => {
     const newComments = comments.filter((values) => values.id !== id);

@@ -4,8 +4,16 @@ import imageRegisterClient from "../../assets/undraw_tweetstorm_re_n0rs 1.svg";
 import { DashboardStyled } from "./style";
 import imageListOfClient from "../../assets/Group 153.svg";
 import Footer from "../../components/Footer";
+import { Redirect } from "react-router-dom";
+import { useAuth } from "../../providers/Auth";
 
 const Dashboard = () => {
+  const { token } = useAuth();
+
+  if (!token) {
+    return <Redirect to="/login" />;
+  }
+
   return (
     <DashboardStyled>
       <HeaderDashBoard />

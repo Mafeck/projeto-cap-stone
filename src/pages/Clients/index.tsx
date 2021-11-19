@@ -11,6 +11,7 @@ import HeaderDashBoard from "../../components/HeaderDashBoard";
 import { usePeople } from "../../providers/People";
 import { useClient } from "../../providers/Client";
 import Input from "../../components/Input";
+import { Redirect } from "react-router-dom";
 
 interface Decode {
   email: string;
@@ -44,6 +45,13 @@ const Clients = () => {
     setClient(filteredCLient!);
     history.push(`/dashboard/people/${id}`);
   };
+
+  if (token) {
+    return <Redirect to="/dashboard" />;
+  }
+  if (!token) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <Container>

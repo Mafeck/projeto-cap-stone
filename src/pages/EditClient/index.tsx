@@ -16,6 +16,7 @@ import api from "../../services/api";
 import jwtDecode from "jwt-decode";
 import { Decode } from "../RegisterClient";
 import { useClient } from "../../providers/Client";
+import { Redirect } from "react-router-dom";
 
 interface Comments {
   title: string;
@@ -123,6 +124,10 @@ const EditClient = () => {
       })
       .catch((error) => console.log(error));
   };
+
+  if (!token) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <div>

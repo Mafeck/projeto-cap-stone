@@ -1,7 +1,6 @@
 import { Redirect } from "react-router";
 import { schemaLogin } from "../../components/schema";
-import { useContext } from "react";
-import { AuthContext } from "../../providers/Auth";
+import { useAuth } from "../../providers/Auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import Header from "../../components/Header";
@@ -16,7 +15,7 @@ interface UserData {
 }
 
 const Login = () => {
-  const { token, signIn } = useContext(AuthContext);
+  const { token, signIn } = useAuth();
 
   const {
     register,
@@ -40,6 +39,7 @@ const Login = () => {
           <h1>Login</h1>
           <form onSubmit={handleSubmit(onSubmitForm)}>
             <Input
+              data-cy="email/login"
               placeholder="E-mail"
               name="email"
               type="email"
@@ -47,6 +47,7 @@ const Login = () => {
               error={errors.email?.message}
             />
             <Input
+              data-cy="password/login"
               placeholder="Senha"
               name="password"
               type="password"
