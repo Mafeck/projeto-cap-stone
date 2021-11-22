@@ -251,7 +251,9 @@ const RegisterClient = () => {
               />
             </div>
           </div>
-          <Button type="submit">Cadastrar</Button>
+          <Button data-cy="buttonsubmit/registerCli" type="submit">
+            Cadastrar
+          </Button>
         </form>
       </RegisterClientStyled>
       <Footer />
