@@ -21,7 +21,7 @@ interface ModalProps {
 }
 
 const ModalCreateComment = ({ setRenderModal }: ModalProps) => {
-  const { client, setClient, comments, setComments } = useClient();
+  const { client, comments, setComments } = useClient();
   const { token } = useAuth();
   const {
     register,
@@ -78,11 +78,11 @@ const ModalCreateComment = ({ setRenderModal }: ModalProps) => {
           />
           <textarea
             maxLength={5000}
-            placeholder="comentário..."
+            placeholder="Digite aqui seu comentário..."
             {...register("comment")}
           />
           <span className="erro">{errors.comment?.message}</span>
-          <Button type="submit">cadastrar comentário</Button>
+          <Button type="submit">Cadastrar comentário</Button>
         </form>
       </Modal>
     </>

@@ -6,9 +6,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  button {
-    margin-top: 10px;
-  }
+
 
   .erro {
     color: var(--negative);
@@ -140,16 +138,22 @@ export const CommentsContainer = styled.div`
     }
 
     .comment__button {
-      background: none;
-      color: var(--gray-50);
-      font-size: 12px;
+      background: black;
+      color: var(--white);
+      font-size: 14px;
       font-weight: 400;
+      padding: 10px;
       cursor: pointer;
       border: none;
+      border-radius: 5px;
 
       :hover {
         transition: 0.5s;
-        color: var(--gray-100);
+        background: var(--color-primary-strong);
+      }
+
+      :active {
+        background: var(--color-primary);
       }
     }
   }

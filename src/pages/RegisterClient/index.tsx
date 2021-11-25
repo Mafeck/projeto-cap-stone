@@ -101,8 +101,16 @@ const RegisterClient = () => {
     <Container>
       <HeaderDashBoard />
       <TitleBox>
-        <div className="frontBox">
-          <h1>Cadastrar cliente</h1>
+      <div className="frontBox">
+          <div className="titleIconBox">
+            <div
+              onClick={() => history.push("/dashboard")}
+              className="divAction"
+            >
+              {"<"}
+            </div>
+            <h1>Cadastrar Cliente</h1>
+          </div>
           <PageClientIcon />
         </div>
       </TitleBox>
@@ -182,8 +190,10 @@ const RegisterClient = () => {
                 width={"280px"}
                 placeholder="(00) 9.9999-9999"
                 name="phone"
-                type="number"
+                type="string"
                 register={register}
+                maxLength={16}
+                inputMask
                 error={errors.phone?.message}
               />
             </div>

@@ -1,6 +1,7 @@
 import { InputHTMLAttributes, useState } from "react";
 import { Container } from "./style";
 import { RiEyeCloseLine, RiEyeFill } from "react-icons/ri";
+import { phoneMask } from './mask';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
@@ -9,6 +10,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   width?: string;
   type?: string;
+  inputMask?: boolean;
 }
 
 const Input = ({
@@ -18,16 +20,30 @@ const Input = ({
   register,
   error,
   width,
+  inputMask,
   ...rest
 }: InputProps) => {
   const [open, setOpen] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState('');
+
+  phoneMask(inputValue);
   return (
     <Container {...rest} style={{ width: width }}>
       <div className="input">
         <input
           type={type === "password" ? (open ? "text" : "password") : type}
+          value={inputValue}
           error={error}
-          {...register(name)}
+          {...register(name, {
+            onChange: (event: any) => {
+              if (inputMask) {
+                let maskResult = phoneMask(event.target.value);
+                setInputValue(maskResult);
+              } else {
+                setInputValue(event.target.value);
+              }
+            },
+          })}
           placeholder={placeholder}
           {...rest}
         />

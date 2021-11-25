@@ -10,6 +10,7 @@ export const TitleBox = styled.div`
   padding: 80px 15px;
   background-attachment: fixed;
   background-repeat: no-repeat;
+  
 
   .content {
     @media (min-width: 769px) {

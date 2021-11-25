@@ -13,7 +13,7 @@ const Services = () => (
         <DesktopImage />
       </div>
     </ImageBox>
-    <div>
+    <div className="cards">
       <CardHome
         title="Clientes"
         image={Clients}

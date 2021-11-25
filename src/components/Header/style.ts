@@ -10,6 +10,9 @@ export const HeaderStyle = styled.div`
   position: fixed;
   top: 0;
   z-index: 10;
+
+   
+
   div {
     min-width: 80%;
     height: 29px;
@@ -17,7 +20,7 @@ export const HeaderStyle = styled.div`
     align-items: center;
     justify-content: space-between;
   }
-
+  
   img {
     cursor: pointer;
     width: 69px;
@@ -31,12 +34,12 @@ export const HeaderStyle = styled.div`
   .desktop {
     display: none;
   }
-
+  
   @media (min-width: 768px) {
     .mobile {
       display: none;
     }
-
+    
     .desktop {
       display: flex;
       justify-content: space-between;
@@ -59,6 +62,7 @@ export const HeaderMenu = styled.div`
   background-color: var(--black);
   position: fixed;
   top: 0;
+  z-index: 10;
 
   .menu {
     display: flex;
@@ -71,5 +75,38 @@ export const HeaderMenu = styled.div`
   a {
     color: var(--white);
     opacity: 0.5;
+  }
+
+  .menu {
+  -webkit-animation-name: fadeInRight;
+  animation-name: fadeInRight;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  }
+  @-webkit-keyframes fadeInRight {
+  0% {
+  opacity: 0;
+  -webkit-transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
+  }
+  100% {
+  opacity: 1;
+  -webkit-transform: none;
+  transform: none;
+  }
+  }
+  @keyframes fadeInRight {
+  0% {
+  opacity: 0;
+  -webkit-transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
+  }
+  100% {
+  opacity: 1;
+  -webkit-transform: none;
+  transform: none;
+  }
   }
 `;

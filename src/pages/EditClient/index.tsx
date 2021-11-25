@@ -153,7 +153,7 @@ const EditClient = () => {
               <Input
                 placeholder={`${client.cpf}`}
                 name="cpf"
-                type="number"
+                type="text"
                 register={register}
               />
               <Input
@@ -187,7 +187,7 @@ const EditClient = () => {
                 register={register}
               />
               <Input
-                placeholder="Digite algo"
+                placeholder="Grau de ensino"
                 name="qualification"
                 type="text"
                 register={register}
@@ -202,7 +202,7 @@ const EditClient = () => {
                 width={"280px"}
                 placeholder="(00) 9.9999-9999"
                 name="phone"
-                type="number"
+                type="text"
                 register={register}
               />
             </div>

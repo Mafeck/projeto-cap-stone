@@ -67,6 +67,7 @@ const Register = () => {
               name="oab"
               type="number"
               width="47%"
+              maxLength={6}
               register={register}
               error={errors.oab?.message}
             />
@@ -100,9 +101,11 @@ const Register = () => {
               data-cy="phone/register"
               placeholder="Telefone"
               name="phone"
-              type="number"
+              type="string"
+              inputMask
               register={register}
               error={errors.phone?.message}
+              maxLength={16}
             />
             <Input
               data-cy="password/register"

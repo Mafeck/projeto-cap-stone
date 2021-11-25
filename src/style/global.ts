@@ -6,7 +6,12 @@ export const Global = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
         outline: 0;
+        ::-webkit-scrollbar {
+        display: none;
+        }
     }
+
+
     
     :root {
         --color-primary: #212529;

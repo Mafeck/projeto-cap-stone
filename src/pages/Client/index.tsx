@@ -96,28 +96,6 @@ const Client = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  const createComment = (data: Comments) => {
-    const newDataFormatted = new Date().toLocaleString("pt-BR");
-    const newData = {
-      title: data.title,
-      comment: data.comment,
-      data: newDataFormatted,
-      id: comments.length + 1,
-    };
-    const newComments = { comments: [...comments, newData] };
-
-    api
-      .patch(`/people/${client.id}`, newComments, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        setComments(response.data.comments);
-        setRenderModal(false);
-        toast.success("comentário criado com sucesso");
-      });
-  };
 
   if (!token) {
     return <Redirect to="/login" />;
