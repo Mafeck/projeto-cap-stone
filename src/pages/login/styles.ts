@@ -77,3 +77,10 @@ export const ContainerForm = styled.div`
     }
   }
 `;
+
+export const RecaptchaContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0 0 20px;
+`

@@ -6,8 +6,9 @@ import { useForm } from "react-hook-form";
 import Header from "../../components/Header";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import { Container, ContainerForm } from "./styles";
+import { Container, ContainerForm, RecaptchaContainer } from "./styles";
 import { Link } from "react-router-dom";
+import Recaptcha from "react-recaptcha";
 
 interface UserData {
   email: string;
@@ -15,7 +16,7 @@ interface UserData {
 }
 
 const Login = () => {
-  const { token, signIn } = useAuth();
+  const { token, signIn, verifyRecaptcha } = useAuth();
 
   const {
     register,
@@ -54,6 +55,14 @@ const Login = () => {
               register={register}
               error={errors.password?.message}
             />
+            <RecaptchaContainer>
+            <Recaptcha
+              sitekey="6LffG8keAAAAAKFKOmblTNBQB0eoQqxdWjcRG1MJ"
+              render="explicit"
+              // onloadCallback={() => console.log("captcha loaded")}
+              verifyCallback={verifyRecaptcha}
+            />
+            </RecaptchaContainer>
             <Button>Acessar</Button>
             <p>
               Não possui um cadastro?{" "}

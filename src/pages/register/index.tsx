@@ -1,4 +1,5 @@
-import { Container, FormContainer } from "./styles";
+import { Container, FormContainer, RecaptchaContainer } from "./styles";
+import Recaptcha from "react-recaptcha";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -22,7 +23,7 @@ interface UserData {
 
 const Register = () => {
   const history = useHistory();
-  const { token } = useAuth();
+  const { token, isVerified, verifyRecaptcha, closeCaptcha } = useAuth();
 
   const {
     register,
@@ -40,14 +41,16 @@ const Register = () => {
       username: data.username,
     };
 
+    isVerified ?
     api
       .post("/signup", newData)
       .then((response) => {
         localStorage.clear();
         toast.success("Conta criada");
         setTimeout(() => history.push("/login"), 2000);
+        closeCaptcha();
       })
-      .catch((error) => toast.error(error.response.data));
+      .catch((error) => toast.error(error.response.data)) : toast.error("Verifique que você não é um robô!");
   };
 
   if (token) {
@@ -123,6 +126,16 @@ const Register = () => {
               register={register}
               error={errors.confirmPassword?.message}
             />
+
+            <RecaptchaContainer>
+            <Recaptcha
+              sitekey="6LffG8keAAAAAKFKOmblTNBQB0eoQqxdWjcRG1MJ"
+              render="explicit"
+              // onloadCallback={() => console.log("captcha loaded")}
+              verifyCallback={verifyRecaptcha}
+            />
+            </RecaptchaContainer>
+
             <Button data-cy="button/register" type="submit">
               Cadastrar
             </Button>
