@@ -16,6 +16,7 @@ import api from "../../services/api";
 import jwtDecode from "jwt-decode";
 import { Decode } from "../RegisterClient";
 import { useClient } from "../../providers/Client";
+import { Redirect } from "react-router-dom";
 
 interface Comments {
   title: string;
@@ -124,6 +125,10 @@ const EditClient = () => {
       .catch((error) => console.log(error));
   };
 
+  if (!token) {
+    return <Redirect to="/login" />;
+  }
+
   return (
     <div>
       <HeaderDashBoard />
@@ -148,7 +153,7 @@ const EditClient = () => {
               <Input
                 placeholder={`${client.cpf}`}
                 name="cpf"
-                type="number"
+                type="text"
                 register={register}
               />
               <Input
@@ -182,7 +187,7 @@ const EditClient = () => {
                 register={register}
               />
               <Input
-                placeholder="Digite algo"
+                placeholder="Grau de ensino"
                 name="qualification"
                 type="text"
                 register={register}
@@ -197,7 +202,7 @@ const EditClient = () => {
                 width={"280px"}
                 placeholder="(00) 9.9999-9999"
                 name="phone"
-                type="number"
+                type="text"
                 register={register}
               />
             </div>

@@ -16,6 +16,7 @@ import Footer from "../../components/Footer";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import schemaComment from "../../components/schemaComments";
+import ModalCreateComment from "../../components/ModalCreateComment";
 
 interface Comments {
   title: string;
@@ -95,28 +96,6 @@ const Client = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  const createComment = (data: Comments) => {
-    const newDataFormatted = new Date().toLocaleString("pt-BR");
-    const newData = {
-      title: data.title,
-      comment: data.comment,
-      data: newDataFormatted,
-      id: comments.length + 1,
-    };
-    const newComments = { comments: [...comments, newData] };
-
-    api
-      .patch(`/people/${client.id}`, newComments, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        setComments(response.data.comments);
-        setRenderModal(false);
-        toast.success("comentário criado com sucesso");
-      });
-  };
 
   if (!token) {
     return <Redirect to="/login" />;
@@ -315,33 +294,7 @@ const Client = () => {
             )}
           </div>
         </CommentsContainer>
-        {renderModal && (
-          <Modal
-            onClose={() => {
-              setRenderModal(false);
-            }}
-            modalTitle="Comentário"
-          >
-            <form
-              onSubmit={handleSubmit(createComment)}
-              style={{ width: "100%" }}
-            >
-              <Input
-                maxLength={25}
-                name="title"
-                error={""}
-                register={register}
-                placeholder="Título do comentário"
-              />
-              <textarea
-                maxLength={5000}
-                {...register("comment")}
-                placeholder="comentário..."
-              />
-              <Button type="submit">cadastrar comentário</Button>
-            </form>
-          </Modal>
-        )}
+        {renderModal && <ModalCreateComment setRenderModal={setRenderModal} />}
       </Container>
       <Footer />
     </>

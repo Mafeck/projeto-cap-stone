@@ -17,6 +17,9 @@ interface AuthProviderData {
   token: string;
   signIn: (data: UserData) => void;
   Logout: () => void;
+  verifyRecaptcha: () => void;
+  closeCaptcha: () => void;
+  isVerified: boolean;
 }
 
 export const AuthContext = createContext<AuthProviderData>(
@@ -30,7 +33,18 @@ export const AuthProvider = ({ children }: AuthProps) => {
     JSON.parse(localStorage.getItem("@token:haki")!) || ""
   );
 
+  const [isVerified, setIsVerified] = useState(false)
+
+  const verifyRecaptcha = () => {
+    setIsVerified(true)
+  }
+
+  const closeCaptcha = () => {
+    setIsVerified(false)
+  }
+
   const signIn = (data: UserData) => {
+    isVerified ?
     api
       .post("/signin", data)
       .then((response) => {
@@ -43,8 +57,9 @@ export const AuthProvider = ({ children }: AuthProps) => {
         );
         toast.success("Login efetuado com sucesso!");
         setTimeout(() => history.push("/dashboard"), 700);
+        closeCaptcha()
       })
-      .catch((error) => toast.error("E-mail ou senha incorretos!"));
+      .catch((error) => toast.error("E-mail ou senha incorretos!")) : toast.error("Verifique que você não é um robô!");
   };
 
   const Logout = () => {
@@ -54,7 +69,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
   };
 
   return (
-    <AuthContext.Provider value={{ token, signIn, Logout }}>
+    <AuthContext.Provider value={{ token, signIn, Logout, verifyRecaptcha, isVerified, closeCaptcha }}>
       {children}
     </AuthContext.Provider>
   );

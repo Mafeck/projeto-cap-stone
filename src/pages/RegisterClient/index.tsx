@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaClient } from "../../components/schemaClient";
 import { toast } from "react-toastify";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import api from "../../services/api";
 import { useAuth } from "../../providers/Auth";
 import { useState } from "react";
@@ -93,12 +93,24 @@ const RegisterClient = () => {
       .catch(() => toast.error("Erro ao adicionar cliente"));
   };
 
+  if (!token) {
+    return <Redirect to="/dashboard" />;
+  }
+
   return (
     <Container>
       <HeaderDashBoard />
       <TitleBox>
-        <div className="frontBox">
-          <h1>Cadastrar cliente</h1>
+      <div className="frontBox">
+          <div className="titleIconBox">
+            <div
+              onClick={() => history.push("/dashboard")}
+              className="divAction"
+            >
+              {"<"}
+            </div>
+            <h1>Cadastrar Cliente</h1>
+          </div>
           <PageClientIcon />
         </div>
       </TitleBox>
@@ -107,6 +119,7 @@ const RegisterClient = () => {
           <div className="inputs">
             <div className="column">
               <Input
+                data-cy="name/registerCli"
                 width={"280px"}
                 placeholder="Nome completo"
                 name="name"
@@ -115,6 +128,7 @@ const RegisterClient = () => {
                 error={errors.name?.message}
               />
               <Input
+                data-cy="cpf/registerCli"
                 placeholder="000.000.000-00"
                 name="cpf"
                 type="text"
@@ -122,30 +136,35 @@ const RegisterClient = () => {
                 error={errors.cpf?.message}
               />
               <Input
+                data-cy="genre/registerCli"
                 placeholder="Gênero"
                 name="genre"
                 type="text"
                 register={register}
               />
               <Input
+                data-cy="naturalness/registerCli"
                 placeholder="Naturalidade"
                 name="naturalness"
                 type="text"
                 register={register}
               />
               <Input
+                data-cy="nationality/registerCli"
                 placeholder="Nacionalidade"
                 name="nationality"
                 type="text"
                 register={register}
               />
               <Input
+                data-cy="fatherName/registerCli"
                 placeholder="Nome do pai"
                 name="fatherName"
                 type="text"
                 register={register}
               />
               <Input
+                data-cy="motherName/registerCli"
                 placeholder="Nome da mãe"
                 name="motherName"
                 type="text"
@@ -153,28 +172,34 @@ const RegisterClient = () => {
                 error={errors.motherName?.message}
               />
               <Input
+                data-cy="qualification/registerCli"
                 placeholder="Digite algo"
                 name="qualification"
                 type="text"
                 register={register}
               />
               <Input
+                data-cy="company/registerCli"
                 placeholder="Empresa onde trabalha"
                 name="company"
                 type="text"
                 register={register}
               />
               <Input
+                data-cy="phone/registerCli"
                 width={"280px"}
                 placeholder="(00) 9.9999-9999"
                 name="phone"
-                type="number"
+                type="string"
                 register={register}
+                maxLength={16}
+                inputMask
                 error={errors.phone?.message}
               />
             </div>
             <div className="column">
               <Input
+                data-cy="type/registerCli"
                 placeholder="Tipo de pessoa"
                 name="type"
                 type="text"
@@ -182,6 +207,7 @@ const RegisterClient = () => {
                 error={errors.type?.message}
               />
               <Input
+                data-cy="maritalStatus/registerCli"
                 placeholder="Estado civil"
                 name="maritalStatus"
                 type="text"
@@ -190,24 +216,28 @@ const RegisterClient = () => {
               />
               <p>Endereço completo:</p>
               <Input
+                data-cy="road/registerCli"
                 placeholder="Rua"
                 name="road"
                 type="text"
                 register={register}
               />
               <Input
+                data-cy="zipCode/registerCli"
                 placeholder="Código postal"
                 name="zipCode"
                 type="number"
                 register={register}
               />
               <Input
+                data-cy="district/registerCli"
                 placeholder="Bairro"
                 name="district"
                 type="text"
                 register={register}
               />
               <Input
+                data-cy="houseNumber/registerCli"
                 placeholder="Número da casa"
                 name="houseNumber"
                 type="number"
@@ -215,12 +245,14 @@ const RegisterClient = () => {
               />
               <p>Processo:</p>
               <Input
+                data-cy="processNumber/registerCli"
                 placeholder="N° do Processo"
                 name="processNumber"
                 type="number"
                 register={register}
               />
               <Input
+                data-cy="area/registerCli"
                 placeholder="Área"
                 name="area"
                 type="text"
@@ -229,7 +261,9 @@ const RegisterClient = () => {
               />
             </div>
           </div>
-          <Button type="submit">Cadastrar</Button>
+          <Button data-cy="buttonsubmit/registerCli" type="submit">
+            Cadastrar
+          </Button>
         </form>
       </RegisterClientStyled>
       <Footer />

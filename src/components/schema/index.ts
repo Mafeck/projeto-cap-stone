@@ -5,7 +5,8 @@ export const schema = yup.object().shape({
   oab: yup
     .string()
     .required("OAB obrigatória")
-    .min(5, "Mínimo de 5 caracteres"),
+    .min(6, "Mínimo de 6 caracteres")
+    .max(6, "Máximo de 6 caracteres"),
   state: yup.string().required("Digite seu estado"),
   phone: yup
     .string()

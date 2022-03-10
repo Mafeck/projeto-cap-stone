@@ -1,5 +1,5 @@
 import { ReactComponent as Dice } from "../../assets/dice.svg";
-import { Container } from "./style";
+import { Container, ContainerAux } from "./style";
 import api from "../../services/api";
 import { useAuth } from "../../providers/Auth";
 import { usePeople } from "../../providers/People";
@@ -42,6 +42,7 @@ const CardClients = ({ name, cpf, id, area, onClick }: CardClientsProps) => {
 
   return (
     <Container>
+      <ContainerAux>
       <div onClick={onClick} className="infosBox">
         <div className="diceBackground">
           <Dice className="diceIcon" />
@@ -55,6 +56,8 @@ const CardClients = ({ name, cpf, id, area, onClick }: CardClientsProps) => {
       <button className="trashButton" onClick={() => setRenderModal(true)}>
         <Delete />
       </button>
+      </ContainerAux>
+
       {renderModal && (
         <Modal
           onClose={() => setRenderModal(false)}

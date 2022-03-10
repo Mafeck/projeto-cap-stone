@@ -4,13 +4,12 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 95%;
+  width: 100%;
   max-width: 450px;
   height: 80px;
   padding: 15px 10px;
   margin: 10px auto;
-  border-radius: 5px;
-  border: 1px solid var(--gray-0);
+
 
   .infosBox {
     width: 80%;
@@ -69,8 +68,51 @@ export const Container = styled.div`
     
   }
 
-  @media (min-width: 769px) {
-    margin: 10px;
-  }
+
 
 `;
+
+
+export const ContainerAux = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 450px;
+  height: 80px;
+  padding: 15px 10px;
+  margin: 10px auto;
+  border-radius: 5px;
+  border: 1px solid var(--gray-0);
+  
+  -webkit-animation-name: fadeInRight;
+  animation-name: fadeInRight;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  @-webkit-keyframes fadeInRight {
+  0% {
+  opacity: 0;
+  -webkit-transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
+  }
+  100% {
+  opacity: 1;
+  -webkit-transform: none;
+  transform: none;
+  }
+  }
+  @keyframes fadeInRight {
+  0% {
+  opacity: 0;
+  -webkit-transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
+  }
+  100% {
+  opacity: 1;
+  -webkit-transform: none;
+  transform: none;
+  }
+  } 
+`

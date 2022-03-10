@@ -1,14 +1,14 @@
 import { Redirect } from "react-router";
 import { schemaLogin } from "../../components/schema";
-import { useContext } from "react";
-import { AuthContext } from "../../providers/Auth";
+import { useAuth } from "../../providers/Auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import Header from "../../components/Header";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import { Container, ContainerForm } from "./styles";
+import { Container, ContainerForm, RecaptchaContainer } from "./styles";
 import { Link } from "react-router-dom";
+import Recaptcha from "react-recaptcha";
 
 interface UserData {
   email: string;
@@ -16,7 +16,7 @@ interface UserData {
 }
 
 const Login = () => {
-  const { token, signIn } = useContext(AuthContext);
+  const { token, signIn, verifyRecaptcha } = useAuth();
 
   const {
     register,
@@ -40,6 +40,7 @@ const Login = () => {
           <h1>Login</h1>
           <form onSubmit={handleSubmit(onSubmitForm)}>
             <Input
+              data-cy="email/login"
               placeholder="E-mail"
               name="email"
               type="email"
@@ -47,12 +48,21 @@ const Login = () => {
               error={errors.email?.message}
             />
             <Input
+              data-cy="password/login"
               placeholder="Senha"
               name="password"
               type="password"
               register={register}
               error={errors.password?.message}
             />
+            <RecaptchaContainer>
+            <Recaptcha
+              sitekey="6LffG8keAAAAAKFKOmblTNBQB0eoQqxdWjcRG1MJ"
+              render="explicit"
+              // onloadCallback={() => console.log("captcha loaded")}
+              verifyCallback={verifyRecaptcha}
+            />
+            </RecaptchaContainer>
             <Button>Acessar</Button>
             <p>
               Não possui um cadastro?{" "}

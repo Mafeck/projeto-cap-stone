@@ -8,6 +8,8 @@ export const FooterBox = styled.div`
   background-color: var(--gray-100);
   flex-direction: column;
   height: 200px;
+
+  
   
   p {
     font-size: 12px;

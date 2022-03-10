@@ -69,6 +69,21 @@ export const TitleBox = styled.div`
   height: 75px;
   margin-top: 64px;
 
+  .titleIconBox {
+      display: flex;
+      align-items: center;
+    }
+
+    .divAction {
+      font-family: "Poppins", sans-serif;
+      color: var(--white);
+      cursor: pointer;
+      width: 30px;
+      font-size: 35px;
+      display: flex;
+      justify-content: center;
+    }
+
   .frontBox {
     background: var(--color-secondary);
     border-bottom-right-radius: 100%;
